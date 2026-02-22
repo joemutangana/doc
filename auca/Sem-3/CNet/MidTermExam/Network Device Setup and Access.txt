@@ -1,0 +1,1087 @@
+Network Device Setup and Access
+================================
+
+HQ-MAIN-ROUTER
+-------------
+
+enable
+configure terminal
+hostname HQ-MAIN-Router-29061
+
+service password-encryption
+enable secret 29061
+username Joseph secret 29061
+ip domain-name 29061.f25
+crypto key generate rsa 2048
+
+no ip http server
+no ip http secure-server
+
+line console 0
+ login local
+exit
+line vty 0 4
+ transport input ssh
+ login local
+exit
+
+banner motd # 29061 BANK - Authorized users only #
+ex
+
+write memory
+=======================================================
+
+
+CORE-SWC
+----------
+
+enable
+configure terminal
+hostname CORE-SWC-29061
+
+service password-encryption
+enable secret 29061
+username Joseph secret 29061
+ip domain-name 29061.f25
+crypto key generate rsa 
+
+spanning-tree mode rapid-pvst
+spanning-tree portfast default
+spanning-tree bpduguard default
+
+line console 0
+ login local
+exit
+line vty 0 4
+ transport input ssh
+ login local
+exit
+
+banner motd # CORE-SWC-29061 - 29061 BANK #
+ex
+
+write memory
+
+==============================================
+
+
+
+A-SWC
+-------------
+
+enable
+configure terminal
+hostname A-SWC-29061
+
+service password-encryption
+enable secret 29061
+username Joseph secret 29061
+ip domain-name 29061.f25
+crypto key generate rsa 
+2048
+spanning-tree mode rapid-pvst
+spanning-tree portfast default
+spanning-tree bpduguard default
+
+line console 0
+ login local
+exit
+line vty 0 4
+ transport input ssh
+ login local
+exit
+
+banner motd # A-SWC-29061 - 29061 BANK #
+ex
+
+write memory
+
+===============================================================
+
+B-SWC
+-------------
+
+enable
+configure terminal
+hostname B-SWC-29061
+
+service password-encryption
+enable secret 29061
+username Joseph secret 29061
+ip domain-name 29061.f25
+crypto key generate rsa 
+2048
+spanning-tree mode rapid-pvst
+spanning-tree portfast default
+spanning-tree bpduguard default
+
+line console 0
+ login local
+exit
+line vty 0 4
+ transport input ssh
+ login local
+exit
+
+banner motd # A-SWC-29061 - 29061 BANK #
+ex
+
+write memory
+
+===============================================================
+
+C-SWC
+-------------
+
+enable
+configure terminal
+hostname C-SWC-29061
+
+service password-encryption
+enable secret 29061
+username Joseph secret 29061
+ip domain-name 29061.f25
+crypto key generate rsa 
+2048
+spanning-tree mode rapid-pvst
+spanning-tree portfast default
+spanning-tree bpduguard default
+
+line console 0
+ login local
+exit
+line vty 0 4
+ transport input ssh
+ login local
+exit
+
+banner motd # A-SWC-29061 - 29061 BANK #
+ex
+
+write memory
+
+===============================================================
+
+SVR-SWC
+-------------
+
+enable
+configure terminal
+hostname SVR-SWC-29061
+
+service password-encryption
+enable secret 29061
+username Joseph secret 29061
+ip domain-name 29061.f25
+crypto key generate rsa 
+2048
+spanning-tree mode rapid-pvst
+spanning-tree portfast default
+spanning-tree bpduguard default
+
+line console 0
+ login local
+exit
+line vty 0 4
+ transport input ssh
+ login local
+exit
+
+banner motd # A-SWC-29061 - 29061 BANK #
+ex
+
+write memory
+
+===============================================================
+
+FIN-SWC
+-------------
+
+enable
+configure terminal
+hostname FIN-SWC-29061
+
+service password-encryption
+enable secret 29061
+username Joseph secret 29061
+ip domain-name 29061.f25
+crypto key generate rsa 
+2048
+spanning-tree mode rapid-pvst
+spanning-tree portfast default
+spanning-tree bpduguard default
+
+line console 0
+ login local
+exit
+line vty 0 4
+ transport input ssh
+ login local
+exit
+
+banner motd # A-SWC-29061 - 29061 BANK #
+ex
+
+write memory
+
+===============================================================
+
+
+ACC-SWC
+-------------
+
+enable
+configure terminal
+hostname ACC-SWC-29061
+
+service password-encryption
+enable secret 29061
+username Joseph secret 29061
+ip domain-name 29061.f25
+crypto key generate rsa 
+2048
+spanning-tree mode rapid-pvst
+spanning-tree portfast default
+spanning-tree bpduguard default
+
+line console 0
+ login local
+exit
+line vty 0 4
+ transport input ssh
+ login local
+exit
+
+banner motd # A-SWC-29061 - 29061 BANK #
+ex
+
+write memory
+
+===============================================================
+
+TELLER-SWC
+-------------
+
+enable
+configure terminal
+hostname TELLER-SWC-29061
+
+service password-encryption
+enable secret 29061
+username Joseph secret 29061
+ip domain-name 29061.f25
+crypto key generate rsa 
+2048
+spanning-tree mode rapid-pvst
+spanning-tree portfast default
+spanning-tree bpduguard default
+
+line console 0
+ login local
+exit
+line vty 0 4
+ transport input ssh
+ login local
+exit
+
+banner motd # A-SWC-29061 - 29061 BANK #
+ex
+
+write memory
+
+===============================================================
+
+
+PHASE 2 VLANs & VTP CONFIGURATIONS
+
+===============================================================
+
+CORE-SWC
+------------------
+
+vtp mode server
+vtp domain 29061.f25
+vtp password 29061
+vtp version 2
+ex
+
+vlan 1
+ name PUBLIC
+vlan 10
+ name IT-NET
+vlan 20
+ name HR-NET
+vlan 30
+ name FIN-NET
+vlan 40
+ name ACC-NET
+vlan 50
+ name RISK-NET
+vlan 60
+ name TELLER-NET
+vlan 70
+ name VISITOR-NET
+vlan 80
+ name CORE-SERVERS
+vlan 90
+ name MONITOR-SVR
+ex
+
+int gi0/1
+switchport mode trunk
+switchport trunk allowed vlan 10,20,30,40,50,60,70
+ex
+
+int gi0/2
+switchport mode trunk
+switchport trunk allowed vlan 1,80,90
+ex
+
+int range fa0/20-21
+channel-group 1 mode active
+ex
+
+int port-channel1
+switchport mode trunk
+switchport trunk allowed vlan 1,10,20,30,40,50,60,70,80,90
+ex
+
+int range fa0/22-23
+channel-group 4 mode active
+ex
+
+int port-channel4
+switchport mode trunk
+switchport trunk allowed vlan 10,20,30,40,50,60,70
+ex
+
+======================================================================
+
+A-SWC
+------------------
+
+vtp mode transparent
+vtp domain 29061.f25
+vtp password 29061
+vtp version 2
+ex
+
+vlan 10
+ name IT-NET
+vlan 20
+ name HR-NET
+vlan 30
+ name FIN-NET
+vlan 40
+ name ACC-NET
+vlan 50
+ name RISK-NET
+vlan 60
+ name TELLER-NET
+vlan 70
+ name VISITOR-NET
+vlan 80
+ name CORE-SERVERS
+vlan 90
+ name MONITOR-SVR
+ex
+int range fa0/20-21
+channel-group 1 mode active
+
+int port-channel1
+switchport mode trunk
+switchport trunk allowed vlan 1,10,20,30,40,50,60,70,80,90
+
+int range gi0/1-2
+channel-group 2 mode active
+
+int port-channel2
+switchport mode trunk
+switchport trunk allowed vlan 80,90
+
+int fa0/20
+switchport mode trunk
+switchport trunk allowed vlan 10,20,30,40,50
+
+int range fa0/22-23
+channel-group 3 mode active
+
+int port-channel3
+switchport mode trunk
+switchport trunk allowed vlan 1,10,20,30,40,50,60,70,80,90
+
+=====================================================================
+
+SVR-SWC
+------------------
+
+vtp mode client
+vtp domain 29061.f25
+vtp password 29061
+vtp version 2
+ex
+
+vlan 80
+ name CORE-SERVERS
+vlan 90
+ name MONITOR-SVR
+ex
+
+int range gi0/1-2
+channel-group 2 mode active
+
+int port-channel2
+switchport mode trunk
+switchport trunk allowed vlan 80,90
+
+interface range FastEthernet0/2-4
+ switchport mode access
+ switchport access vlan 80
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ switchport port-security
+ switchport port-security maximum 1
+ switchport port-security violation shutdown
+ no shutdown
+exit
+
+int vlan80
+no shu
+ex
+
+
+interface range FastEthernet0/5-7
+ switchport mode access
+ switchport access vlan 90
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ switchport port-security
+ switchport port-security maximum 1
+ switchport port-security violation shutdown
+ no shutdown
+exit
+
+int vlan90
+no shu
+ex
+
+interface FastEthernet0/8
+ switchport mode access
+ switchport access vlan 1
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ switchport port-security
+ switchport port-security maximum 1
+ switchport port-security violation shutdown
+ no shutdown
+exit
+int vlan1
+no shu
+ex
+
+
+=====================================================================
+
+B-SWC
+------------------
+
+vtp mode transparent
+vtp domain 29061.f25
+vtp password 29061
+vtp version 2
+ex
+
+vlan 10
+ name IT-NET
+vlan 20
+ name HR-NET
+vlan 30
+ name FIN-NET
+vlan 40
+ name ACC-NET
+vlan 50
+ name RISK-NET
+vlan 60
+ name TELLER-NET
+vlan 70
+ name VISITOR-NET
+vlan 80
+ name CORE-SERVERS
+vlan 90
+ name MONITOR-SVR
+ex
+
+int range fa0/22-23
+channel-group 3 mode active
+
+int port-channel3
+switchport mode trunk
+switchport trunk allowed vlan 10,20,30,40,50
+
+int fa0/20
+switchport mode trunk
+switchport trunk allowed vlan 10,20,30,40,50
+
+int fa0/21
+switchport mode trunk
+switchport trunk allowed vlan 10,20,30,40,50
+=================================================================
+
+FIN-SWC
+------------------
+
+vtp mode client
+vtp domain 29061.f25
+vtp password 29061
+vtp version 2
+ex
+
+vlan 10
+ name IT-NET
+vlan 20
+ name HR-NET
+vlan 30
+ name FIN-NET
+vlan 40
+ name ACC-NET
+vlan 50
+ name RISK-NET
+ex
+
+
+int fa0/20
+switchport mode trunk
+switchport trunk allowed vlan 10,20,30,40,50
+
+
+interface range FastEthernet0/1-7
+ switchport mode access
+ switchport access vlan 30
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ switchport port-security
+ switchport port-security maximum 1
+ switchport port-security violation shutdown
+ no shutdown
+exit
+==================================================================
+
+ACC-SWC
+------------------
+
+vtp mode client
+vtp domain 29061.f25
+vtp password 29061
+vtp version 2
+ex
+
+vlan 10
+ name IT-NET
+vlan 20
+ name HR-NET
+vlan 30
+ name FIN-NET
+vlan 40
+ name ACC-NET
+vlan 50
+ name RISK-NET
+ex
+
+int fa0/21
+switchport mode trunk
+switchport trunk allowed vlan 10,20,30,40,50
+
+
+interface range FastEthernet0/1-7
+ switchport mode access
+ switchport access vlan 40
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ switchport port-security
+ switchport port-security maximum 1
+ switchport port-security violation shutdown
+ no shutdown
+exit
+
+=============================================================
+
+C-SWC
+------------------
+
+vtp mode transparent
+vtp domain 29061.f25
+vtp password 29061
+vtp version 2
+ex
+
+vlan 10
+ name IT-NET
+vlan 20
+ name HR-NET
+vlan 30
+ name FIN-NET
+vlan 40
+ name ACC-NET
+vlan 50
+ name RISK-NET
+vlan 60
+ name TELLER-NET
+vlan 70
+ name VISITOR-NET
+vlan 80
+ name CORE-SERVERS
+vlan 90
+ name MONITOR-SVR
+ex
+
+int range fa0/22-23
+channel-group 4 mode active
+
+int port-channel4
+switchport mode trunk
+switchport trunk allowed vlan 10,20,30,40,50,60,70
+
+int fa0/20
+switchport mode trunk
+switchport trunk allowed vlan 10,20,30,40,50
+
+int fa0/21
+switchport mode trunk
+switchport trunk allowed vlan 10,20,30,40,50
+
+int gi0/1
+switchport mode trunk
+switchport trunk allowed vlan 60,70
+
+=============================================================
+
+TELLER-SWC
+------------------
+
+vtp mode client
+vtp domain 29061.f25
+vtp password 29061
+vtp version 2
+ex
+
+vlan 60
+ name TELLER-NET
+ex
+
+int gi0/1
+switchport mode trunk
+switchport trunk allowed vlan 60,70
+
+
+interface range FastEthernet0/1-7
+ switchport mode access
+ switchport access vlan 40
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ switchport port-security
+ switchport port-security maximum 1
+ switchport port-security violation shutdown
+ no shutdown
+exit
+
+=============================================================
+
+
+PHASE 3: Routing Configurations
+
+=============================================================
+
+HQ-MAIN-ROUTER
+-----------------------------------------
+
+interface GigabitEthernet0/0
+ no shutdown
+ exit
+
+interface GigabitEthernet0/0.1
+ encapsulation dot1Q 1
+ ip address 192.168.100.97 255.255.255.240
+ description VLAN1_PUBLIC_NET_GW
+ exit
+
+interface GigabitEthernet0/0.10
+ encapsulation dot1Q 10
+ ip address 192.168.10.1 255.255.255.240
+ description VLAN10_IT_NET_GW
+ exit
+
+interface GigabitEthernet0/0.20
+ encapsulation dot1Q 20
+ ip address 192.168.20.1 255.255.255.240
+ description VLAN20_HR_NET_GW
+ exit
+
+interface GigabitEthernet0/0.30
+ encapsulation dot1Q 30
+ ip address 192.168.30.1 255.255.255.240
+ description VLAN30_FIN_NET_GW
+ exit
+
+interface GigabitEthernet0/0.40
+ encapsulation dot1Q 40
+ ip address 192.168.40.1 255.255.255.240
+ description VLAN40_ACC_NET_GW
+ exit
+
+interface GigabitEthernet0/0.50
+ encapsulation dot1Q 50
+ ip address 192.168.50.1 255.255.255.240
+ description VLAN50_RISK_NET_GW
+ exit
+
+interface GigabitEthernet0/0.60
+ encapsulation dot1Q 60
+ ip address 192.168.60.1 255.255.255.240
+ description VLAN60_TELLER_NET_GW
+ exit
+
+interface GigabitEthernet0/0.70
+ encapsulation dot1Q 70
+ ip address 192.168.70.1 255.255.255.240
+ description VLAN70_VISITOR_NET_GW
+ exit
+
+interface GigabitEthernet1/0
+ no shutdown
+ exit
+
+interface GigabitEthernet1/0.80
+ encapsulation dot1Q 80
+ ip address 192.168.80.1 255.255.255.240
+ description VLAN80_CORE_SVR_GW
+ exit
+
+interface GigabitEthernet1/0.90
+ encapsulation dot1Q 90
+ ip address 192.168.90.1 255.255.255.240
+ description VLAN90_MONITOR_SVR_GW
+ exit
+============================================================
+DHCP: exclude server IPs & gateway IPs per network
+============================================================
+
+ip dhcp excluded-address 192.168.80.10 192.168.80.12
+ip dhcp excluded-address 192.168.90.10 192.168.90.12
+ip dhcp excluded-address 192.168.100.100
+ip dhcp excluded-address 192.168.10.1 192.168.10.5
+ip dhcp excluded-address 192.168.20.1 192.168.20.5
+ip dhcp excluded-address 192.168.30.1 192.168.30.5
+ip dhcp excluded-address 192.168.40.1 192.168.40.5
+ip dhcp excluded-address 192.168.50.1 192.168.50.5
+ip dhcp excluded-address 192.168.60.1 192.168.60.5
+ip dhcp excluded-address 192.168.70.1 
+ip dhcp excluded-address 192.168.100.97 
+ip dhcp excluded-address 192.168.80.1 
+ip dhcp excluded-address 192.168.90.1 
+
+============================================================
+DHCP: POOL
+============================================================
+
+ip dhcp pool IT-NET
+ network 192.168.10.0 255.255.255.240
+ default-router 192.168.10.1
+ dns-server 192.168.80.10
+ domain-name 29061.f25
+exit
+
+ip dhcp pool HR-NET
+ network 192.168.20.0 255.255.255.240
+ default-router 192.168.20.1
+ dns-server 192.168.80.10
+ domain-name 29061.f25
+exit
+
+ip dhcp pool FIN-NET
+ network 192.168.30.0 255.255.255.240
+ default-router 192.168.30.1
+ dns-server 192.168.80.10
+ domain-name 29061.f25
+exit
+
+ip dhcp pool ACC-NET
+ network 192.168.40.0 255.255.255.240
+ default-router 192.168.40.1
+ dns-server 192.168.80.10
+ domain-name 29061.f25
+exit
+
+ip dhcp pool RISK-NET
+ network 192.168.50.0 255.255.255.240
+ default-router 192.168.50.1
+ dns-server 192.168.80.10
+ domain-name 29061.f25
+exit
+
+ip dhcp pool TELLER-NET
+ network 192.168.60.0 255.255.255.240
+ default-router 192.168.60.1
+ dns-server 192.168.80.10
+ domain-name 29061.f25
+exit
+
+
+ip dhcp pool VISITOR-NET
+ network 192.168.70.0 255.255.255.240
+ default-router 192.168.70.1
+ dns-server 192.168.80.10
+ domain-name 29061.f25
+exit
+
+end
+write memory
+
+============================================================
+PHASE 4 Network Device Setup & Addressing
+============================================================
+
+CORE-SWC
+------------------
+
+int gi0/1
+switchport mode trunk
+switchport trunk allowed vlan 10,20,30,40,50,60,70
+
+int gi0/2
+switchport mode trunk
+switchport trunk allowed vlan 1,80,90
+
+int range fa0/20-21
+channel-group 1 mode active
+
+int port-channel1
+switchport mode trunk
+switchport trunk allowed vlan 1,10,20,30,40,50,60,70,80,90
+
+int range fa0/22-23
+channel-group 4 mode active
+
+int port-channel4
+switchport mode trunk
+switchport trunk allowed vlan 10,20,30,40,50,60,70
+
+======================================================================
+
+A-SWC
+------------------
+
+int range fa0/20-21
+channel-group 1 mode active
+
+int port-channel1
+switchport mode trunk
+switchport trunk allowed vlan 1,10,20,30,40,50,60,70,80,90
+
+int range gi0/1-2
+channel-group 2 mode active
+
+int port-channel2
+switchport mode trunk
+switchport trunk allowed vlan 80,90
+
+int fa0/20
+switchport mode trunk
+switchport trunk allowed vlan 10,20,30,40,50
+
+int range fa0/22-23
+channel-group 3 mode active
+
+int port-channel3
+switchport mode trunk
+switchport trunk allowed vlan 1,10,20,30,40,50,60,70,80,90
+
+=====================================================================
+
+SVR-SWC
+------------------
+
+int range gi0/1-2
+channel-group 2 mode active
+
+int port-channel2
+switchport mode trunk
+switchport trunk allowed vlan 80,90
+
+=====================================================================
+
+B-SWC
+------------------
+
+int range fa0/22-23
+channel-group 3 mode active
+
+int port-channel3
+switchport mode trunk
+switchport trunk allowed vlan 10,20,30,40,50
+
+int fa0/20
+switchport mode trunk
+switchport trunk allowed vlan 10,20,30,40,50
+
+int fa0/21
+switchport mode trunk
+switchport trunk allowed vlan 10,20,30,40,50
+=================================================================
+
+FIN-SWC
+------------------
+
+int fa0/20
+switchport mode trunk
+switchport trunk allowed vlan 10,20,30,40,50
+
+
+==================================================================
+
+ACC-SWC
+------------------
+
+
+int fa0/21
+switchport mode trunk
+switchport trunk allowed vlan 10,20,30,40,50
+
+
+=============================================================
+
+C-SWC
+------------------
+
+int range fa0/22-23
+channel-group 4 mode active
+
+int port-channel4
+switchport mode trunk
+switchport trunk allowed vlan 10,20,30,40,50,60,70
+
+int fa0/20
+switchport mode trunk
+switchport trunk allowed vlan 10,20,30,40,50
+
+int fa0/21
+switchport mode trunk
+switchport trunk allowed vlan 10,20,30,40,50
+
+int gi0/1
+switchport mode trunk
+switchport trunk allowed vlan 60,70
+
+=============================================================
+
+TELLER-SWC
+------------------
+
+int gi0/1
+switchport mode trunk
+switchport trunk allowed vlan 60,70
+
+
+PHASE 5: SERVER CONFIGURTION
+==============================================================
+
+PHASE 6: SECURITY IMPLEMENTATION
+==============================================================
+
+CORE-SWC
+------------------
+
+
+======================================================================
+
+A-SWC
+------------------
+
+=====================================================================
+
+SVR-SWC
+------------------
+
+interface range FastEthernet0/2-4
+ switchport mode access
+ switchport access vlan 80
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ switchport port-security
+ switchport port-security maximum 1
+ switchport port-security violation shutdown
+ no shutdown
+exit
+
+interface range FastEthernet0/5-7
+ switchport mode access
+ switchport access vlan 90
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ switchport port-security
+ switchport port-security maximum 1
+ switchport port-security violation shutdown
+ no shutdown
+exit
+
+
+interface FastEthernet0/8
+ switchport mode access
+ switchport access vlan 1
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ switchport port-security
+ switchport port-security maximum 1
+ switchport port-security violation shutdown
+ no shutdown
+exit
+
+=====================================================================
+
+B-SWC
+------------------
+
+=================================================================
+
+FIN-SWC
+------------------
+
+interface range FastEthernet0/1-7
+ switchport mode access
+ switchport access vlan 30
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ switchport port-security
+ switchport port-security maximum 1
+ switchport port-security violation shutdown
+ no shutdown
+exit
+==================================================================
+
+ACC-SWC
+------------------
+
+
+interface range FastEthernet0/1-7
+ switchport mode access
+ switchport access vlan 40
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ switchport port-security
+ switchport port-security maximum 1
+ switchport port-security violation shutdown
+ no shutdown
+exit
+
+=============================================================
+
+C-SWC
+------------------
+
+
+=============================================================
+
+TELLER-SWC
+------------------
+
+PHASE 7: Verification and Testing
+=============================================================

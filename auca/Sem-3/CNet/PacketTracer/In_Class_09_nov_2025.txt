@@ -1,0 +1,91 @@
+Router 1
+----------------------------
+
+int fa0/0
+ip add 192.168.10.254 255.255.255.0
+no sh
+
+int se2/0
+ip add 200.200.200.1 255.255.255.252
+no sh
+
+! RIP Routing
+! ------------------------
+
+router rip
+network 192.168.20.0
+network 192.168.30.0
+
+-----------------------------
+Router 2
+----------------------------
+
+int fa0/0
+ip add 192.168.20.254 255.255.255.0
+no sh
+
+int se2/0
+ip add 200.200.200.2 255.255.255.252
+no sh
+
+int se3/0
+ip add 100.100.100.2 255.255.255.252
+no sh
+
+
+! RIP Routing
+! ------------------------
+
+router rip
+network 192.168.30.0
+network 192.168.10.0
+
+-----------------------------
+Router 3
+----------------------------
+
+int fa0/0
+ip add 192.168.30.254 255.255.255.0
+no sh
+
+int se3/0
+ip add 100.100.100.2 255.255.255.252
+no sh
+
+! RIP Routing
+! ------------------------
+
+router rip
+network 192.168.20.0
+network 192.168.10.0
+
+--------------------------------
+RADIUS/Router2
+--------------------------------
+
+aaa new-model
+radius-server host 192.168.10.1 key cisco
+aaa authentication  login default group  radius local
+login authentication default
+
+--------------------------------
+RADIUS/SWC1
+--------------------------------
+
+aaa new-model
+radius-server host 192.168.10.1 key cisco
+aaa authentication dot1x default group radius
+dot1x system-auth-control
+
+int fa0/1
+authentication port-control auto
+dot1x pae authenticator
+
+--------------------------
+PORT-MONITORING
+--------------------------
+monitor session 1 source int gig0/1
+monitor session 1 destination int fa0/3
+end 
+wr
+conf t

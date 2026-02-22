@@ -1,0 +1,93 @@
+1.function areaOfRectangle(length, width)
+    area = length * width
+    return area
+end function
+
+Start
+    declare length, width, result as float
+
+    display("Enter the length:")
+    read length
+    display("Enter the width:")
+    read width
+
+    result = areaOfRectangle(length, width)
+    display("The area of the rectangle with length", length, "and width", width, "is", result)
+Stop
+
+
+2.function is_even(n)
+    if n % 2 == 0
+        return "The number is even"
+    else
+        return "The number is not even"
+end function
+
+Start
+    declare number, result as integer
+
+    display("Enter a number:")
+    read number
+
+    result = is_even(number)
+    display(result)
+Stop
+
+3.function toFahrenheit(celsius)
+    fahrenheit = (celsius * 9 / 5) + 32
+    return fahrenheit
+end function
+
+Start
+    declare celsius, result as float
+
+    display("Enter the Celsius temperature:")
+    read celsius
+
+    result = toFahrenheit(celsius)
+    display("The Fahrenheit equivalent of", celsius, "°C is", result, "°F")
+Stop
+
+4.function Nfactorial(n)
+    if n < 0
+        return "Factorial doesn't exist"
+    else if n == 0 or n == 1
+        return 1
+    else
+        return n * Nfactorial(n - 1)
+end function
+
+Start
+    declare number, result as integer
+
+    display("Enter a number:")
+    read number
+
+    result = Nfactorial(number)
+    display("The factorial of", number, "is", result)
+Stop
+
+5.function largest(a, b, c)
+    if a > b AND a > c
+        return a + " is the largest"
+    else if b > a AND b > c
+        return b + " is the largest"
+    else if c > a AND c > b
+        return c + " is the largest"
+    else
+        return "All numbers are equal"
+end function
+
+Start
+    declare d, e, f, result as float
+
+    display("Enter the first number:")
+    read d
+    display("Enter the second number:")
+    read e
+    display("Enter the third number:")
+    read f
+
+    result = largest(d, e, f)
+    display(result)
+Stop

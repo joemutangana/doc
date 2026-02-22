@@ -1,0 +1,81 @@
+Start
+Declare i AS Integer
+i <- 1
+while i <= 10
+write i
+i=i+1
+End
+
+
+start
+declare password as integer
+
+do
+
+write "Enter the correct password"
+read password
+
+while password != 1234
+write "Access granted"
+END
+
+
+Start
+declare number, sum as float
+sum <- 0
+Input("Enter a number"
+read number
+
+while number >= 0
+sum <- sum + number
+write "enter a number"
+read number
+End
+
+Write "Total sum is: ", sum
+
+Start
+declare choice as integer
+
+do
+
+write "1. Withdraw"
+write "2. Deposit "
+write "3. Exit"
+write "Enter you choice"
+read choice
+
+if choice == 1
+write "Withdraw selected"
+else if choice == 2
+Write "Deposit selected"
+else if choice == 3
+Write "Exiting"
+else
+write "Invalid choice"
+
+while choice != 3
+END
+
+
+Start
+declare number as integer
+number <- 2
+
+while number <= 20
+write number
+number = number + 2
+End
+
+
+Start
+declare guess as integer
+secret <- 3
+write("Guess the number between 1 and 5")
+read guess
+while guess != secret
+write("Wrong! Try Again")
+read guess
+END
+write "You won!"
+

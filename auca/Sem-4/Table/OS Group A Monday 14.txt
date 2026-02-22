@@ -1,0 +1,28 @@
+OS Group A Monday 14
+OS Group B Tuesday 14
+OS Group F Tuesday 8 
+
+Academic English Writing group C Tuesday 8 am
+Academic English Writing group G Monday 14 pm
+Academic English Writing group F Monday 8 am
+
+Programming with C Group H Friday 8 am
+Programming with C Group A Monday 8 am
+Programming with C Group B Monday 18
+
+Probability Group A Monday 14
+Probability Group B Wednesday 18
+Probability Group D Wednesday 14
+
+Requirements Engineering Group A Wednesday 8
+
+Health principles Group A Wed 8
+
+---------------------------------------------------------------------
+Mix
+----------------------------
+Academic English Writing group C Tuesday 8 am with OS Group B Tuesday 14 with Health Principles Group B Tuesday 18 
+
+Requirements software Group A wed 8 with Probability Group D Wed 14/ Requirements software Group A wed 8  with Probability Group B Wed 18
+
+Programing with C group A Monday 8

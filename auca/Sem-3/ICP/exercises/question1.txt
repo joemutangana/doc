@@ -1,0 +1,47 @@
+function addition(*ptr1, *ptr2)
+ return *ptr1 + *ptr2
+ end function
+
+function substruction(*ptr1, *ptr2)
+ return *ptr1 - *ptr2
+ end function
+
+function product(*ptr1, *ptr2)
+ return *ptr1 * *ptr2
+ end function
+
+function division(*ptr1, *ptr2)
+ return *ptr1 / *ptr2
+ end function
+
+
+Start
+declare a, b as integer
+
+write "Enter the first number: "
+read a
+write "Enter the second number: "
+read b
+
+*ptr1 = &a
+*ptr2 = &b
+
+sum = addition(*ptr1,*ptr2)
+diff = sustruction(*ptr1,*ptr2)
+pro = product(*ptr1,*ptr2)
+div = division(*ptr1,*ptr2)
+
+write *ptr1 "+" *ptr2 "=" sum
+write *ptr1 "-" *ptr2 "=" diff
+write *ptr1 "*" *ptr2 "=" pro
+write *ptr1 "÷" *ptr2 "=" div
+
+Stop
+
+
+
+
+
+
+
+ 

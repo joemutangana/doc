@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/html2pdf.js@0.10.1/dist/html2pdf.bundle.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <title>29061_docs</title>
+</head>
+<body id="home">
+  <section class="main-content" id="main-content">
+
+    <!-- #Section Header -->
+    <section class="header">
+        <a href="#" target="_blank"><button type="button">F25</button></a>
+        <div class="header_title">
+            <div class="title">CNET-F25 Final Project 29061</div>
+            <div class="description">
+                Network & System Admin Documentation & Evidence Portal
+            </div>
+        </div>
+        <div class="open_docs">
+            <button onclick="downloadPDF()">Open Doc</button>
+
+    </div>
+    </section>
+    <!-- Main Section -->
+    <section class="main">
+        <div class="nav">
+            <div class="nav_header">
+                <a href="#" target="_blank"><button type="button">S</button></a>
+                <div class="nav_title">
+                    <div class="title">29061</div>
+                    <div class="nav_description">Course: Network Systems Final Project</div>
+                </div>
+            </div>
+            <div class="nav_links">
+            <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#win_server">Window_Server_AD/GPO</a></li>
+            <li><a href="#linux_server">Linux_Server</a></li>
+            <li><a href="#pfsense">PfSense_Firewall</a></li>
+            <li><a href="#vpn">VPN_(OpenVPN)</a></li>
+            <li><a href="#wazuh">Wazuh_Server</a></li>
+            <li><a href="#aduc">Active_Directory</a></li>
+            <li><a href="#ids">IDS_Suricata</a></li>
+            <li><a href="#kali">Kali</a></li>
+            <li><a href="#ntopng">Monitoring_Network_Traffic_With_NTOPng</a></li>
+            <li><a href="#firewall">FireWall_&_Web_Filtering</a></li>
+            <li><a href="#backup">Authomated_Backup_&_Restore_Of_pfSense</a></li>
+            <li><a href="#summary">Summary</a></li>
+            </ul>
+            </div>
+        </div>
+
+        <div class="main_body" >
+            <!-- Home tab -->
+            <div class="home" id="">
+                <div class="home1">
+                <div class="home_header">
+                    <ul >
+                    <li id="overview">Overview</li>
+                    <li  id="topology">Topology</li>
+                    <li id="ip_table">IP Table</li>
+                </ul>
+                </div>
+                <div class="home_executive_summary">
+                    <h1>Executive Summary</h1>
+                    <div class="description">
+                        This Documentation Portial covers the full final project for 29061. 
+                        Use the tabs on left to navigate each page contains step-by-step.
+                    </div>
+                    <div class="home_flex">
+                        <div class="video_link">
+                            <h2>Project Video Demonstartion (Google Drive Link)</h2>
+                            <div class="drive_link">https://www.googledrive</div>
+                        </div>
+                    <div class="topology" >
+                        <h1>Topology Diagram</h1>
+                        <img src="topology.png" alt="topology Diagram" id="topology">
+                    </div>
+                </div>
+                </div>
+            </div>
+            
+            <div class="ip_allocation">
+                <h1>IP Allocation</h1>
+                <div class="allocation">
+                <div class="network">
+                    <h1>Network</h1>
+                    <li>LAN1</li>
+                    <li>LAN2</li>
+                    </div>
+                    <div class="name">
+                        <h1>Name</h1>
+                        <li>29061_LAN1</li>
+                        <li>29061_LAN2</li>
+                    </div>
+                    <div class="subnet">
+                        <h1>Subnet</h1>
+                        <li>192.168.1.0/29</li>
+                        <li>192.168.2.0/29</li>
+                    </div>
+                    <div class="gateway">
+                        <h1>Gateway</h1>
+                        <li>192.168.1.1</li>
+                        <li>192.168.2.1</li>
+                    </div>
+                    <div class="dhcp" >
+                        <h1>DHCP</h1>
+                        <li>Linux_Docs_Server</li>
+                        <li>pfSense</li>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- #Window Server tab -->
+        <div class="win_server" id="win_server">
+           <div class="aduc" id="aduc">
+            <h1>Active Directories Users and Computers - ADUC</h1>
+            <p>In this configuration, I created Active directories for IT,
+                HR, Fiance, and Student as active directory.
+            I also added some users in each directory, so later I can join some client and log in as one of user I created.
+            </p>
+
+            <div class="aduc_flex">
+                <div class="ad">
+                    <h2>Active Directory</h2>
+                    <li>IT</li>
+                    <li>HR</li>
+                    <li>Finance</li>
+                    <li>Students</li>
+                    <img src="aduc.png" alt="Active directory-image" >
+                </div>
+
+                <div class="user">
+                    <h2>Users</h2>
+                    <li>IT1, IT2</li>
+                    <li>HR1, HR2</li>
+                    <li>FIN1</li>
+                    <li>ST1</li>  
+                    <img src="ou_users.png" alt="img of users in active directory">
+                </div>
+
+            </div>
+           </div>
+           <div class="gpo">
+            <h1>Group Policy</h1>
+            <p>Group Policy has configured on this LAB for purpose of security, such as lockaout account after failing schedured times and 
+                user will change password on each login.
+            </p>
+            <div class="gpo_list">
+                <img src="gpo.png" alt="gpo-list-img">
+            </div>
+
+           </div>
+           <div class="mapped_drive">
+            <h1>Mapped-Drive</h1>
+            <p>On window server, mappeddrive configured, so that each joined PC/Client will 
+                have access to the drive created from server.</p>
+                <img src="mapeddrive.png" alt="mapped-drive-image">
+           </div>
+           <div class="iis">
+            <h1>IIS</h1>
+            <p>IIS installed on Window server it helped to host my portfolio webapge on server,
+                 so clients and users can access the webapage by browsing.</p>
+                 <img src="portfolio.png" alt="portfolio-image-from browser">
+           </div>
+           <div class="roaming">
+            <h1>Roaming/Mapped Folder</h1>
+            <p>Roaming, this was folder created aiming to follow each user, so where he/she logged on any PC/Client, 
+                the folder was linked to his profile so that any PC user join, the folder will be there.</p>
+                <img src="roaming.png" alt="roaming-mapped-folder-img">
+           </div>
+        </div>
+        <!-- Linux Server Tab -->
+        <div class="linux_server" id="linux_server">
+            <h1>Linux Server</h1>
+            <p><h5>Ubuntu live server was installed on this LAB, it's purpose is to provide the DHCP 
+                IP address to PC/Clients that are coonnected on LAN21(192.168.1.1), this doen by installing isc-dhcp-server.
+            Apache and nginx installed on Linux Server/ubuntu live server, 
+            so that I can be able to host documantaion website on Linux Server</h2></p>
+            <div class="code">
+                # subnet 192.168.1.0/290
+                <br>
+                subnet 192.168.1.0 netmask 255.255.255.248{
+                    <br>
+                     range 192.168.1.2 192.168.1.6
+                    <br>
+                    option routers 192.168.1.1;
+                }
+            </div>
+            <h1>Static IP Address on Linux Server</h1>
+            <p>network: <br>
+            version: 2<br>
+            ethernets:<br>
+            enp0s3:<br>
+            dhcp4: no<br>
+            addresses:<br>
+            - 192.168.1.3/29<br>
+            gateway4: 192.168.1.1<br>
+            nameservers:<br>
+            addresses: [8.8.8.8, 1.1.1.1, 192.168.1.3, 192.168.1.2]<br>
+                </p>
+            <h1>IP DHCP POOL ON LAN1 CONFIGURED ON Linux Server</h1>
+            <p>option domain-name "docs.29061.f25";<br>
+            option domain-name-servers 8.8.8.8;<br>
+            option domain-name-servers 192.168.1.3;<br>
+            
+            <br>
+            default-lease-time 600;<br>
+            max-lease-time 7200;<br>
+            authoritative;<br>
+            
+            subnet 192.168.1.0 netmask 255.255.255.248 {<br>
+            range 192.168.1.5 192.168.1.6;<br>
+            option routers 192.168.1.1;<br>
+            option subnet-mask 255.255.255.248;<br>
+            option broadcast-address 192.168.1.7;<br>
+            option domain-name "docs.29061.f25";<br>
+            }
+                </p>
+            <div class="doc_url">
+                <h1>Documentation Site Link</h1>
+                <p><a href="#" target="_blank">http://docs.29061.f25</a></p>
+            </div>
+        </div>
+        <!-- pfSense Tab -->
+         <div class="pfsense" id="pfsense">
+            <h1>pfSense</h1>
+            <p>PfSense: This device Helped fo setting up Interfaces and provide an 
+                IP address on Clients connected to 29061-LAN2 via DHCP. Moreover, Pfsense used to set rules
+                 and schedules that govern this LAB</p>
+                 <div class="interface">
+                    <h1>Interface IP address</h1>
+                    <p>These are IP of the interface on pfSense</p>
+                    <div class="interface_flex">
+                        <div class="lan1">
+                            <h4>29061_LAN1 Interface(lan, em2)</h1>
+                            <img src="lan1ip.png" alt="29061_LAN1 Interface(lan, em2) IP">
+                        </div>
+                        <div class="lan2">
+                            <h4>29061_LAN2 Interface(lan, em1)</h1>
+                            <img src="lan2ip.png" alt="29061_LAN2 Interface(lan, em2) IP">
+                        </div>
+                    </div>
+                 </div>
+                 <div class="dhcp" id="dhcp">
+                    <h1>DHCP POOL 29061-LAN2</h1>
+                    <p>pfSense Used Dynamic host Configuration Protocal To privide IP address on Cleint Dynamically.
+                        Belowe is the Image showing the DHCP network usable IPs, and IPs range.
+                    </p>
+                    <img src="lan2dhcp.png" alt="DHCP POOL 29061-LAN2-IMG.png">
+                 </div>
+                 <div class="firewall_rules">
+                    <h1>Firewall Rules and Schedules</h1>
+                    <p>pfSense used Firewall rules, to govern how both lan interact 
+                        each other, morever hw the access internet. On other side, 
+                        firewall schedule, 
+                        helped to schedule how often the device
+                         will have access some features, 
+                         to give permission at specific time. Below are images showing that.</p>
+                        <div class="firewall_flex">
+                            <div class="rules">
+                                <h4>Rules</h4>
+                                <img src="lan1rule.png" alt="lan1rule.png">
+                            </div>
+                            <div class="schedule">
+                                <h4>Schedules</h4>
+                                <img src="schedules.png" alt="schedules.png">
+                            </div>
+                        </div>
+                 </div>
+                    <div class="wazuh" id="wazuh">
+                        <h1>Wazhu Server</h1>
+                        <p>Wazuh is deployed in this project as a Security Information and Event Management (SIEM) and Host-based Intrusion
+                            Detection System (HIDS). Its primary purpose is to collect, analyze, and correlate security events from
+                            different
+                            systems across the network, including Linux servers, Windows endpoints, pfSense logs, and Suricata IDS alerts.
+                            By
+                            centralizing all logs and applying real-time detection rules, Wazuh allows administrators to identify threats
+                            quickly,
+                            detect suspicious activities, and respond before they escalate into major security incidents.</p>
+                    
+                        <h1>Static IP address on wazuh</h1>
+                        <div class="code">cd /etc/sysconfing/network-scripts/ <br>
+                    
+                            nano ifcfg-eth0<p>
+                    
+                                DEVICE=eth0<br>
+                                ONBOOT=yes<br>
+                                BOOTPROTO=none<br>
+                                TYPE=Ethernet<br>
+                                NM_CONTROLLED=no<br>
+                                PREFIX=29<br>
+                                IPADDR=192.168.1.4<br>
+                                GATEWAY=192.168.1.1<br>
+                                DNS1=192.168.1.2<br>
+                                DNS2=192.168.1.3</div>
+                    
+                        <h1>Wazuh Dashboard</h1>
+                        <p>I have Agent that control Window Server</p>
+                        <img src="agent.png" alt="Agent image">
+                        <h1>Wazuh Linux Docs Agent</h1>
+                        <p>
+                        <h1>Command used for Linux Agent</h1>
+                        wget https://packages.wazuh.com/4.x/apt/pool/main/w/wazuh-agent/wazuh-agent_4.14.0-1_amd64.deb && sudo
+                        WAZUH_MANAGER='192.168.1.4' WAZUH_AGENT_GROUP='Phase2_CNet' WAZUH_AGENT_NAME='Linux_Server' dpkg -i
+                        ./wazuh-agent_4.14.0-1_amd64.deb
+                        
+                        </p>
+                    </div>
+                    
+                
+
+         </div>
+         <!-- ntopng tab -->
+        <div class="ntopng" id="ntopng">
+            <h1>NTOPng Dashboard</h1>
+            <p>NTOPng was installed on pfSense packages to monitor network traffic</p>
+            <img src="em0ntopng.png" alt="ntopng_dashboard.png">
+            <h1>LAN2 Interface Traffic</h1>
+            <img src="em1ntopng.png" alt="ntopng_dashboard.png">
+            <h1>LAN1 Interface Traffic</h1>
+            <img src="em1ntopng.png" alt="ntopng_dashboard.png">
+        </div>
+        <!-- backup tab -->
+        <div class="backup" id="backup">
+            <h1>Backup And Restore</h1>
+            <p>A file Config.xml created to store data on pfSense</p>
+            <img src="backupfile.png" alt="config.png">
+        </div>
+        <!-- Open VPN tab -->
+        <div class="vpn" id="vpn">
+            <h1>OpenVPN</h1>
+            <p>OpenVPN configured to allow some client to connect to private network.</p>
+            <img src="openVPN.png" alt="config.png">
+            <p>User connecting to VPN succefuly.</p>
+            <img src="Vpn connected.png" alt="Vpn.png">
+        </div>
+        <!-- Open VPN tab -->
+        <div class="ids" id="ids">
+            <h1>Suricata ID's</h1>
+            <p>Suricata was included in the project as the Intrusion Detection and Intrusion Prevention System (IDS/IPS) for the
+            network. Its main purpose was to inspect all traffic flowing through pfSense (LAN1, LAN2) and detect suspicious,
+            malicious, or abnormal activity. Suricata provides deep packet inspection and uses rule-based signatures to alert on
+            threats such as port scans, malware communication, exploit attempts, brute-force traffic, and protocol anomalies.</p>
+            <h1>Suricata EVE Json and location of LAN1</h1>
+            <img src="lan1ids.png" alt="LAN1 eve json file path ">
+            <h1>Suricata EVE JSON and Location of LAN2</h1>
+            <img src="lan2ids.png" alt="LAN2 eve json file path">
+        </div>
+        <!--Kali Tab -->
+        <div class="kali" id="kali">
+            <h1>Kali</h1>
+            <p>
+                <h1>Coomand used for nmap scan command</h1>
+                <p>nmap -sS -Pn -T4 -p 1-65535 --open -oN nmap_scan_29061_20251206.txt 192.168.2.0/29</p>
+            </p>
+
+        </div>
+        <!-- Summary Tab -->
+        <div class="summary" id="summary">
+            <h1>Project Summary</h1>
+            <p>This project involved designing, building, and securing a fully functional enterprise-grade network infrastructure using
+            virtualized systems. The environment included a pfSense firewall acting as the core perimeter device, multiple LAN
+            segments, Active Directory services on Windows Server, a Linux documentation and DNS server, a Kali penetration-testing
+            machine, and an integrated Wazuh SIEM for real-time monitoring. Each component was configured to work together,
+            providing a realistic simulation of a modern corporate network with segmentation, security enforcement, monitoring, and
+            centralized management.</p>
+            <p>The project included deploying and securing DNS, DHCP, VPN access, HTTPS web documentation, Linux-based DNS zones,
+            Suricata IDS/IPS rules, NTOPng network analytics, and automated backup solutions. Additional tasks involved configuring
+            network services on Windows Server such as DNS and AD DS, building detailed firewall rules, performing penetration tests
+            from Kali, and capturing Wazuh alerts for correlation and detection. All tasks were documented step-by-step with
+            screenshots, logs, and configuration files to demonstrate mastery of system administration, cybersecurity monitoring,
+            and network engineering.</p>
+            <p>Overall, this project showcased strong skills in implementing secure network architectures, managing cross-platform
+            services, troubleshooting security alerts, and integrating open-source security tools into a cohesive enterprise
+            environment. It demonstrates the ability to plan, deploy, and maintain a multi-layered security infrastructure suitable
+            for real-world IT operations.</p>
+           
+        </div>
+        </div>
+    </section>
+ </section>
+    
+ <script>
+    function downloadPDF() {
+            const element = document.getElementById('main-content'); // the HTML element to convert
+            const opt = {
+                margin: 0.5,
+                filename: '29061_documentation.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2, useCORS: true },
+                jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+            };
+
+            html2pdf().set(opt).from(element).save();
+        }
+
+ </script>
+</body>
+
+</html>

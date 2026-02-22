@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mid-Term Exam Project: Comprehensive Network Configuration Guide</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f7f6;
+            color: #333;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+        h1, h2, h3, h4 {
+            color: #2c3e50;
+            margin-top: 1.5em;
+            margin-bottom: 0.5em;
+        }
+        h1 {
+            text-align: center;
+            color: #1a2a3a;
+            font-size: 2.2em;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+        }
+        h2 {
+            color: #3498db;
+            font-size: 1.8em;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 8px;
+            margin-top: 2em;
+        }
+        h3 {
+            color: #2980b9;
+            font-size: 1.4em;
+            margin-top: 1.5em;
+        }
+        h4 {
+            color: #1abc9c;
+            font-size: 1.2em;
+            margin-top: 1em;
+        }
+        p {
+            margin-bottom: 1em;
+        }
+        ul {
+            list-style-type: disc;
+            margin-left: 25px;
+            margin-bottom: 1em;
+        }
+        ol {
+            list-style-type: decimal;
+            margin-left: 25px;
+            margin-bottom: 1em;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+            background-color: #fff;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px 15px;
+            text-align: left;
+        }
+        th {
+            background-color: #eaf6ff;
+            font-weight: bold;
+            color: #333;
+        }
+        tr:nth-child(even) {
+            background-color: #f8f8f8;
+        }
+        code {
+            background-color: #e8eaf6;
+            padding: 2px 4px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            color: #c0392b;
+        }
+        pre {
+            background-color: #f0f4f7;
+            border: 1px solid #dcdcdc;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            color: #333;
+        }
+        .note {
+            background-color: #fff3cd;
+            border-left: 5px solid #ffc107;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+            color: #664d03;
+        }
+        .important {
+            background-color: #d1ecf1;
+            border-left: 5px solid #17a2b8;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+            color: #0c5460;
+        }
+        .warning {
+            background-color: #f8d7da;
+            border-left: 5px solid #dc3545;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+            color: #721c24;
+        }
+        .image-container {
+            text-align: center;
+            margin: 30px 0;
+        }
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .section-nav {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #eef7fc;
+            border-radius: 8px;
+            border: 1px solid #dbe9f5;
+        }
+        .section-nav h3 {
+            margin-top: 0;
+            color: #2980b9;
+        }
+        .section-nav ol {
+            margin-left: 0;
+            padding-left: 20px;
+        }
+        .section-nav li {
+            margin-bottom: 5px;
+        }
+        .vlan-color {
+            background-color: #e8f4f8;
+        }
+        .code-block {
+            background-color: #e9ecef;
+            padding: 15px;
+            border-left: 4px solid #007bff;
+            overflow-x: auto;
+            margin: 1.5em 0;
+            border-radius: 5px;
+        }
+        .code-block code {
+            display: block;
+            white-space: pre;
+        }
+        .step {
+            background-color: #e8f4fd;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+        .success {
+            color: #27ae60;
+            font-weight: bold;
+        }
+        .command {
+            color: #2ecc71;
+            font-weight: bold;
+        }
+        .topology-info {
+            background-color: #d5f4e6;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Mid-Term Exam Project: Comprehensive Network Configuration Guide</h1>
+        <p><strong>Project Name:</strong> YOUR_STUDENT_ID BANK NETWORK DEPLOYMENT</p>
+        <p><strong>Course:</strong> Computer Networks</p>
+        <p><strong>Submission Deadline:</strong> Sunday, Oct 27, 2025, 11:59 P.M.</p>
+        <p><strong>Lecturer:</strong> Eng. Joshua K. IRADUKUNDA.</p>
+        
+        <div class="warning">
+            <strong>CRITICAL NOTE:</strong> After downloading the .pka file from Canvas, you MUST update your User Profile in Packet Tracer before starting any configuration:
+            <ul>
+                <li><strong>Name:</strong> Your Student ID (e.g., 12345)</li>
+                <li><strong>Additional Info:</strong> Your Full Name, Phone Number, and Starting Date</li>
+	<p></p>
+                <li><strong>Failure to update these fields will result in your work NOT being graded</strong></li>
+            </ul>
+        </div>
+
+        <div class="section-nav">
+            <h3>Table of Contents</h3>
+            <ol>
+                <li><a href="#overview">Project Overview & Network Topology</a></li>
+                <li><a href="#pre-config">Pre-Configuration Requirements</a></li>
+                <li><a href="#naming">Naming and Credential Standards</a></li>
+                <li><a href="#network-setup">Network Device Setup & Addressing</a></li>
+                <li><a href="#vlans-config">VLANs Configuration & Port Assignments</a></li>
+                <li><a href="#trunking-etherchannel">Trunking and EtherChannel Configuration</a></li>
+                <li><a href="#server-config">Server Configuration & Services</a></li>
+                <li><a href="#security-impl">Security Implementation</a></li>
+                <li><a href="#verification">Verification & Testing Procedures</a></li>
+                <li><a href="#troubleshooting">Troubleshooting Guide</a></li>
+                <li><a href="#submission">Submission Requirements & Grading</a></li>
+            </ol>
+        </div>
+
+        <h2 id="overview">1. Project Overview & Network Topology</h2>
+        
+        <div class="topology-info">
+            <h3>Network Topology Overview</h3>
+            <p>The network architecture follows a hierarchical design with four main functional blocks:</p>
+            <ul>
+                
+		<li><strong>HQ-Block A:</strong> IT-NETWORK and SERVER-ROOM</li>  
+		<li><strong>HQ-Block B:</strong> FINANCE-NETWORK, ACCOUNTING-NETWORK</li> 
+		<li><strong>HQ-Block C:</strong> HR-NETWORK, RISK-NETWORK, and Distribution layer connecting HQ-Block D</li>
+		<li><strong>HQ-Block D:</strong> TELLER-NETWORK, CUSTOMER NETWORK (WiFi)</li>
+                <li><strong>CORE:</strong> Central switching connecting all distribution layers</li>
+            </ul>
+            <p>The diagram shows a segmented corporate network with departmental VLANs (IT, HR, Finance, Accounting, Risk, Teller) and service VLANs (Core-Servers, Monitoring).</p>
+        </div>
+
+        <h3>Project Goals</h3>
+        <ul>
+            <li>Build complete campus network following the provided topology diagram</li>
+            <li>Implement VLAN segmentation and inter-VLAN routing on Main-Router</li>
+            <li>Configure VTP modes (Server, Transparent, Client) as specified</li>
+            <li>Deploy EtherChannels for link aggregation</li>
+            <li>Implement comprehensive security controls</li>
+            <li>Configure DHCP services for client networks</li>
+            <li>Setup DNS and NTP services</li>
+            <li>Document and demonstrate full network functionality</li>
+        </ul>
+
+        <h3>Network Topology Description</h3>
+        <p>The provided network topology diagram, titled "YOUR-STUDENT_ID BANK", illustrates a hierarchical network design with a central <strong>CORE-SWC</strong> connecting to various network blocks (HQ-Block A, B, C, D) and a Main-Router.</p>
+        <ul>
+            <li><strong>Main-Router:</strong> Connected to CORE-SWC, positioned at the top-left of the diagram.</li>
+            <li><strong>CORE-SWC:</strong> A central 2960-24TT switch, connecting the Main-Router to blocks A, B, C, and D.</li>
+            <li><strong>HQ-Block A:</strong> Contains an "IT-NETWORK" (2960-24TT IT-NET switch) and a "SERVER-ROOM" (2960-24TT SERVER-ROOM switch). Both connect to A-SWC (BLOCK A - SWC). The IT-NETWORK houses various laptops and PCs. The SERVER-ROOM contains WEB SERVER, AD/DC, CBS, EDWH, SYSLOG, NET-MONITORING, and SIEM servers.</li>
+            <li><strong>HQ-Block B:</strong> Features a "FINANCE-NETWORK" (2960-24TT FINANCE-NET switch) and an "ACCOUNTING-NETWORK" (2960-24TT ACCOUNTING-NET switch). Both connect to B-SWC (BLOCK B - SWC). These networks are populated with laptops and PCs.</li>
+            <li><strong>HQ-Block C:</strong> Includes a "HR-NETWORK" (2960-24TT HR-NET switch) and a "RISK-NETWORK" (2960-24TT RISK-NET switch). Both connect to C-SWC (BLOCK C - SWC). Laptops and PCs are present in these networks.</li>
+            <li><strong>HQ-Block D:</strong> Consists of a "TELLER-NETWORK" (2960-24TT TELLER-NET switch) and a "CUSTOMER-NETWORK" served by a HomeRouter-PT-AC wireless router. The TELLER-NETWORK has PCs and laptops, while the CUSTOMER-NETWORK has visitor and client laptops/PCs connecting wirelessly. The TELLER-NET switch connects to the HomeRouter-PT-AC, which in turn connects to C-SWC.</li>
+            <li><strong>Interconnections:</strong>
+                <ul>
+                    <li>Main-Router to CORE-SWC (likely using multiple links for inter-VLAN routing).</li>
+                    <li>CORE-SWC to A-SWC (BLOCK A - SWC), B-SWC (BLOCK B - SWC), C-SWC (BLOCK C - SWC) via EtherChannels (indicated by multiple dashed lines).</li>
+                    <li>A-SWC to IT-NET and SERVER-ROOM switches.</li>
+                    <li>B-SWC to FINANCE-NET and ACCOUNTING-NET switches.</li>
+                    <li>C-SWC to HR-NET, RISK-NET, and HomeRouter-PT-AC.</li>
+                    <li>HomeRouter-PT-AC to TELLER-NET switch.</li>
+                </ul>
+            </li>
+            <li><strong>IP Addressing:</strong> IP subnets like 192.168.10.0/28 (IT-NET), 192.168.80.0/28 (SERVER-ROOM), 192.168.30.0/28 (FINANCE-NET), 192.168.40.0/28 (ACCOUNTING-NET), 192.168.20.0/28 (HR-NET), 192.168.50.0/28 (RISK-NET), and 192.168.60.0/28 (TELLER-NETWORK) are indicated next to their respective switches/networks.</li>
+            <li><strong>Device Labels:</strong> Switches are labeled with their names (e.g., IT-SWC, FINANCE-SWC,...) and model (2960-24TT). End devices are generically labeled Laptop-PT or PC-PT with specific identifiers (e.g., IT-L1, TELLER-P1).</li>
+        </ul>
+      
+        <h2 id="pre-config">2. Pre-Configuration Requirements</h2>
+        
+        <div class="note">
+            <strong>IMPORTANT:</strong> Before starting configuration, ensure all equipment and software requirements are met.
+        </div>
+
+        <h3>Software & Equipment Requirements:</h3>
+        <ul>
+            <li>Cisco Packet Tracer v8.2.2.0400 or compatible</li>
+            <li>Download file format: YourStudentID_YourFullName_CNet-F25_MID - ID BANK.pka</li>
+            <li><strong>Console Access:</strong> Use console cable from IT computer to device console port</li>
+            <li><strong>Router&Switch Terminals use Console cable:</strong>  To configure any network device (Routers, Switches), connect an IT Computer to the device using a Console cable and use its Terminal application.</li>
+            <li>Lab notebook or digital log for command tracking</li>
+        </ul>
+
+        <h3>File Naming Conventions</h3>
+        <ul>
+            <li><strong>Pka File:</strong> YourStudentID_YourFullName_CNet-F25_MID.pka</li>
+            <li><strong>PDF Report:</strong> YourStudentID_YourFullName_CNet-F25_MID.pdf</li>
+            <li><strong>HD Video:</strong> YourStudentID_YourFullName_CNet-F25_MID.mp4</li>
+        </ul>
+
+        <h2 id="naming">3. Naming and Credential Standards</h2>
+        
+        <div class="warning">
+            <strong>MANDATORY:</strong> You MUST replace "YOUR_STUDENT_ID" with your actual student ID throughout the configuration
+        </div>
+
+        <h3>Required Changes Across All Devices</h3>
+        <table>
+            <tr>
+                <th>Element</th>
+                <th>Format</th>
+                <th>Example</th>
+            </tr>
+            <tr>
+                <td>Network Container Name</td>
+                <td>YOUR-STUDENT_ID BANK</td>
+                <td>12345 BANK</td>
+            </tr>
+            <tr>
+                <td>Wireless Router Device Name</td>
+                <td>YOUR-STUDENT_ID_HQ_WIFI</td>
+                <td>12345_HQ_WIFI</td>
+            </tr>
+            <tr>
+                <td>Guest Network SSID</td>
+                <td>YOUR-STUDENT_ID_Guest_WIFI</td>
+                <td>12345_Guest_WIFI</td>
+            </tr>
+            <tr>
+                <td>Domain Names (VTP, SSH, DNS)</td>
+                <td>your_student_id.f25</td>
+                <td>12345.f25</td>
+            </tr>
+            <tr>
+                <td>Username</td>
+                <td>Your last name</td>
+                <td>Joshua</td>
+            </tr>
+            <tr>
+                <td>Password/Secret</td>
+                <td>Your student ID</td>
+                <td>12345</td>
+            </tr>
+        </table>
+
+        <h2 id="network-setup">4. Network Device Setup & Addressing</h2>
+
+        <h3>Complete VLAN Configuration Table</h3>
+        <table>
+            <tr>
+                <th>VLAN ID</th>
+                <th>Name</th>
+                <th>IP Network</th>
+                <th>Subnet Mask (/28)</th>
+                <th>Gateway IP</th>
+                <th>Interfaces Used</th>
+                <th>Devices & Purpose</th>
+            </tr>
+            <tr class="vlan-color">
+                <td>1</td>
+                <td>PUBLIC-NET</td>
+                <td>192.168.100.96/28</td>
+                <td>255.255.255.240</td>
+                <td>192.168.100.97</td>
+                <td>F0/1</td>
+                <td>WEB-SERVER (Public web services)</td>
+            </tr>
+            <tr>
+                <td>10</td>
+                <td>IT-NET</td>
+                <td>192.168.10.0/28</td>
+                <td>255.255.255.240</td>
+                <td>192.168.10.1</td>
+                <td>F0/1-3</td>
+                <td>IT Computers and admin workstations</td>
+            </tr>
+            <tr>
+                <td>20</td>
+                <td>HR-NET</td>
+                <td>192.168.20.0/28</td>
+                <td>255.255.255.240</td>
+                <td>192.168.20.1</td>
+                <td>F0/4-6</td>
+                <td>HR Computers</td>
+            </tr>
+            <tr>
+                <td>30</td>
+                <td>FIN-NET</td>
+                <td>192.168.30.0/28</td>
+                <td>255.255.255.240</td>
+                <td>192.168.30.1</td>
+                <td>F0/7-9</td>
+                <td>Finance PCs</td>
+            </tr>
+            <tr>
+                <td>40</td>
+                <td>ACC-NET</td>
+                <td>192.168.40.0/28</td>
+                <td>255.255.255.240</td>
+                <td>192.168.40.1</td>
+                <td>F0/10-12</td>
+                <td>Accounting PCs</td>
+            </tr>
+            <tr>
+                <td>50</td>
+                <td>RISK-NET</td>
+                <td>192.168.50.0/28</td>
+                <td>255.255.255.240</td>
+                <td>192.168.50.1</td>
+                <td>F0/13-15</td>
+                <td>Risk Dept PCs</td>
+            </tr>
+            <tr>
+                <td>60</td>
+                <td>TELLER-NET</td>
+                <td>192.168.60.0/28</td>
+                <td>255.255.255.240</td>
+                <td>192.168.60.1</td>
+                <td>F0/16-18</td>
+                <td>Teller PCs</td>
+            </tr>
+            <tr>
+                <td>70</td>
+                <td>VISITOR-NET</td>
+                <td>192.168.70.0/28</td>
+                <td>255.255.255.240</td>
+                <td>192.168.70.1</td>
+                <td>Wireless SSID</td>
+                <td>Visitor/Guests</td>
+            </tr>
+            <tr>
+                <td>80</td>
+                <td>CORE-SVR</td>
+                <td>192.168.80.0/28</td>
+                <td>255.255.255.240</td>
+                <td>192.168.80.1</td>
+                <td>F0/2-4</td>
+                <td>AD/DC, CBS, EDWH</td>
+            </tr>
+            <tr>
+                <td>90</td>
+                <td>MONITOR-SVR</td>
+                <td>192.168.90.0/28</td>
+                <td>255.255.255.240</td>
+                <td>192.168.90.1</td>
+                <td>F0/5-7</td>
+                <td>SYSLOG, NET-MONITORING, SIEM</td>
+            </tr>
+        </table>
+
+        <h3>Server IP Configuration Table</h3>
+        <table>
+            <tr>
+                <th>Server Name</th>
+                <th>Hostname</th>
+                <th>IP Address/Mask</th>
+                <th>Default Gateway</th>
+                <th>VLAN</th>
+                <th>Role & Services</th>
+            </tr>
+            <tr>
+                <td>WEB SERVER</td>
+                <td>web.yourID.f25</td>
+                <td>192.168.100.100/28</td>
+                <td>192.168.100.97</td>
+                <td>1</td>
+                <td>Web Server, HTTP Service</td>
+            </tr>
+            <tr>
+                <td>AD/DC SERVER</td>
+                <td>ad.yourID.f25</td>
+                <td>192.168.80.10/28</td>
+                <td>192.168.80.1</td>
+                <td>80</td>
+                <td>Active Directory, Domain Controller, DNS Server</td>
+            </tr>
+            <tr>
+                <td>CBS SERVER</td>
+                <td>cbs.yourID.f25</td>
+                <td>192.168.80.11/28</td>
+                <td>192.168.80.1</td>
+                <td>80</td>
+                <td>Core Banking System, FTP Service</td>
+            </tr>
+            <tr>
+                <td>EDWH SERVER</td>
+                <td>edwh.yourID.f25</td>
+                <td>192.168.80.12/28</td>
+                <td>192.168.80.1</td>
+                <td>80</td>
+                <td>Enterprise Data Warehouse, Restricted DB Server</td>
+            </tr>
+            <tr>
+                <td>SYSLOG SERVER</td>
+                <td>syslog.yourID.f25</td>
+                <td>192.168.90.10/28</td>
+                <td>192.168.90.1</td>
+                <td>90</td>
+                <td>Syslog Server, Monitoring/Log Collector</td>
+            </tr>
+            <tr>
+                <td>NET-MONITORING</td>
+                <td>mon.yourID.f25</td>
+                <td>192.168.90.11/28</td>
+                <td>192.168.90.1</td>
+                <td>90</td>
+                <td>NTP Server</td>
+            </tr>
+            <tr>
+                <td>SIEM</td>
+                <td>siem.yourID.f25</td>
+                <td>192.168.90.12/28</td>
+                <td>192.168.90.1</td>
+                <td>90</td>
+                <td>Security Monitoring</td>
+            </tr>
+        </table>
+
+        <h3>DHCP Pool Configuration</h3>
+        <table>
+            <tr>
+                <th>Network Pool</th>
+                <th>DHCP Range</th>
+                <th>Excluded Addresses</th>
+                <th>Default Gateway</th>
+                <th>DNS Server</th>
+            </tr>
+            <tr>
+                <td>IT-NET (VLAN 10)</td>
+                <td>192.168.10.6 to 192.168.10.14</td>
+                <td>192.168.10.1 to 192.168.10.5</td>
+                <td>192.168.10.1</td>
+                <td>192.168.80.10</td>
+            </tr>
+            <tr>
+                <td>HR-NET (VLAN 20)</td>
+                <td>192.168.20.6 to 192.168.20.14</td>
+                <td>192.168.20.1 to 192.168.20.5</td>
+                <td>192.168.20.1</td>
+                <td>192.168.80.10</td>
+            </tr>
+            <tr>
+                <td>FIN-NET (VLAN 30)</td>
+                <td>192.168.30.6 to 192.168.30.14</td>
+                <td>192.168.30.1 to 192.168.30.5</td>
+                <td>192.168.30.1</td>
+                <td>192.168.80.10</td>
+            </tr>
+            <tr>
+                <td>ACC-NET (VLAN 40)</td>
+                <td>192.168.40.6 to 192.168.40.14</td>
+                <td>192.168.40.1 to 192.168.40.5</td>
+                <td>192.168.40.1</td>
+                <td>192.168.80.10</td>
+            </tr>
+            <tr>
+                <td>RISK-NET (VLAN 50)</td>
+                <td>192.168.50.6 to 192.168.50.14</td>
+                <td>192.168.50.1 to 192.168.50.5</td>
+                <td>192.168.50.1</td>
+                <td>192.168.80.10</td>
+            </tr>
+            <tr>
+                <td>TELLER-NET (VLAN 60)</td>
+                <td>192.168.60.6 to 192.168.60.14</td>
+                <td>192.168.60.1 to 192.168.60.5</td>
+                <td>192.168.60.1</td>
+                <td>192.168.80.10</td>
+            </tr>
+        </table>
+
+        <h2 id="vlans-config">5. VLANs Configuration & Port Assignments</h2>
+        
+        <h3>VLAN Deployment Strategy</h3>
+        <p>Implement VLANs according to the hierarchical network design:</p>
+        <ul>
+            <li><strong>Core Switch:</strong> Creates all VLANs (since VTP Server) and propagates to clients</li>
+            <li><strong>Transparent Switches:</strong> Must manually create ALL required VLANs locally</li>
+            <li><strong>Client Switches:</strong> Receive VLAN information from VTP Server</li>
+        </ul>
+
+        <h3>Port Configuration Requirements</h3>
+        <table>
+            <tr>
+                <th>Switch Type</th>
+                <th>VTP Mode</th>
+                <th>VLAN Creation</th>
+            </tr>
+            <tr>
+                <td>CORE-SWC</td>
+                <td>Server</td>
+                <td>Create VLANs: 1, 10, 20, 30, 40, 50, 60, 70, 80, 90</td>
+            </tr>
+            <tr>
+                <td>A-SWC, B-SWC, C-SWC</td>
+                <td>Transparent</td>
+                <td>MANUAL creation of all VLANs required</td>
+            </tr>
+            <tr>
+                <td>SVR-SWC, FIN-SWC, ACC-SWC, TELLER-SWC</td>
+                <td>Client</td>
+                <td>Learn VLANs from VTP Server</td>
+            </tr>
+        </table>
+
+        <div class="note">
+            <strong>CONFIGURATION ORDER:</strong> Configure core VLANs first, then access switches, then security
+        </div>
+
+        <h3>VLAN Interface Assignments and Security</h3>
+        <ul>
+            <li><strong>Access Port Configuration:</strong> All end-device interfaces must have:
+                <ul>
+                    <li>switchport mode access</li>
+                    <li>switchport access vlan XX</li>
+                    <li>spanning-tree portfast</li>
+                    <li>spanning-tree bpduguard enable</li>
+                    <li>port-security with maximum 1 MAC address, violation shutdown</li>
+                </ul>
+            </li>
+            <li><strong>Unused Ports:</strong> All unused switch interfaces must be shutdown</li>
+            <li><strong>VTP Domain:</strong> All devices must use your_student_ID.f25</li>
+            <li><strong>VTP Password:</strong> Use student ID as VTP password</li>
+        </ul>
+
+        <h3>Port Security Configuration</h3>
+        <p><strong>Required on ALL end-device access interfaces:</strong></p>
+        <div class="code-block">
+            <code>
+interface fastethernet 0/1<br>
+ switchport mode access<br>
+ switchport access vlan XX<br>
+ switchport port-security<br>
+ switchport port-security maximum 1<br>
+ switchport port-security violation shutdown<br>
+ spanning-tree portfast<br>
+ spanning-tree bpduguard enable<br>
+ no shutdown
+            </code>
+        </div>
+
+        <h2 id="trunking-etherchannel">6. Trunking and EtherChannel Configuration</h2>
+        
+        <h3>Comprehensive EtherChannel & Trunk Mapping</h3>
+        <table>
+            <tr>
+                <th>Port-Channel Group</th>
+                <th>Devices Connected</th>
+                <th>Interfaces</th>
+                <th>Allowed VLANs</th>
+                <th>Protocol</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>CORE-SWC ↔ A-SWC</td>
+                <td>Fa0/20-21</td>
+                <td>1,10-90</td>
+                <td>LACP Active</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>A-SWC ↔ SVR-SWC</td>
+                <td>Gi0/1-2</td>
+                <td>80,90</td>
+                <td>LACP Active</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>A-SWC ↔ B-SWC</td>
+                <td>Fa0/22-23</td>
+                <td>1,10-90</td>
+                <td>LACP Active</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>CORE-SWC ↔ C-SWC</td>
+                <td>Fa0/22-23</td>
+                <td>10-70</td>
+                <td>LACP Active</td>
+            </tr>
+        </table>
+
+        <h2 id="server-config">7. Server Configuration & Services</h2>
+        
+        <h3>Complete Server Configuration Matrix</h3>
+        <table>
+            <tr>
+                <th>Server Name</th>
+                <th>IP Address</th>
+                <th>VLAN Assignment</th>
+                <th>Interfaces Used</th>
+                <th>Services Enabled</th>
+                <th>ACL Restrictions</th>
+            </tr>
+            <tr>
+                <td>WEB</td>
+                <td>192.168.100.100/28</td>
+                <td>1</td>
+                <td>F0/1 (SVR-SWC)</td>
+                <td>HTTP, static IP</td>
+                <td>VISITOR: HTTP only; Others: Full access</td>
+            </tr>
+            <tr>
+                <td>AD/DC</td>
+                <td>192.168.80.10/28</td>
+                <td>80</td>
+                <td>F0/2 (SVR-SWC)</td>
+                <td>DNS, AD Services</td>
+                <td>Restricted access per ACL</td>
+            </tr>
+            <tr>
+                <td>CBS</td>
+                <td>192.168.80.11/28</td>
+                <td>80</td>
+                <td>F0/3 (SVR-SWC)</td>
+                <td>FTP</td>
+                <td>Restricted access per ACL</td>
+            </tr>
+            <tr>
+                <td>EDWH</td>
+                <td>192.168.80.12/28</td>
+                <td>80</td>
+                <td>F0/4 (SVR-SWC)</td>
+                <td>DB Server</td>
+                <td>IT-NET only</td>
+            </tr>
+            <tr>
+                <td>SYSLOG</td>
+                <td>192.168.90.10/28</td>
+                <td>90</td>
+                <td>F0/5 (SVR-SWC)</td>
+                <td>Syslog</td>
+                <td>Full access</td>
+            </tr>
+            <tr>
+                <td>NET-MON</td>
+                <td>192.168.90.11/28</td>
+                <td>90</td>
+                <td>F0/6 (SVR-SWC)</td>
+                <td>NTP</td>
+                <td>Full access</td>
+            </tr>
+            <tr>
+                <td>SIEM</td>
+                <td>192.168.90.12/28</td>
+                <td>90</td>
+                <td>F0/7 (SVR-SWC)</td>
+                <td>SIEM</td>
+                <td>Full access</td>
+            </tr>
+        </table>
+
+        <h3>General Server Configuration Steps</h3>
+        <ul>
+            <li>Go to Desktop > IP Configuration.</li>
+            <li>Set IP Address, Subnet Mask, Default Gateway (VLAN Gateway IP from Main-Router), and DNS Server (192.168.80.10 for all).</li>
+            <li>Go to Services tab to enable/configure specific services.</li>
+        </ul>
+
+        <h2 id="security-impl">8. Security Implementation</h2>
+        
+        <h2 id="acls">Access Control Lists (ACLs) - On Main-Router</h2>
+        <p>ACLs are critical for security and must be applied on the Main-Router. Name your ACLs using your Student ID for clarity <strong>(e.g., IP access-list standard Standard_12345)</strong>. Remember the implicit deny any at the end of every ACL, so explicitly permit necessary traffic.</p>
+
+        <h3>ACL Application Guidelines:</h3>
+        <ul>
+            <li>ACLs should be applied on the sub-interfaces of the Main-Router.</li>
+            <li>Carefully consider the direction (in or out) based on the flow of traffic you want to filter.</li>
+        </ul>
+
+        <h4>Standard ACL (Named):</h4>
+        <p><strong>Objective:</strong> Block VISITOR/CLIENT Network (VLAN 70) from accessing any other network.</p>
+        <ul>
+            <li><strong>Name:</strong> IP access-list standard Standard_&lt;YourStudentID&gt;_Visitor_Block</li>
+            <li><strong>Rules:</strong> Deny all traffic originating from 192.168.70.0/28.</li>
+            <li><strong>Application:</strong> Apply inbound on the GigabitEthernet 0/0.70 sub-interface.</li>
+        </ul>
+
+        <h4>Extended ACLs (Named):</h4>
+        <p><strong><strong>Objective:</strong></strong> Allow VISITOR/CLIENT Network (VLAN 70) to access WEB SERVER (HTTP) and AD/DC SERVER (DNS) only.</p>
+        <ul>
+            <li><strong>Name:</strong> IP access-list extended Extended_&lt;YourStudentID&gt;__Visitor_Access</li>
+            <li><strong>Rules:</strong>
+                <ul>
+                    <li>Permit TCP traffic from 192.168.70.0/28 to 192.168.100.100 (WEB SERVER) on port 80 (HTTP).</li>
+                    <li>Permit UDP traffic from 192.168.70.0/28 to 192.168.80.10 (AD/DC) on port 53 (DNS).</li>
+                    <li>Explicitly deny all other traffic from 192.168.70.0/28 (or rely on implicit deny).</li>
+                </ul>
+            </li>
+            <li><strong>Application:</strong> Apply inbound on the GigabitEthernet 0/0.70 sub-interface (after the Standard ACL if it blocks all). Alternatively, if you want to block all, then selectively permit, make sure this extended ACL comes before any broader deny. A better approach might be to just use this extended ACL, permitting HTTP/DNS and then having an implicit deny for everything else.</li>
+        </ul>
+        <p><strong>Objective:</strong> Allow other networks (all except Visitors/Clients) to send only PING and DNS traffic to AD/DC SERVER. IT-NET users have Full Access.</p>
+        <ul>
+            <li><strong>Name:</strong> IP access-list extended Extended_&lt;YourStudentID&gt;_ADDC_Access</li>
+            <li><strong>Rules:</strong>
+                <ul>
+                    <li>Permit IP traffic from 192.168.10.0/28 (IT-NET) to 192.168.80.10 (AD/DC). (Full access for IT-NET).</li>
+                    <li>Permit ICMP (ping) traffic from any (or specific subnets excluding 70) to 192.168.80.10 (AD/DC).</li>
+                    <li>Permit UDP traffic (DNS) from any (or specific subnets excluding 70) to 192.168.80.10 (AD/DC) on port 53.</li>
+                    <li>Deny all other traffic to 192.168.80.10.</li>
+                </ul>
+            </li>
+            <li><strong>Application:</strong> Apply outbound on the GigabitEthernet 1/0.80 sub-interface (towards the AD/DC server).</li>
+        </ul>
+        <p><strong>Objective:</strong> Allow all networks (except Visitors/Clients) to send only FTP traffic to CBS SERVER. IT-NET has Full Access.</p>
+        <ul>
+            <li><strong>Name:</strong> IP access-list extended Extended_&lt;YourStudentID&gt;__CBS_Access</li>
+            <li><strong>Rules:</strong>
+                <ul>
+                    <li>Permit IP traffic from 192.168.10.0/28 (IT-NET) to 192.168.80.11 (CBS). (Full access for IT-NET).</li>
+                    <li>Permit TCP traffic from any (or specific subnets excluding 70) to 192.168.80.11 (CBS) on ports 20 and 21 (FTP).</li>
+                    <li>Deny all other traffic to 192.168.80.11.</li>
+                </ul>
+            </li>
+            <li><strong>Application:</strong> Apply outbound on the GigabitEthernet 1/0.80 sub-interface.</li>
+        </ul>
+        <p><strong>Objective:</strong> Allow only IT-NET to access EDWH SERVER.</p>
+        <ul>
+            <li><strong>Name:</strong> IP access-list extended Extended_&lt;YourStudentID&gt;__EDWH_Access</li>
+            <li><strong>Rules:</strong>
+                <ul>
+                    <li>Permit IP traffic from 192.168.10.0/28 (IT-NET) to 192.168.80.12 (EDWH).</li>
+                    <li>Deny IP traffic from any to 192.168.80.12.</li>
+                </ul>
+            </li>
+            <li><strong>Application:</strong> Apply outbound on the GigabitEthernet 1/0.80 sub-interface.</li>
+        </ul>
+        <p><h4><strong>Special Note for NET-MONITORING Systems:</strong></h4> The NET-MONITORING Systems (VLAN 90) are allowed to send and receive traffic from all networks/devices without any restrictions from these ACLs. This means you should ensure your ACLs do not implicitly block traffic to/from 192.168.90.0/28 for monitoring purposes. You might need to add explicit permit ip any 192.168.90.0 0.0.0.15 and permit ip 192.168.90.0 0.0.0.15 any statements in your extended ACLs if necessary, before any broad deny statements.</p>
+
+        <h3>Mandatory Security Settings</h3>
+        <ul>
+            <li><strong>Port Security:</strong> Apply on all access ports with maximum MAC addresses: 1, violation action: shutdown</li>
+            <li><strong>SSH Configuration:</strong> Enable SSH on all devices, disable Telnet completely, username: Your last name, password: Your student ID, service password-encryption enabled</li>
+            <li><strong>STP Hardening:</strong> spanning-tree mode rapid-pvst, BPDU Guard on all PortFast enabled interfaces</li>
+        </ul>
+
+        <h2 id="verification">9. Verification & Testing Procedures</h2>
+        
+        <h3>Essential Show Commands & Expected Outputs</h3>
+        
+        <h4>Router Verification Commands</h4>
+        <table>
+            <tr>
+                <th>Command</th>
+                <th>Expected Result</th>
+                
+            </tr>
+            <tr>
+                <td>show ip interface brief</td>
+                <td>All subinterfaces show correct IPs and UP/UP status</td>
+                
+            </tr>
+            <tr>
+                <td>show ip route</td>
+                <td>All VLAN networks visible as connected routes</td>
+                
+            </tr>
+            <tr>
+                <td>show ip dhcp binding</td>
+                <td>Client leases shown from pools with correct IPs</td>
+                
+            </tr>
+            <tr>
+                <td>show ip access-lists &lt;ACL_NAME&gt;</td>
+                <td>Hits increment for allowed/blocked flows</td>
+                
+            </tr>
+        </table>
+
+        <h3>Step-by-Step Testing Procedure</h3>
+        <div class="step">1. Verify subinterfaces are operational with correct IP assignments</div>
+        <div class="step">2. Test within same VLAN first (ping between computers in same VLAN)</div>
+        <div class="step">3. Then test cross-VLAN routing (ping between different VLANs)</div>
+        <div class="step">4. Test DHCP functionality across all client VLANs</div>
+        <div class="step">5. Validate DNS resolution for instance, web.yourID.f25</div>
+        <div class="step">6. Check inter-VLAN routing connectivity</div>
+        <div class="step">7. Verify ACL implementations and counters</div>
+        <div class="step">8. Finally test services (NTP, SYSLOG, FTP)</div>
+
+        <h2 id="troubleshooting">10. Troubleshooting Guide</h2>
+        
+        <h3>Common Issues & Solutions</h3>
+        <ul>
+            <li><strong>VLAN Mismatch:</strong> Ensure VLAN IDs match between switches and router subinterfaces</li>
+            <li><strong>Port Security Violations:</strong> Check port-security status and clear violations</li>
+            <li><strong>ACL Blocking Required Traffic:</strong> Temporarily remove or re-order ACL rules</li>
+            <li><strong>Trunk Issues:</strong> Verify allowed VLANs on trunk interfaces</li>
+            <li><strong>EtherChannel Problems:</strong> Ensure consistent LACP mode on both sides</li>
+            <li><strong>VTP Domain Mismatch:</strong> Verify VTP domain name and password match across all switches</li>
+        </ul>
+
+        <h3>Critical Best Practices</h3>
+        <div class="warning">
+            <strong>⚠️ IMPORTANT:</strong> Save your Packet Tracer file frequently at each major configuration milestone
+        </div>
+<h2 id="evidence">Key Screenshot Evidence Required</h2>
+        <ul>
+            <li>VLANs and Inter-VLANs</li>
+            <li>DHCP_Lease_Proof</li>
+            <li>Web_Access_by_IP</li>
+            <li>Web_Access_by_Domain</li>
+            <li>DNS_Resolution</li>
+            <li>NTP_Sync_Router.png</li>
+            <li>NTP_Sync_Switch.png</li>
+            <li>ACL_Counters</li>
+            <li>EtherChannel_Summary</li>
+            <li>Port_Security_Enabled</li>
+        </ul>
+
+        <h2 id="best-practices">BEST PRACTICES AND FINAL TIPS</h2>
+        <h3>During Configuration</h3>
+        <ul>
+            <li><strong>✓ Plan Before You Configure</strong>
+                <ul>
+                    <li>Draw port-to-port mapping</li>
+                    <li>Create an interface assignment table</li>
+                    <li>Document IP assignments beforehand</li>
+                </ul>
+            </li>
+            <li><strong>✓ Configure Incrementally</strong>
+                <ul>
+                    <li>Complete one phase before moving to next</li>
+                    <li>Test after each major step</li>
+                    <li>Save backup after each phase</li>
+                </ul>
+            </li>
+            <li><strong>✓ Document Everything</strong>
+                <ul>
+                    <li>Keep detailed lab notebook</li>
+                    <li>Record every command used</li>
+                    <li>Note reasons for configuration choices</li>
+                    <li>Capture timestamps of changes</li>
+                </ul>
+            </li>
+            <li><strong>✓ Save Frequently</strong>
+                <ul>
+                    <li><strong>Save after each phase:</strong> pka, Phase2_Config.pka, etc.</li>
+                    <li><strong>Final PKA submission:</strong> Your_Student_ID_FullName_CNet-F25_MID.pka (12345_FullName_CNet-F25_MID.pka)</li>
+                    <li><strong>Final PDF submission:</strong> Your_Student_ID_FullName_CNet-F25_MID.pdf (12345_FullName_CNet-F25_MID.pka)</li>
+                </ul>
+            </li>
+        </ul>
+
+
+        <h2 id="submission">11. Submission Requirements & Grading</h2>
+        
+        <h3>Submission Package Requirements</h3>
+        <p>Upload the following files to the designated Google Form:</p>
+        <ul>
+            <li><strong>Packet Tracer Activity (.pka) file:</strong> The completed network configuration</li>
+            <li><strong>PDF Document:</strong> A detailed report outlining your configuration steps, verification outputs (screenshots of show commands, ping results, browser tests), and any challenges faced during the project</li>
+	    <li><strong>HD Short demo video:</strong> 4–8 minutes showing:
+		<ul>
+                    <li>Provide a comprehensive demonstration of the network, detailing how everything is connected and how devices interact with each other</li>
+                    <li>Router & switch show commands outputs</li>
+                    <li>Browser visiting the web page by DNS name</li>
+                    <li>Ping tests and ACL evidence</li>
+                </ul>
+	   </li>
+        </ul>
+
+        <h3>Grading Rubric</h3>
+        <table>
+            <tr>
+                <th>Area</th>
+                <th>Points</th>
+                <th>Criteria</th>
+            </tr>
+            <tr>
+                <td>VLANs & IP addressing</td>
+                <td>20</td>
+                <td>Correct VLANs created; subnets assigned; DHCP pools configured correctly</td>
+            </tr>
+            <tr>
+                <td>Trunks & Port-Channels</td>
+                <td>15</td>
+                <td>Trunks up, allowed VLANs correct; EtherChannel stable and up</td>
+            </tr>
+            <tr>
+                <td>Router & inter-VLAN routing</td>
+                <td>15</td>
+                <td>Subinterfaces correct, routes visible, gateways reachable</td>
+            </tr>
+            <tr>
+                <td>Servers & DNS/NTP</td>
+                <td>15</td>
+                <td>Web resolvable by name, NTP sync, services running</td>
+            </tr>
+            <tr>
+                <td>ACLs & Security</td>
+                <td>20</td>
+                <td>ACLs implemented exactly as specified, port-security, SSH only, STP hardened</td>
+            </tr>
+            <tr>
+                <td>Documentation & Evidence</td>
+                <td>15</td>
+                <td>Complete report, HD Short video, show outputs, screenshots, mapping table</td>
+            </tr>
+        </table>
+    </div>
+    <div class="topology-info">
+            <strong>MOTIVATION:</strong> "Dream big and work hard to achieve your goals. Stay strong and keep fighting for your dreams. Do not let anything discourage you; the future looks bright."
+	<p></p>
+	<h1><center><strong>Good luck!</strong></h1></center></div>
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>

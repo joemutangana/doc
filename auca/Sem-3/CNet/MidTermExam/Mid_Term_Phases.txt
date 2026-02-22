@@ -1,0 +1,1731 @@
+PHASE 1: Naming and Credential Standards
+=====================================================================
+
+PHASE1 — HQ-MAIN-ROUTER
+=====================================================================
+
+enable
+configure terminal
+hostname 29061-HQ-MAIN-ROUTER
+no ip domain-lookup
+ip domain-name 29061.f25
+username Joseph privilege 15 secret 29061
+enable secret 29061
+service password-encryption
+banner motd # Authorized Access Only - 29061 BANK #
+crypto key generate rsa 
+1024
+ip ssh version 2
+line console 0
+ login local
+ exec-timeout 10
+line vty 0 4
+ login local
+ transport input ssh
+ exec-timeout 10
+end
+write memory
+
+
+=====================================================================
+PHASE1 — CORE-SWC
+=====================================================================
+
+enable
+configure terminal
+hostname 29061-CORE-SWC
+no ip domain-lookup
+ip domain-name 29061.f25
+username Joseph privilege 15 secret 29061
+enable secret 29061
+service password-encryption
+banner motd # Authorized Access Only - 29061 BANK #
+spanning-tree mode rapid-pvst
+crypto key generate rsa 
+1024
+ip ssh version 2
+line console 0
+ login local
+ exec-timeout 10
+line vty 0 4
+ login local
+ transport input ssh
+ exec-timeout 10
+vtp domain 29061.f25
+vtp password 29061
+vtp mode server
+ex
+write memory
+
+=====================================================================
+PHASE1 — A-SWC
+=====================================================================
+
+enable
+configure terminal
+hostname 29061-A-SWC
+no ip domain-lookup
+ip domain-name 29061.f25
+username Joseph privilege 15 secret 29061
+enable secret 29061
+service password-encryption
+banner motd # Authorized Access Only - 29061 BANK #
+spanning-tree mode rapid-pvst
+crypto key generate rsa 
+1024
+ip ssh version 2
+line console 0
+ login local
+ exec-timeout 10
+line vty 0 4
+ login local
+ transport input ssh
+ exec-timeout 10
+vtp domain 29061.f25
+vtp password 29061
+vtp mode transparent
+ex
+write memory
+
+=====================================================================
+PHASE1 — B-SWC
+=====================================================================
+
+enable
+configure terminal
+hostname 29061-B-SWC
+no ip domain-lookup
+ip domain-name 29061.f25
+username Joseph privilege 15 secret 29061
+enable secret 29061
+service password-encryption
+banner motd # Authorized Access Only - 29061 BANK #
+spanning-tree mode rapid-pvst
+crypto key generate rsa
+1024
+ip ssh version 2
+line console 0
+ login local
+ exec-timeout 10
+line vty 0 4
+ login local
+ transport input ssh
+ exec-timeout 10
+vtp domain 29061.f25
+vtp password 29061
+vtp mode transparent
+ex
+write memory
+
+=====================================================================
+PHASE1 — C-SWC
+=====================================================================
+
+enable
+configure terminal
+hostname 29061-C-SWC
+no ip domain-lookup
+ip domain-name 29061.f25
+username Joseph privilege 15 secret 29061
+enable secret 29061
+service password-encryption
+banner motd # Authorized Access Only - 29061 BANK #
+spanning-tree mode rapid-pvst
+crypto key generate rsa 
+1024
+ip ssh version 2
+line console 0
+ login local
+ exec-timeout 10
+line vty 0 4
+ login local
+ transport input ssh
+ exec-timeout 10
+vtp domain 29061.f25
+vtp password 29061
+vtp mode transparent
+ex
+write memory
+
+=====================================================================
+PHASE1 — SVR-SWC
+=====================================================================
+
+enable
+configure terminal
+hostname 29061-SVR-SWC
+no ip domain-lookup
+ip domain-name 29061.f25
+username Joseph privilege 15 secret 29061
+enable secret 29061
+service password-encryption
+banner motd # Authorized Access Only - 29061 BANK #
+spanning-tree mode rapid-pvst
+crypto key generate rsa
+1024
+ip ssh version 2
+line console 0
+ login local
+ exec-timeout 10
+line vty 0 4
+ login local
+ transport input ssh
+ exec-timeout 10
+vtp domain 29061.f25
+vtp password 29061
+vtp mode client
+ex
+write memory
+
+=====================================================================
+PHASE1 — IT-SWC
+=====================================================================
+
+enable
+configure terminal
+hostname 29061-IT-SWC
+no ip domain-lookup
+ip domain-name 29061.f25
+username Joseph privilege 15 secret 29061
+enable secret 29061
+service password-encryption
+banner motd # Authorized Access Only - 29061 BANK #
+spanning-tree mode rapid-pvst
+crypto key generate rsa 
+1024
+ip ssh version 2
+line console 0
+ login local
+ exec-timeout 10
+line vty 0 4
+ login local
+ transport input ssh
+ exec-timeout 10
+vtp domain 29061.f25
+vtp password 29061
+vtp mode client
+ex
+write memory
+
+=====================================================================
+PHASE1 — FIN-SWC
+=====================================================================
+
+enable
+configure terminal
+hostname 29061-FIN-SWC
+no ip domain-lookup
+ip domain-name 29061.f25
+username Joseph privilege 15 secret 29061
+enable secret 29061
+service password-encryption
+banner motd # Authorized Access Only - 29061 BANK #
+spanning-tree mode rapid-pvst
+crypto key generate rsa
+1024
+ip ssh version 2
+line console 0
+ login local
+ exec-timeout 10
+line vty 0 4
+ login local
+ transport input ssh
+ exec-timeout 10
+vtp domain 29061.f25
+vtp password 29061
+vtp mode client
+ex
+write memory
+
+=====================================================================
+PHASE1 — ACC-SWC
+=====================================================================
+
+enable
+configure terminal
+hostname 29061-ACC-SWC
+no ip domain-lookup
+ip domain-name 29061.f25
+username Joseph privilege 15 secret 29061
+enable secret 29061
+service password-encryption
+banner motd # Authorized Access Only - 29061 BANK #
+spanning-tree mode rapid-pvst
+crypto key generate rsa
+1024
+ip ssh version 2
+line console 0
+ login local
+ exec-timeout 10
+line vty 0 4
+ login local
+ transport input ssh
+ exec-timeout 10
+vtp domain 29061.f25
+vtp password 29061
+vtp mode client
+ex
+write memory
+
+=====================================================================
+PHASE1 — HR-SWC
+=====================================================================
+
+enable
+configure terminal
+hostname 29061-HR-SWC
+no ip domain-lookup
+ip domain-name 29061.f25
+username Joseph privilege 15 secret 29061
+enable secret 29061
+service password-encryption
+banner motd # Authorized Access Only - 29061 BANK #
+spanning-tree mode rapid-pvst
+crypto key generate rsa
+1024
+ip ssh version 2
+line console 0
+ login local
+ exec-timeout 10
+line vty 0 4
+ login local
+ transport input ssh
+ exec-timeout 10
+vtp domain 29061.f25
+vtp password 29061
+vtp mode client
+ex
+write memory
+
+=====================================================================
+PHASE1 — RISK-SWC
+=====================================================================
+
+enable
+configure terminal
+hostname 29061-RISK-SWC
+no ip domain-lookup
+ip domain-name 29061.f25
+username Joseph privilege 15 secret 29061
+enable secret 29061
+service password-encryption
+banner motd # Authorized Access Only - 29061 BANK #
+spanning-tree mode rapid-pvst
+crypto key generate rsa
+1024
+ip ssh version 2
+line console 0
+ login local
+ exec-timeout 10
+line vty 0 4
+ login local
+ transport input ssh
+ exec-timeout 10
+vtp domain 29061.f25
+vtp password 29061
+vtp mode client
+ex
+write memory
+=====================================================================
+PHASE1 — TELLER-SWC
+=====================================================================
+enable
+configure terminal
+hostname 29061-TELLER-SWC
+no ip domain-lookup
+ip domain-name 29061.f25
+username Joseph privilege 15 secret 29061
+enable secret 29061
+service password-encryption
+banner motd # Authorized Access Only - 29061 BANK #
+spanning-tree mode rapid-pvst
+crypto key generate rsa 
+1024
+ip ssh version 2
+line console 0
+ login local
+ exec-timeout 10
+line vty 0 4
+ login local
+ transport input ssh
+ exec-timeout 10
+vtp domain 29061.f25
+vtp password 29061
+vtp mode client
+ex
+write memory
+
+=====================================================================
+PHASE1 — HQ_WIFI
+=====================================================================
+hostname 29061_HQ_WIFI
+
+SSID 1 (Main WiFi): 29061_HQ_WIFI — WPA2 key = 29061_HQ_WIFI
+
+SSID 2 (Guest WiFi): 29061_Guest_WIFI — WPA2 key = 29061_HQ_WIFI
+--------------------------------------------------------------------
+
+PHASE2: Network Device Setup & Addressing
+=====================================================================
+
+PHASE2.1: ON-HQ-MAIN-ROUTER (ROUTER-ON-A-STICK)
+---------------------------------------------------
+
+interface GigabitEthernet0/0
+ no shutdown
+ exit
+
+interface GigabitEthernet1/0.1
+ encapsulation dot1Q 1
+ ip address 192.168.100.97 255.255.255.240
+ exit
+
+interface GigabitEthernet0/0.10
+ encapsulation dot1Q 10
+ ip address 192.168.10.1 255.255.255.240
+ exit
+
+interface GigabitEthernet0/0.20
+ encapsulation dot1Q 20
+ ip address 192.168.20.1 255.255.255.240
+ exit
+
+interface GigabitEthernet0/0.30
+ encapsulation dot1Q 30
+ ip address 192.168.30.1 255.255.255.240
+ exit
+
+interface GigabitEthernet0/0.40
+ encapsulation dot1Q 40
+ ip address 192.168.40.1 255.255.255.240
+ exit
+
+interface GigabitEthernet0/0.50
+ encapsulation dot1Q 50
+ ip address 192.168.50.1 255.255.255.240
+ exit
+
+interface GigabitEthernet0/0.60
+ encapsulation dot1Q 60
+ ip address 192.168.60.1 255.255.255.240
+ exit
+
+interface GigabitEthernet0/0.70
+ encapsulation dot1Q 70
+ ip address 192.168.70.1 255.255.255.240
+ exit
+
+interface GigabitEthernet1/0
+ no shutdown
+ exit
+
+interface GigabitEthernet1/0.80
+ encapsulation dot1Q 80
+ ip address 192.168.80.1 255.255.255.240
+ exit
+
+interface GigabitEthernet1/0.90
+ encapsulation dot1Q 90
+ ip address 192.168.90.1 255.255.255.240
+ exit
+
+
+=========================================================================
+PHASE2.2 DHCP Pool Configuration
+=========================================================================
+
+ON HQ-MAIN-ROUTER
+-----------------------------------------
+
+ip dhcp excluded-address 192.168.100.97 192.168.100.100
+ip dhcp excluded-address 192.168.90.10 192.168.90.12
+ip dhcp excluded-address 192.168.80.10 192.168.80.12
+ip dhcp excluded-address 192.168.10.1 192.168.10.5
+ip dhcp excluded-address 192.168.20.1 192.168.20.5
+ip dhcp excluded-address 192.168.30.1 192.168.30.5
+ip dhcp excluded-address 192.168.40.1 192.168.40.5
+ip dhcp excluded-address 192.168.50.1 192.168.50.5
+ip dhcp excluded-address 192.168.60.1 192.168.60.5
+ip dhcp excluded-address 192.168.70.1 192.168.70.5
+ip dhcp excluded-address 192.168.80.1 192.168.80.5
+ip dhcp excluded-address 192.168.90.1 192.168.90.5
+
+
+ip dhcp pool IT_NET
+ network 192.168.10.0 255.255.255.240
+ default-router 192.168.10.1
+ dns-server 192.168.80.10
+ domain-name 29061.f25
+
+
+ip dhcp pool FIN_NET
+ network 192.168.20.0 255.255.255.240
+ default-router 192.168.20.1
+ dns-server 192.168.80.10
+ domain-name 29061.f25
+
+
+ip dhcp pool ACC_NET
+ network 192.168.30.0 255.255.255.240
+ default-router 192.168.30.1
+ dns-server 192.168.80.10
+ domain-name 29061.f25
+
+
+ip dhcp pool HR_NET
+ network 192.168.40.0 255.255.255.240
+ default-router 192.168.40.1
+ dns-server 192.168.80.10
+ domain-name 29061.f25
+
+
+ip dhcp pool RISK_NET
+ network 192.168.50.0 255.255.255.240
+ default-router 192.168.50.1
+ dns-server 192.168.80.10
+ domain-name 29061.f25
+
+
+ip dhcp pool TELLER_NET
+ network 192.168.60.0 255.255.255.240
+ default-router 192.168.60.1
+ dns-server 192.168.80.10
+ domain-name 29061.f25
+
+
+ip dhcp pool VISITOR_NET
+ network 192.168.70.0 255.255.255.240
+ default-router 192.168.70.1
+ dns-server 192.168.80.10
+ domain-name 29061.f25
+
+ip dhcp pool SERVER_NET
+ network 192.168.80.0 255.255.255.240
+ default-router 192.168.80.1
+ dns-server 192.168.80.10
+ domain-name 29061.f25
+
+
+ip dhcp pool MGMT_NET
+ network 192.168.90.0 255.255.255.240
+ default-router 192.168.90.1
+ dns-server 192.168.80.10
+ domain-name 29061.f25
+
+
+end
+write memory
+
+=========================================================================
+PHASE 3: VLANs Configuration & Port Assignments
+=========================================================================
+
+CORE-SWC
+-------------------------------------------------------------------------
+enable
+configure terminal
+vlan 1
+ name PUBLIC-NET
+vlan 10
+ name IT-NET
+vlan 20
+ name FIN-NET
+vlan 30
+ name ACC-NET
+vlan 40
+ name HR-NET
+vlan 50
+ name RISK-NET
+vlan 60
+ name TELLER-NET
+vlan 70
+ name VISITOR-NET
+vlan 80
+ name SERVER-NET
+vlan 90
+ name MGT-NET
+end
+write memory
+
+-------------------------------------------------------------------------
+A-SWC
+-------------------------------------------------------------------------
+
+
+enable
+configure terminal
+vlan 10
+ name IT-NET
+vlan 20
+ name FIN-NET
+vlan 30
+ name ACC-NET
+vlan 40
+ name HR-NET
+vlan 50
+ name RISK-NET
+vlan 60
+ name TELLER-NET
+vlan 70
+ name VISITOR-NET
+vlan 80
+ name SERVER-NET
+vlan 90
+ name MGT-NET
+end
+write memory
+
+
+-------------------------------------------------------------------------
+B-SWC 
+-------------------------------------------------------------------------
+
+enable
+configure terminal
+vlan 1
+ name PUBLIC-NET
+vlan 10
+ name IT-NET
+vlan 20
+ name FIN-NET
+vlan 30
+ name ACC-NET
+vlan 40
+ name HR-NET
+vlan 50
+ name RISK-NET
+vlan 60
+ name TELLER-NET
+vlan 70
+ name VISITOR-NET
+vlan 80
+ name SERVER-NET
+vlan 90
+ name MGT-NET
+end
+write memory
+
+-------------------------------------------------------------------------
+C-SWC
+-------------------------------------------------------------------------
+
+enable
+configure terminal
+vlan 1
+ name PUBLIC-NET
+vlan 10
+ name IT-NET
+vlan 20
+ name FIN-NET
+vlan 30
+ name ACC-NET
+vlan 40
+ name HR-NET
+vlan 50
+ name RISK-NET
+vlan 60
+ name TELLER-NET
+vlan 70
+ name VISITOR-NET
+vlan 80
+ name SERVER-NET
+vlan 90
+ name MGT-NET
+end
+write memory
+
+
+=========================================================================
+PHASE 4: Trunking and EtherChannel Configuration
+=========================================================================
+
+DEVICE: CORE-SWC 
+----------------------------------------------------------------
+
+! Trunk to HQ-MAIN-ROUTER Gi0/1
+----------------------------------------------------------------
+
+interface GigabitEthernet0/1
+ switchport mode trunk
+ switchport trunk allowed vlan 10,20,30,40,50,60,70
+ no shutdown
+----------------------------------------------------------------
+
+! Trunk to HQ-MAIN-ROUTER Gi0/2
+--------------------------------------------------------------------
+
+interface GigabitEthernet0/2
+ switchport mode trunk
+ switchport trunk allowed vlan 1,80,90
+ no shutdown
+----------------------------------------------------------------
+
+! EtherChannel CORE <-> A-SWC
+----------------------------------------------------------------
+
+interface range FastEthernet0/20 - 21
+ switchport mode trunk
+ switchport trunk allowed vlan 1,10,20,30,40,50,60,70,80,90
+ channel-group 1 mode active
+ no shutdown
+
+
+interface Port-channel1
+ switchport mode trunk
+ switchport trunk allowed vlan 1,10,20,30,40,50,60,70,80,90
+ no shutdown
+
+----------------------------------------------------------------
+
+! EtherChannel CORE <-> B-SWC 
+----------------------------------------------------------------
+interface range FastEthernet0/22 - 23
+ switchport mode trunk
+ switchport trunk allowed vlan 10,20,30,40,50
+ channel-group 3 mode active
+ no shutdown
+
+interface Port-channel3
+ switchport mode trunk
+ switchport trunk allowed vlan 10,20,30,40,50
+ no shutdown
+
+----------------------------------------------------------------
+! EtherChannel CORE <-> C-SWC 
+----------------------------------------------------------------
+
+interface range FastEthernet0/22 - 23
+ switchport mode trunk
+ switchport trunk allowed vlan 10,20,30,40,50,60,70
+ channel-group 4 mode active
+ no shutdown
+
+interface Port-channel4
+ switchport mode trunk
+ switchport trunk allowed vlan 10,20,30,40,50,60,70
+ no shutdown
+
+spanning-tree mode rapid-pvst
+end
+write memory
+
+----------------------------------------------------------------
+DEVICE: A-SWC 
+----------------------------------------------------------------
+
+! Trunk to CORE (Fa0/20-21)
+----------------------------------------------------------------
+interface range FastEthernet0/20 - 21
+ switchport mode trunk
+ switchport trunk allowed vlan 1,10,20,30,40,50,60,70,80,90
+ channel-group 1 mode active
+ no shutdown
+
+interface Port-channel1
+ switchport mode trunk
+ switchport trunk allowed vlan 1,10,20,30,40,50,60,70,80,90
+ no shutdown
+----------------------------------------------------------------
+
+! Trunk to SVR-SWC (Gi0/1-2) 
+----------------------------------------------------------------
+interface range GigabitEthernet0/1 - 2
+ switchport mode trunk
+ switchport trunk allowed vlan 1,80,90
+ channel-group 2 mode active
+ no shutdown
+
+interface Port-channel2
+ switchport mode trunk
+ switchport trunk allowed vlan 1,80,90
+ no shutdown
+
+----------------------------------------------------------------
+! TRunk to IT-SWC 
+----------------------------------------------------------------
+interface range FastEthernet0/24
+ switchport mode trunk
+ switchport trunk allowed vlan 10,20,30,40,50
+
+----------------------------------------------------------------
+! Trunk to B-SWC (Fa0/22-23)
+----------------------------------------------------------------
+interface range FastEthernet0/22 - 23
+ switchport mode trunk
+ switchport trunk allowed vlan 10,20,30,40,50
+ channel-group 3 mode active
+ no shutdown
+
+interface Port-channel3
+ switchport mode trunk
+ switchport trunk allowed vlan 10,20,30,40,50
+ no shutdown
+
+spanning-tree mode rapid-pvst
+end
+write memory
+
+----------------------------------------------------------------
+DEVICE: B-SWC 
+----------------------------------------------------------------
+
+! TRunk to A-SWC (Fa0/22-23)
+----------------------------------------------------------------
+interface range FastEthernet0/22 - 23
+ switchport mode trunk
+ switchport trunk allowed vlan 10,20,30,40,50
+ channel-group 3 mode active
+ no shutdown
+
+interface Port-channel3
+ switchport mode trunk
+ switchport trunk allowed vlan 10,20,30,40,50
+ no shutdown
+----------------------------------------------------------------
+
+! Trunks to FIN-SWC and ACC-SWC 
+----------------------------------------------------------------
+
+interface FastEthernet0/20
+ switchport mode trunk
+ switchport trunk allowed vlan 10,20,30,40,50
+ no shutdown
+
+interface FastEthernet0/21
+ switchport mode trunk
+ switchport trunk allowed vlan 10,20,30,40,50
+ no shutdown
+
+spanning-tree mode rapid-pvst
+end
+write memory
+
+----------------------------------------------------------------
+DEVICE: IT-SWC
+----------------------------------------------------------------
+! Trunk to A-SWC
+----------------------------------------------------------------
+interface FastEthernet0/24
+ switchport mode trunk
+ switchport trunk allowed vlan 10,20,30,40,50
+
+spanning-tree mode rapid-pvst
+end
+write memory
+show interfaces trunk
+
+----------------------------------------------------------------
+DEVICE: FIN-SWC
+----------------------------------------------------------------
+
+! Trunks to B-SWC
+----------------------------------------------------------------
+
+interface FastEthernet0/20
+ switchport mode trunk
+ switchport trunk allowed vlan 10,20,30,40,50
+ no shutdown
+
+
+spanning-tree mode rapid-pvst
+end
+write memory
+show interfaces trunk
+
+----------------------------------------------------------------
+DEVICE: ACC-SWC
+
+----------------------------------------------------------------
+! Trunks to B-SWC
+----------------------------------------------------------------
+conf t
+interface FastEthernet0/21
+ switchport mode trunk
+ switchport trunk allowed vlan 10,20,30,40,50
+ no shutdown
+
+
+spanning-tree mode rapid-pvst
+end
+write memory
+show interfaces trunk
+
+
+----------------------------------------------------------------
+DEVICE: C-SWC 
+----------------------------------------------------------------
+
+! Trunk to CORE 
+----------------------------------------------------------------
+conf t
+interface range FastEthernet0/22-23
+ switchport mode trunk
+ switchport trunk allowed vlan 10,20,30,40,50,60,70
+ channel-group 4 mode active
+ no shutdown
+
+interface Port-channel4
+ switchport mode trunk
+ switchport trunk allowed vlan 10,20,30,40,50,60,70
+ no shutdown
+----------------------------------------------------------------
+
+! Trunk to HR-SWC (Fa0/20) 
+----------------------------------------------------------------
+
+interface FastEthernet0/20
+ switchport mode trunk
+ switchport trunk allowed vlan 10,20,30,40,50
+ no shutdown
+
+----------------------------------------------------------------
+! Trunk to RISK-SWC
+----------------------------------------------------------------
+
+interface FastEthernet0/21
+ switchport mode trunk
+ switchport trunk allowed vlan 10,20,30,40,50
+ no shutdown
+
+------------------------------------------------------
+! Trunk to Wireless/HomeRouter (Gi0/1) 
+------------------------------------------------------
+
+interface GigabitEthernet0/1
+ switchport mode trunk
+ switchport trunk allowed vlan 10,20,30,40,50,60,70
+ no shutdown
+
+spanning-tree mode rapid-pvst
+end
+write memory
+
+------------------------------------------------------
+DEVICE: TELLER-SWC
+------------------------------------------------------
+interface GigabitEthernet0/1
+ switchport mode trunk
+ switchport trunk allowed vlan 10,20,30,40,50,60
+ no shutdown
+
+spanning-tree mode rapid-pvst
+end
+write memory
+
+
+------------------------------------------------------
+DEVICE: SVR-SWC 
+------------------------------------------------------
+
+
+!to A-SWC (Gi0/1-2)
+------------------------------------------------------
+conf t
+interface range GigabitEthernet0/1 - 2
+ switchport mode trunk
+ switchport trunk allowed vlan 1,80,90
+ channel-group 2 mode active
+ no shutdown
+
+interface Port-channel2
+ switchport mode trunk
+ switchport trunk allowed vlan 1,80,90
+ no shutdown
+------------------------------------------------------
+! Server mapping
+------------------------------------------------------
+interface FastEthernet0/1
+ switchport mode access
+ switchport access vlan 1
+ switchport port-security
+ switchport port-security maximum 1
+ switchport port-security violation shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ no shutdown
+
+interface FastEthernet0/2
+ switchport mode access
+ switchport access vlan 80
+ switchport port-security
+ switchport port-security maximum 1
+ switchport port-security violation shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ no shutdown
+
+interface FastEthernet0/3
+ switchport mode access
+ switchport access vlan 80
+ switchport port-security
+ switchport port-security maximum 1
+ switchport port-security violation shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ no shutdown
+
+interface FastEthernet0/4
+ switchport mode access
+ switchport access vlan 80
+ switchport port-security
+ switchport port-security maximum 1
+ switchport port-security violation shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ no shutdown
+
+interface FastEthernet0/5
+ description SYSLOG
+ switchport mode access
+ switchport access vlan 90
+ switchport port-security
+ switchport port-security maximum 1
+ switchport port-security violation shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ no shutdown
+
+interface FastEthernet0/6
+ switchport mode access
+ switchport access vlan 90
+ switchport port-security
+ switchport port-security maximum 1
+ switchport port-security violation shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ no shutdown
+
+interface FastEthernet0/7
+ switchport mode access
+ switchport access vlan 90
+ switchport port-security
+ switchport port-security maximum 1
+ switchport port-security violation shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ no shutdown
+
+interface range FastEthernet0/8 - 24
+ shutdown
+
+spanning-tree mode rapid-pvst
+end
+write memory
+------------------------------------------------------
+
+SHUDOWN UNUSED PORT
+------------------------------------------------------
+
+DEVICE: IT-SWC (access: IT PCs + shutdown unused)
+------------------------------------------------------
+
+! IT access ports 
+------------------------------------------------------
+conf t
+spanning-tree portfast default
+spanning-tree bpduguard default
+exit
+
+interface FastEthernet0/24
+ switchport mode trunk
+ switchport trunk allowed vlan 10,20,30,40,50,60
+ no shutdown
+
+interface range FastEthernet0/1 - 3
+ switchport mode access
+ switchport access vlan 10
+ switchport port-security
+ switchport port-security maximum 1
+ switchport port-security violation shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ no shutdown
+
+
+interface FastEthernet0/4
+switchport mode access
+ switchport access vlan 20
+ switchport port-security
+ switchport port-security maximum 1
+ switchport port-security violation shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ no shutdown
+
+interface FastEthernet0/5
+switchport mode access
+ switchport access vlan 30
+ switchport port-security
+ switchport port-security maximum 1
+ switchport port-security violation shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ no shutdown
+
+interface FastEthernet0/6
+switchport mode access
+ switchport access vlan 40
+ switchport port-security
+ switchport port-security maximum 1
+ switchport port-security violation shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ no shutdown
+
+interface FastEthernet0/7
+switchport mode access
+ switchport access vlan 50
+ switchport port-security
+ switchport port-security maximum 1
+ switchport port-security violation shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ no shutdown
+
+interface range FastEthernet0/8 - 23
+ shutdown
+------------------------------------------------------
+DEVICE: FIN-SWC (access: FIN PCs + shutdown unused)
+------------------------------------------------------
+conf t
+spanning-tree portfast default
+spanning-tree bpduguard default
+exit
+
+interface FastEthernet0/20
+ switchport mode trunk
+ switchport trunk allowed vlan 10,20,30,40,50,60
+ no shutdown
+
+interface range FastEthernet0/7-9
+ switchport mode access
+ switchport access vlan 30
+ switchport port-security
+ switchport port-security maximum 1
+ switchport port-security violation shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ no shutdown
+
+interface FastEthernet0/10
+switchport mode access
+ switchport access vlan 10
+ switchport port-security
+ switchport port-security maximum 1
+ switchport port-security violation shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ no shutdown
+
+interface FastEthernet0/11
+switchport mode access
+ switchport access vlan 20
+ switchport port-security
+ switchport port-security maximum 1
+ switchport port-security violation shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ no shutdown
+
+interface FastEthernet0/12
+switchport mode access
+ switchport access vlan 50
+ switchport port-security
+ switchport port-security maximum 1
+ switchport port-security violation shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ no shutdown
+
+interface FastEthernet0/13
+switchport mode access
+ switchport access vlan 40
+ switchport port-security
+ switchport port-security maximum 1
+ switchport port-security violation shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ no shutdown
+
+interface range FastEthernet0/14 - 19
+ shutdown
+interface range FastEthernet0/1 - 6
+no switchport mode access
+no switchport access vlan 30
+ shutdown
+
+ shutdown
+
+interface range FastEthernet0/21-24
+ shutdown
+interface range gi0/1-2
+ shutdown
+
+------------------------------------------------------
+DEVICE: ACC-SWC (access: ACC PCs + shutdown unused)
+------------------------------------------------------
+conf t
+spanning-tree portfast default
+spanning-tree bpduguard default
+exit
+
+
+interface FastEthernet0/21
+ switchport mode trunk
+ switchport trunk allowed vlan 10,20,30,40,50
+ no shutdown
+
+
+interface range FastEthernet0/10-12
+ switchport mode access
+ switchport access vlan 40
+ switchport port-security
+ switchport port-security maximum 1
+ switchport port-security violation shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ no shutdown
+
+interface FastEthernet0/13
+switchport mode access
+ switchport access vlan 10
+ switchport port-security
+ switchport port-security maximum 1
+ switchport port-security violation shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ no shutdown
+
+interface FastEthernet0/14
+switchport mode access
+ switchport access vlan 30
+ switchport port-security
+ switchport port-security maximum 1
+ switchport port-security violation shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ no shutdown
+
+interface FastEthernet0/15
+switchport mode access
+ switchport access vlan 50
+ switchport port-security
+ switchport port-security maximum 1
+ switchport port-security violation shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ no shutdown
+
+interface FastEthernet0/16
+switchport mode access
+ switchport access vlan 20
+ switchport port-security
+ switchport port-security maximum 1
+ switchport port-security violation shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ no shutdown
+
+
+interface range FastEthernet0/17 - 20
+ shutdown
+interface range FastEthernet0/1 - 9
+no switchport mode access
+no switchport access vlan 20
+ shutdown
+
+interface range FastEthernet0/22-24
+ shutdown
+interface range gi0/1-2
+ shutdown
+
+------------------------------------------------------
+DEVICE: HR-SWC
+------------------------------------------------------
+conf t
+spanning-tree portfast default
+spanning-tree bpduguard default
+exit
+
+
+interface FastEthernet0/20
+ switchport mode trunk
+ switchport trunk allowed vlan 10,20,30,40,50
+ no shutdown
+
+interface range FastEthernet0/4-6
+ switchport mode access
+ switchport access vlan 20
+ switchport port-security
+ switchport port-security maximum 1
+ switchport port-security violation shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ no shutdown
+
+interface FastEthernet0/7
+switchport mode access
+ switchport access vlan 10
+ switchport port-security
+ switchport port-security maximum 1
+ switchport port-security violation shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ no shutdown
+
+interface FastEthernet0/8
+switchport mode access
+ switchport access vlan 50
+ switchport port-security
+ switchport port-security maximum 1
+ switchport port-security violation shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ no shutdown
+
+interface FastEthernet0/9
+switchport mode access
+ switchport access vlan 30
+ switchport port-security
+ switchport port-security maximum 1
+ switchport port-security violation shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ no shutdown
+
+interface FastEthernet0/10
+switchport mode access
+ switchport access vlan 40
+ switchport port-security
+ switchport port-security maximum 1
+ switchport port-security violation shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ no shutdown
+
+interface range FastEthernet0/11 - 19
+ shutdown
+interface range FastEthernet0/1 - 3
+no switchport mode access
+no switchport access vlan 20
+ shutdown
+interface range FastEthernet0/21-24
+ shutdown
+interface range gi0/1-2
+ shutdown
+
+spanning-tree mode rapid-pvst
+end
+write memory
+
+
+------------------------------------------------------
+DEVICE: RISK-SWC
+------------------------------------------------------
+conf t
+spanning-tree portfast default
+spanning-tree bpduguard default
+exit
+
+interface FastEthernet0/21
+ switchport mode trunk
+ switchport trunk allowed vlan 10,20,30,40,50
+ no shutdown
+
+
+interface range FastEthernet0/13 -15
+ switchport mode access
+ switchport access vlan 50
+ switchport port-security
+ switchport port-security maximum 1
+ switchport port-security violation shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ no shutdown
+
+interface FastEthernet0/16
+switchport mode access
+ switchport access vlan 10
+ switchport port-security
+ switchport port-security maximum 1
+ switchport port-security violation shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ no shutdown
+
+interface FastEthernet0/17
+switchport mode access
+ switchport access vlan 30
+ switchport port-security
+ switchport port-security maximum 1
+ switchport port-security violation shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ no shutdown
+
+interface FastEthernet0/18
+switchport mode access
+ switchport access vlan 40
+ switchport port-security
+ switchport port-security maximum 1
+ switchport port-security violation shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ no shutdown
+
+interface FastEthernet0/19
+switchport mode access
+ switchport access vlan 20
+ switchport port-security
+ switchport port-security maximum 1
+ switchport port-security violation shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ no shutdown
+
+
+interfaceFastEthernet0/20
+ shutdown
+interface range FastEthernet0/1 - 12
+no switchport mode access
+no switchport access vlan 50
+ shutdown
+
+
+interface range FastEthernet0/22-24
+ shutdown
+interface gi0/1
+ shutdown
+
+spanning-tree mode rapid-pvst
+end
+write memory
+
+---------------------------------------------------------
+DEVICE: C-SWC
+---------------------------------------------------------
+conf t
+spanning-tree portfast default
+spanning-tree bpduguard default
+exit
+
+interface GigabitEthernet0/1
+ switchport mode trunk
+ switchport trunk allowed vlan 10,20,30,40,50,60,70
+ no shutdown
+
+interface GigabitEthernet0/2
+ switchport mode trunk
+ switchport trunk allowed vlan 70
+ no shutdown
+
+
+------------------------------------------------------
+DEVICE: TELLER-SWC
+------------------------------------------------------
+conf t
+spanning-tree portfast default
+spanning-tree bpduguard default
+exit
+
+interface GigabitEthernet0/1
+ switchport mode trunk
+ switchport trunk allowed vlan 10,20,30,40,50,60
+ no shutdown
+
+
+interface range FastEthernet0/16-18
+ switchport mode access
+ switchport access vlan 60
+ switchport port-security
+ switchport port-security maximum 1
+ switchport port-security violation shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ no shutdown
+
+interface FastEthernet0/19
+switchport mode access
+ switchport access vlan 10
+ switchport port-security
+ switchport port-security maximum 1
+ switchport port-security violation shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ no shutdown
+
+interface FastEthernet0/20
+switchport mode access
+ switchport access vlan 50
+ switchport port-security
+ switchport port-security maximum 1
+ switchport port-security violation shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ no shutdown
+
+interface FastEthernet0/21
+switchport mode access
+ switchport access vlan 30
+ switchport port-security
+ switchport port-security maximum 1
+ switchport port-security violation shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ no shutdown
+
+interface FastEthernet0/22
+switchport mode access
+ switchport access vlan 20
+ switchport port-security
+ switchport port-security maximum 1
+ switchport port-security violation shutdown
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ no shutdown
+
+
+interface range FastEthernet0/23 - 24
+ shutdown
+interface range FastEthernet0/1 - 15
+no switchport mode access
+no switchport access vlan 60
+ shutdown
+interface gi0/2
+ shutdown
+
+spanning-tree mode rapid-pvst
+end
+write memory
+
+
+======================================================================
+PHASE 5: Server Configuration & Services
+======================================================================
+
+=========================================================================
+PHASE5.1 Server IP Configuration Table
+=========================================================================
+
+WEB SERVER
+--------------------------
+
+IP: 192.168.100.100
+Mask: 255.255.255.240
+Gateway: 192.168.100.97
+DNS: 192.168.80.10   
+
+AD / DC SERVER
+--------------------------
+
+IP: 192.168.80.10
+Mask: 255.255.255.240
+Gateway: 192.168.80.1
+DNS: 192.168.80.10   
+
+CBS SERVER
+--------------------------
+
+IP: 192.168.80.11
+Mask: 255.255.255.240
+Gateway: 192.168.80.1
+DNS: 192.168.80.10
+
+
+EDWH SERVER
+--------------------------
+
+IP: 192.168.80.12
+Mask: 255.255.255.240
+Gateway: 192.168.80.1
+DNS: 192.168.80.10
+
+
+SYSLOG SERVER
+--------------------------
+
+IP: 192.168.90.10
+Mask: 255.255.255.240
+Gateway: 192.168.90.1
+DNS: 192.168.80.10
+
+
+NET-MONITORING
+--------------------------
+
+IP: 192.168.90.11
+Mask: 255.255.255.240
+Gateway: 192.168.90.1
+DNS: 192.168.80.10
+
+
+SIEM
+--------------------------
+
+IP: 192.168.90.12
+Mask: 255.255.255.240
+Gateway: 192.168.90.1
+DNS: 192.168.80.10
+
+======================================================================
+PHASE5.2 — SERVER CONFIGURATION (GUI in Packet Tracer)
+======================================================================
+
+WEB-SERVER
+---------------------------------------------------------------------
+
+Desktop → IP Configuration → Confirm right IP
+
+Services → HTTP: ON, HTTPS: ON
+
+---------------------------------------------------------------------
+AD-DC (DNS Server)
+---------------------------------------------------------------------
+
+Desktop → IP Configuration → Confirm right IP
+
+Services → DNS: ON
+
+---------------------------------------------------------------------
+SYSLOG SERVER (192.168.90.10)
+---------------------------------------------------------------------
+
+Desktop → IP Configuration → Confirm IP
+
+Services → SYSLOG: ON
+
+Confirm Port: 514
+---------------------------------------------------------------------
+NET-MONITOR (NTP)
+---------------------------------------------------------------------
+
+Desktop → IP Configuration → Confirm IP
+
+Services → NTP: ON
+
+---------------------------------------------------------------------
+SIEM
+---------------------------------------------------------------------
+Desktop → IP Configuration → Confirm IP
+
+Services → SIEM / Log Collector → ON
+
+Set Syslog Source = 192.168.90.10
+---------------------------------------------------------------------
+
+----------------------------------------------------------------------
+ON ALL SWC's and ROUTERs RUN THIS
+----------------------------------------------------------------------
+
+configure terminal
+service timestamps log datetime msec
+logging host 192.168.90.10
+ntp server 192.168.90.11
+end
+write memory
+
+===================================================================
+PHASE 6 — SECURITY IMPLEMENTATION 
+===================================================================
+
+ip access-list extended Extended_29061_Visitor_Access
+ remark --- Allow DHCP (Client <-> Server) ---
+ permit udp any any eq 67
+ permit udp any any eq 68
+
+ remark --- Allow DNS to AD-DC server (192.168.80.10) ---
+ permit udp 192.168.70.0 0.0.0.15 host 192.168.80.10 eq 53
+ permit tcp 192.168.70.0 0.0.0.15 host 192.168.80.10 eq 53
+
+ remark --- Allow HTTP to Web Server (192.168.100.100) ---
+ permit tcp 192.168.70.0 0.0.0.15 host 192.168.100.100 eq 80
+
+ remark --- Deny all other traffic from VLAN 70 ---
+ deny ip 192.168.70.0 0.0.0.15 any
+
+ remark --- Permit everything else (so router services work) ---
+ permit ip any any
+exit
+
+interface GigabitEthernet0/0.70
+ no ip access-group Standard_29061_Visitor_Block in
+ no ip access-group Extended_29061_Visitor_Access in
+ ip access-group Extended_29061_Visitor_Access in
+
+
+2. Extended ACL (AD-DC SERVER ACCESS) IT-NET full access, others only ping + DNS
+
+-------------------------------------------------------------------
+
+configure terminal
+interface GigabitEthernet1/0.80
+ no ip access-group Extended_29061_ADDC_Access out
+end
+
+ ! 1) permit net-monitor FIRST
+
+conf t
+ip access-list extended Extended_29061_ADDC_Access
+ permit ip any 192.168.90.0 0.0.0.15
+ permit ip 192.168.90.0 0.0.0.15 any
+
+
+ ! 2) permit IT full access
+
+ permit ip 192.168.10.0 0.0.0.15 host 192.168.80.10
+
+ ! 3) permit limited access for all other VLANs
+
+
+ permit icmp any host 192.168.80.10
+ permit udp any host 192.168.80.10 eq 53
+
+
+ ! 4) block everything else
+
+
+ deny ip any host 192.168.80.10
+exit
+
+interface GigabitEthernet1/0.80
+ ip access-group Extended_29061_ADDC_Access out
+end
+wr
+
+-------------------------------------------------------------------
+3. Extended ACL (CBS SERVER ACCESS) IT-NET full access, others only FTP (20, 21)
+
+-------------------------------------------------------------------
+
+
+ip access-list extended Extended_29061_CBS_Access
+ permit ip 192.168.10.0 0.0.0.15 host 192.168.80.11
+ permit tcp any host 192.168.80.11 eq 20
+ permit tcp any host 192.168.80.11 eq 21
+ deny ip any host 192.168.80.11
+exit
+
+-------------------------------------------------------------------
+
+Apply outbound
+-------------------------------------------------------------------
+interface GigabitEthernet1/0.80
+ ip access-group Extended_29061_CBS_Access out
+
+-------------------------------------------------------------------
+4. Extended ACL (EDWH SERVER ACCESS) ONLY IT-NET allowed
+-------------------------------------------------------------------
+
+ip access-list extended Extended_29061_EDWH_Access
+ permit ip 192.168.10.0 0.0.0.15 host 192.168.80.12
+ deny ip any host 192.168.80.12
+exit
+
+-------------------------------------------------------------------
+Apply outbound
+-------------------------------------------------------------------
+interface GigabitEthernet1/0.80
+ ip access-group Extended_29061_EDWH_Access out
+-------------------------------------------------------------------
+
+

@@ -1,0 +1,136 @@
+1. Sequential Control Structure
+===========================================
+
+
+print("Start")
+print("Middle")
+print("End")
+
+
+----------------OUTPUT------------------
+
+Start
+Middle
+End
+
+[🟨 No conditions, no loops — just straight execution]
+
+===========================================
+2. Selection Control Structure (Decision Making)
+===========================================
+
+Declare grade as float
+
+input("Enter grade")
+read grade
+if grade >= 90:
+    display("Excellent")
+elif grade >= 70:
+    display("Good")
+else:
+    display("Needs Improvement")
+
+----------------OUTPUT------------------
+
+Good
+
+[🟨 Only one block runs based on the condition]
+
+===========================================
+3.Iteration Control Structure (Loops)
+===========================================
+
+
+-------------------------For Loop-------------------
+i = 0
+for i < 3:
+    display("Hello", i)
+
+----------------OUTPUT------------------
+
+Hello 0
+Hello 1
+Hello 2
+
+
+-------------------------while Loop------------------
+
+
+count = 0
+while count < 3:
+    display("Count:", count)
+    count += 1
+
+----------------OUTPUT------------------
+
+Count: 0
+Count: 1
+Count: 2
+
+[Pre tested loop]
+
+[🟨 Loops repeat code. You use them when you want to do something multiple times.]
+
+
+------------------------- Do while Loop------------------
+
+
+count = 0
+
+do
+
+    display("Count:", count)
+    count += 1
+
+    while count < 3:
+
+
+----------------OUTPUT------------------
+
+Count: 0
+Count: 1
+Count: 2
+
+---------------------------------------------------------------------
+do...while loop is a post-tested loop, meaning:
+
+The code runs first, then the condition is checked.
+
+It will always execute at least once, even if the condition is false.
+-----------------------------------------------------------------------
+
+===========================================
+✅ 4. Branching Control Structure (Jump Statements)
+===========================================
+
+
+-------------------------Break------------------
+
+i = 0
+for i < 3:
+    if i == 1:
+        break
+    display("Hello", i)
+
+----------------OUTPUT------------------
+
+Hello 0
+
+[🟨 break where instruction says, no need to continue]
+
+-------------------------Continue------------------
+
+i = 0
+for i in range(3):
+    if i == 1
+        continue
+    display("Hello", i)
+
+
+----------------OUTPUT------------------
+
+Hello 0
+Hello 2
+
+[🟨 continue skipped printing 1]
+

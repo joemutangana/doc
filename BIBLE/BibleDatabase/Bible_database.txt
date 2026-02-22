@@ -1,0 +1,8 @@
+create table Bible(
+
+Id int auto_increment Primary key,
+Book varchar(50) not null,
+Chapter int not null,
+Verse int not null,
+Text text not null
+);

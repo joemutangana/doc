@@ -1,0 +1,417 @@
+:root{
+    --dark-color: rgb(3, 5, 37);
+    --text-color: #969494;
+    --title-color: white;
+    --button-bgcolor: rgb(25, 201, 224);
+    --hover-bgcolor:rgba(0, 0, 255, 0.196);
+    --hover-color:rgb(33, 146, 195);
+    --border-radius: 10px;
+    --main-body_bgcolor: rgba(2, 2, 29, 0.31);
+    --tab-bg-color:rgba(57, 57, 60, 0.306);
+    --tab-padding:10px 10px;
+    --font-size: 18px;
+    --tab-width: 865px;
+    --tab-margin: 12px;
+}
+
+/* Body Section */
+
+body{
+    margin:0; 
+    background: var(--dark-color); 
+    font-family: Arial, Helvetica, sans-serif;
+    scroll-behavior: smooth;
+}
+/* #section Header */
+.header{
+    background-color: var(--dark-color);
+    display: flex;
+    color: var(--tex-color);
+    gap: 2rem;
+    position: sticky;
+    top: 0;
+    padding: 14px;
+    padding-left: 50px;
+    border-bottom: solid black;
+}
+
+.header  button{
+    background-color: var(--button-bgcolor);
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+}
+
+.header button:hover {
+    background-color: blue;
+    color: white;
+    transition: 1s;
+}
+
+.header .open_docs{
+    position: absolute;
+    right: 2rem;
+}
+
+.header .open_docs input{
+    position: absolute;
+    right: 2rem;
+    padding: 8px;
+    background-color: var(--button-bgcolor);
+    border: none;
+    border-radius: 8px;
+}
+
+.header .header_title .title{
+    color: var(--title-color);
+    font-size: 21px;
+}
+
+.header .header_title .description {
+    color: var(--text-color);
+    font-size: 10px;
+    font-weight: bolder;
+}
+
+/* section main */
+
+.main{
+    display: flex;
+    color: var(--tex-color);
+    padding-left: 3rem;
+    padding-top: 14px;
+    top: 0;
+}
+
+.nav{
+    background-color: rgb(7, 7, 27);
+    border-radius: 10px;
+    position: fixed;
+    overflow-y: scroll;
+    scrollbar-width: none;
+    width: 250px;
+    padding:0 14px;
+    height: 87vh;
+}
+.main .nav .nav_header{
+    position: sticky;
+    top: 0;
+    padding: 10px 0;
+    display: flex;
+    gap: 0.5rem;
+    background-color: rgb(7, 7, 27);
+}
+
+.main .nav .nav_header button{
+   padding: 12px;
+   border-radius: 9px;
+   border: none;
+   background-color: rgba(0, 0, 255, 0.196);
+   color: rgb(33, 146, 195);
+
+
+}
+
+.main .nav .nav_header .nav_title {
+    color: var(--title-color);
+    
+}
+.main .nav .nav_header .nav_description {
+    color: var(--text-color);
+    font-size: 12px;
+
+}
+.nav .nav_links ul{
+   
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    
+}
+
+.nav .nav_links ul li{
+    padding: 0.3rem;
+    border-radius: 8px;
+    margin-left: -40px;
+    font-size: 12px;
+}
+
+.nav .nav_links ul li:hover{
+    background-color: var(--hover-bgcolor);
+}
+.nav .nav_links ul li a{
+    text-decoration: none;
+    color: var(--text-color);
+}
+
+.nav .nav_links ul li a:hover {
+    color: var(--hover-color);
+}
+
+.main{
+    scroll-behavior: smooth;
+}
+
+.main .main_body{
+    margin-left:300px;
+    color: var(--text-color);
+    background-color: var(--main-body_bgcolor);
+    border-radius: var(--border-radius);
+    padding: var(--tab-padding);
+    
+    
+}
+.main .main_body h1,h2,h3{
+   font-size: var(--font-size);
+   color: var(--title-color);
+
+}
+.main .main_body img{
+    width:400px;
+    padding: var(--tab-padding);
+}
+.main .main_body .home, .win_server, .pfsense, .linux_server, .vpn, .ntopng, .backup,.wazuh, .ids, .kali, .firewall, .summary{
+    color: var(--text-color);
+    background-color: var(--tab-bg-color);
+    border-radius: var(--border-radius);
+    padding: var(--tab-padding);
+    width: var(--tab-width);
+    margin-top: var(--tab-margin);
+
+}
+
+.main .main_body .home1{
+    padding: var(--tab-padding);
+    border-radius: var(--border-radius);
+}
+
+.main .main_body .home ul{
+   display: flex;
+   gap: 2rem;
+   list-style: none;
+   padding-left: 1px;
+   font-size: 20px;
+  
+}
+.main .main_body .home ul li{
+    padding:4px 7px;
+    border-radius: 9px;
+}
+.main .main_body .home ul li:hover{
+    color: var(--hover-color);
+    background-color: var(--hover-bgcolor);
+}
+.main .main_body .home .home_executive_summary{
+   padding-left: var(--tab-padding);
+
+}
+.main .main_body .home .home_executive_summary .description{
+    background-color: var(--main-body_bgcolor);
+    padding: var(--tab-padding);
+    border-radius: var(--border-radius);
+}
+
+.main .main_body .home .home_executive_summary .home_flex {
+    display: flex;
+    gap: 2rem;
+    padding-top: 20px;
+
+}
+
+.main .main_body .home .home_executive_summary .home_flex img:hover, .win_server .aduc .aduc_flex img:hover{
+   right: 15rem;
+}
+
+.main .main_body .home .home_executive_summary .home_flex .drive_link{
+    border: solid #3f4014;
+    border-radius: 4px;
+    padding: 10px 10px;
+    margin:0 auto;
+    background-color: var(--main-body_bgcolor);
+
+}
+
+
+.main_body .ip_allocation{
+    background-color: var(--main-body_bgcolor);
+    border-radius: var(--border-radius);
+    padding:9px 10px;
+    margin-top: 30px;
+}
+.main_body .allocation {
+  display: flex;
+  list-style: none;
+  gap: 2rem;
+}
+.main_body .ip_allocation h1{
+    color: var(--title-color);
+    font-size: 15px;
+
+}
+
+/* Window server */
+
+.win_server{
+    margin-top: 3rem;
+    padding: 10px 10px;
+    border-radius: var(--border-radius);
+    background-color:  var(--tab-bg-color);
+    width: var(--tab-width);
+}
+
+.win_server h1{
+    font-size: var(--font-size);
+    color: var(--title-color)
+}
+
+.main .main_body p {
+   background-color: var(--main-body_bgcolor);
+   border-radius: var(--border-radius);
+   padding: var(--tab-padding);
+}
+
+.win_server .aduc, .gpo, .roaming, .iis{
+    background-color: var(--tab-bg-color);
+    padding: var(--tab-padding);
+    border-radius: var(--border-radius);
+    margin-top: var(--tab-margin);
+    
+}
+
+
+.win_server .aduc .aduc_flex {
+    display: flex;
+    gap: 1rem;
+    list-style: none;
+}
+
+.linux_server .code, .linux_server p, .wazuh .code{
+    background-color: var(--main-body_bgcolor);
+    padding: var(--tab-padding);
+    border-radius: var(--border-radius);
+    color: rgba(78, 145, 179, 0.466);
+}
+
+.linux_server a, h5{
+   text-decoration: none;
+   color: var(--tex-color)
+}
+
+/* pfSense */
+
+.pfsense .firewall_flex, .interface_flex{
+    display: flex;
+    gap:1rem;
+    background-color: var(--tab-bg-color);
+    border-radius: var(--border-radius);
+    padding: var(--tab-padding);
+}
+
+
+
+@media screen and (max-width: 860px) {
+    img:hover{
+        position: absolute;
+        transform: scale(0.7);
+        left: -4rem;
+
+    }
+        .main .main_body .home .home_executive_summary .home_flex img:hover,
+        .win_server .aduc .aduc_flex img:hover,
+        .pfsense .firewall_flex img:hover,
+        .interface_flex img:hover {
+            right: 0;
+        }
+    .header {
+        gap: 1rem;
+        padding-bottom: 3rem;
+    }
+
+    .header .open_docs input{
+            right: 0;   
+        }
+    .main, .pfsense .firewall_flex,
+    .interface_flex{
+        display: flex;
+        flex-direction: column;
+        margin-top: 10px;
+        margin:0 auto;
+        padding-left: 10px;
+        
+    }
+    .main .main_body {
+            margin-left: 0px;
+        }
+    .main .nav {
+        height: auto;
+        position: fixed;
+        margin-top: -60px;
+        width: 94%;
+        margin-left: -15px;
+        background-color: var(--dark-color);
+    
+    }
+    .main .nav .nav_header {
+           display: none;
+        }
+    
+    .main .nav .nav_links ul {
+        display: flex;
+        flex-direction: row;
+        font-size: 8px;
+        gap: 2.4rem;
+    }
+        .nav .nav_links ul li {
+            padding: 0.3rem;
+            border-radius: 8px;
+            margin-left: -40px;
+            color: white;
+        }
+        .nav .nav_links ul li a{
+            background-color: rgb(72, 86, 99);
+            padding: 2px 9px;
+            border-radius: 5px;
+        }
+    
+        .nav .nav_links ul li:hover {
+            background-color: rgba(0, 0, 139, 0);
+        }
+     
+                .main .main_body .home,
+                .win_server,
+                .pfsense,
+                .linux_server,
+                .vpn,
+                .ntopng,
+                .backup,
+                .wazuh,
+                .ids,
+                .kali,
+                .firewall,
+                .summary{
+            width: 535px;
+                }
+        .main .main_body .home .home_executive_summary .home_flex, .aduc_flex{
+            display: flex;
+            flex-direction: column;
+         }
+                
+         .main_body .allocation, .allocation .network h1,
+        .allocation .gateway h1,
+        .allocation .subnet h1,
+        .allocation .name h1,
+        .allocation .dhcp h1{
+            font-size: xx-small;
+         }
+        .main .main_body img {
+            width: 100%;
+            padding: 0;       
+        }
+
+
+
+    
+}
+
+

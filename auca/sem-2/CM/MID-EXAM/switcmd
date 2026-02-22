@@ -1,0 +1,50 @@
+en
+conf t
+int range fa0/1 - 24,gig0/1 - 2
+no switchport port-security
+shutdown
+no shutdown
+end
+write memory
+
+
+00:01:43:A4:E0:27
+
+HQ-L2
+
+00:01:64:60:39:E1
+
+HQ-L3
+
+00:01:97:6D:C9:02
+
+HQ-L4
+
+00:60:47:72:86:86
+
+HQ-L5
+
+00:0C:CF:50:46:63
+
+HQ-L6
+
+00:90:0C:A7:14:DA
+
+HQ-L7
+
+00:01:63:E4:4C:39
+
+HQ-L8
+
+00:E0:8F:72:0D:3C
+
+G-L2
+
+00:02:16:9D:D3:E5
+
+G-L4
+
+00:40:0B:C9:30:64
+
+
+
