@@ -1,0 +1,32 @@
+step1-powershell
+---------
+ssh-keygen -t ed25519 -C "joemutangana@gmail.com" -f C:\Users\user\.ssh\second_git
+
+
+-------------------
+step2-powershell
+-------------------
+Start-Process ssh-agent -ArgumentList '-s' -NoNewWindow
+ssh-add C:\Users\user\.ssh\second_git
+ssh-add -l  # should show your second key
+
+-----------
+step3-add key from .pub to your github-acc
+----------------------------------------
+open with notepad  C:\Users\user\.ssh\second_git.pub
+
+
+---------------------------------------------
+step0-4 create config file of your new acc C:\Users\user\.ssh\config
+-------------------------------------------
+
+# Second GitHub account
+Host github.com-second
+    HostName github.com
+    User git
+    IdentityFile ~/.ssh/second_git
+
+------------------------------------------------------------
+step5 clone repo on you new acc using git@github.com-second
+------------------------------------------------------------
+git clone git@github.com-second:YourSecondUsername/your-repo.git
