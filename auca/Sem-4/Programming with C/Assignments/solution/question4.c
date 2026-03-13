@@ -5,7 +5,7 @@ int main() {
 
     float celsius, fahrenheit, kelvin;
     int seconds, hours, minutes, remainingSeconds;
-    char classification[20];
+    char *classification;
 
     printf("\n\nEnter temperature in Celsius: ");
     scanf("%f", &celsius);
@@ -23,16 +23,9 @@ int main() {
     remainingSeconds = seconds % 60;
 
     
-    if (celsius > 30) {
-        classification[0] = '\0';
-        sprintf(classification, "Hot");
-    }
-    else if (celsius >= 15 && celsius <= 30) {
-        sprintf(classification, "Moderate");
-    }
-    else {
-        sprintf(classification, "Cold");
-    }
+    classification = (celsius > 30) ? "Hot" :
+                     (celsius >= 15) ? "Moderate" :
+                      "Cold";
 
     int comfortable = 0;
     if (celsius >= 18 && celsius <= 25) {
