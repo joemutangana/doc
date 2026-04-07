@@ -15,14 +15,15 @@ int main(){
     area_rectangle = (length * width);
     circumference = 2 * (pi * radius);
     perimeter_rectangle = 2 * (length + width);
+
     printf("\n\n----------------------------------\n");
     if( area_circle > area_rectangle){
         printf("Area of circle is larger\n");
-        printf("----------------------------------\n");
+
     }
     else if(area_rectangle > area_circle){
         printf("Area of rectangle is larger\n");
-        printf("----------------------------------\n");
+
 
     }
     else{
