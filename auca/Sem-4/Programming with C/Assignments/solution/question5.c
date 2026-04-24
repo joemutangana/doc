@@ -7,8 +7,8 @@ int main(){
 
     printf("Enter total classes :");
     scanf("\n%d", &total_classes);
-    while( total_classes <0){
-        printf("Total classes can not be less than 0.\n\nEnter total classes :");
+    while( total_classes <=0){
+        printf("Total classes can not be less or equal to 0.\n\nEnter total classes :");
         scanf("\n%d", &total_classes);
     }
 
@@ -23,6 +23,10 @@ int main(){
         }
 
         else{
+
+            if(attended_classes == -1){
+                break;
+            }
 
             if(attended_classes > 0 )
             {

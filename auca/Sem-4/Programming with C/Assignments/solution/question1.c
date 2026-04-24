@@ -5,7 +5,7 @@ int main(){
     char name[50], grade;
     int student_ID;
     float score1, score2, score3, average;
-    
+
     printf("\n\nEnter student name :");
     scanf("%s", &name);
     printf("Enter student ID :");
@@ -24,7 +24,7 @@ int main(){
     printf("Student Score :%.2f\n", average);
 
     if (score1 >=50 && score2 >=50 && score3 >=50){
-        
+
         printf("Passed all subjects\n");
 
     }
@@ -36,28 +36,28 @@ int main(){
 
     if (average >= 90){
         grade = 'A';
-       
+
     }
     else if (average >= 80 ){
         grade = 'B';
-        
+
     }
     else if (average >= 70 ){
         grade= 'C';
-        
+
     }
     else if (average >= 60 ){
         grade= 'D';
-        
+
     }
     else{
         grade = 'F';
-        
+
     }
 
     printf("Student Grade :%c", grade);
     printf("\n----------------------------------\n\n");
 
-    
+
     return 0;
 }
