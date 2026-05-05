@@ -28,7 +28,7 @@ int main(){
         printf("Sunday");
         break;
         default:
-        printf("Out of days.");
+        printf("Out of week days.");
     }
     printf("\n\n");
     return 0;

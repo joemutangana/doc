@@ -32,8 +32,8 @@ int main() {
 
     printf("\n===== Logical Operations =====\n");
 
-    printf("Are both numbers positive? %d\n", (a > 0 && b > 0));
-    printf("Is at least one number even? %d\n", (a % 2 == 0 || b % 2 == 0));
+    printf("Are both numbers positive? %s\n", (a > 0 && b > 0)? "Yes":"No");
+    printf("Is at least one number even? %s\n", (a % 2 == 0 || b % 2 == 0)? "Yes":"No");
 
     printf("\n===== Increment Demonstration =====\n");
 
