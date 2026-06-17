@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Booking Registration Form</title>
+    <style>
+        body{
+            background-color: black;
+
+        }
+        form{
+            width: 200px;
+            margin: auto;
+            color: goldenrod;
+            padding: 10px;
+            border: 1px goldenrod solid;
+
+        }
+
+        input, textarea, select, button{
+            width: 90%;
+        }
+    </style>
+</head>
+<body>
+    <h1>Booking Registration Form</h1>
+    <form action="#" method="post">
+        <label for="fname">Fullname:</label> 
+        <input type="text" name="fname" id="fname" placeholder="Enter your name..."> <br> <br>
+        <label for="email">Email:</label>
+        <input type="email" name="email" id="email" placeholder="Enter your email..."><br> <br>
+        <label for="pswd">Password:</label>
+        <input type="password" name="pswd" id="pswd" placeholder="Enter your password..."> <br> <br>
+        <label for="age">Age:</label>
+        <input type="number" name="age" id="age" placeholder="Enter your age..."><br> <br>
+        <label for="chbx">Select Services:</label>
+        <input type="checkbox" name="chbx" id="chbx">Airport Pickups
+        <input type="checkbox" name="chbx" id="chbx">Breakfask
+        <input type="checkbox" name="" id="">Gym
+        <input type="checkbox" name="" id="">Swimming Pool
+        <br> <br>
+        <label for="gender">Gender:</label>
+        <input type="radio" name="gender" id="">Male
+        <input type="radio" name="gender" id="">Female
+        <br> <br>
+        <label for="country">Home Country: </label>
+        <select name="country" id="country">
+            <option value="">Select the country</option>
+            <option value="rw">Rwanda</option>
+            <option value="tg">Togo</option>
+            <option value="ug">Uganda</option>
+            <option value="brd">Burundi</option>
+        </select>
+        <br> <br>
+        <label for="feedback">Additional Request:</label>
+        <br> <br>
+        <textarea name="" id="" cols="30" rows="5" placeholder="Enter the details of additional requests if any..."></textarea><br> <br>
+        <button type="submit">Submit</button>
+        <button type="reset">Clear</button>
+
+    </form>
+</body>
+</html>
