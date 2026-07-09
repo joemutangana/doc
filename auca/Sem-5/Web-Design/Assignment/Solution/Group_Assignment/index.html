@@ -1,0 +1,242 @@
+
+<!-- 
+
+1. MUTANGANA Joseph 29061
+2. KARUHANGA Moses  27911
+3. MANZI Habingoma Kevin 28881
+
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+
+        }
+        header{
+            padding: 1px;
+            background-color: red;
+            color: aliceblue;
+            text-align: center;
+        }
+        header h3{
+            margin-top: -28px;
+            color: rgb(238, 234, 234);
+
+        }
+
+        nav{
+            display: flex;
+            justify-content: center;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.432);
+            
+           
+        }
+
+        nav ul{
+            display: flex;
+            gap: 20px;
+            list-style-type: none;
+
+
+        }
+
+        nav ul .submenu{
+            display: none;
+            position: absolute;
+            padding:10px  0;
+            text-align: left;
+            background: #333;
+            border-radius: 10px 10px 0 0;
+            padding: 5px;
+        }
+
+        nav .submenu li{
+            color: white;
+            padding: 5px;
+            font-weight: bold;
+        }
+
+       
+
+
+        nav ul li a{
+            text-decoration: none;
+            padding: 5px;
+            font-size: larger;
+            color: white;
+            font-weight: bold;
+        }
+
+        nav ul li a:hover, nav .submenu li:hover{
+            color: red;
+            cursor: pointer;
+            
+        }
+
+        nav .rooms:hover .submenu, nav .services:hover .submenu{
+            display: block;
+        }
+
+        main{
+            display: flex;
+            gap: 10px;
+            margin-top: 5px;
+            
+            
+        }
+
+        main section{
+            flex: 3;
+            padding: 10px;
+            background-color: rgba(174, 173, 171, 0.279);
+            
+        }
+
+        main section h2{
+            text-decoration: underline;
+        }
+
+        
+
+        main aside{
+            background-color: red;
+            padding: 10px;
+            color: white;
+        }
+
+        main aside ul li{
+            list-style-type: none;
+            display: block;
+            padding: 5px;
+            
+        }
+        main aside a{
+            text-decoration: none;
+            color: white;
+        }
+
+        main aside article{
+            color: white;
+           
+            
+        }
+
+        footer{
+            background-color: #333;
+            text-align: center;
+            color: white;
+            padding: 10px;
+            font-weight: bold;
+        }
+
+        footer ul{
+
+            list-style-type: none;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+
+        }
+        footer ul a{
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Grand Horizon Hotel</h1>
+        <h3><em>Luxury stays, unforgettable memories</em></h3>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li class="rooms"><a href="#">Rooms</a>
+            <ul class="submenu">
+                <li>Standard</li>
+                <li>Deluxe Suite</li>
+            </ul></li>
+            <li class="services"><a href="#">Services</a>
+            <ul class="submenu">
+                <li>Free Wi-Fi</li>
+                <li>Swimming Pool</li>
+                <li>Airport Shuttle Services</li>
+            </ul>
+            </li>
+            <li><a href="#">Garrely</a></li>
+            <li><a href="#">Contact Us</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section>
+            <h2>Our Rooms</h2>
+            <article>
+                <h3>Standard Room</h3>
+                
+                <p>For booking a standard room the cost per night is <mark><strong>$2000</strong></mark></p>
+                <img src="img/std1.jpg" alt="Stndard Room" width="150px">
+            </article>
+            <article>
+                <h3>Deluxe Suite Room</h3>
+               
+                <p>For booking a delux suite room  the cost per night is <mark><strong>$1000</strong></mark></p>
+                <img src="img/deluxe.jpg" alt="Deluxe suite room" width="150px">
+            </article>
+        </section>
+
+        <section>
+            <h2>Our Services</h2>
+            <article>
+                At grand hotel we provide the following services
+            </article>
+            <article>
+                <ul>
+                    <li>Free Wi-Fi</li>
+                    <li>Restaurant Services</li>
+                    <li>Swimming Pool</li>
+                    <li>Airport Shuttle Services</li>
+                </ul>
+                
+                
+                <img src="img/pool.jpg" alt="Swimming pool" width="150px">
+            </article>
+        </section>
+        <aside>
+            <u><h2>Quick Links</h2></u>
+            <ul>
+                <li><a href="#">Book Now</a></li>
+                <li><a href="#">FAQs</a></li>
+                <li><a href="#">Reviews</a></li>
+                <li><a href="#">Careers</a></li>
+            </ul>
+            <article>
+           <u><h3>Contact Information</h3></u>
+            <ul>
+                <li> <a href=""><i class="fas fa-phone"></i></a> <small>+327 907 345</small></li>
+                <li><i class="fas fa-envelope"></i> <small> grandhorizonhotel@gmail.com</small></li>
+            </ul>
+        </article>
+        </aside>
+    </main>
+
+    <footer>
+        <ul>
+            <li><a href="#"><i class="fab fa-facebook"></i> </a></li>
+            <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+            <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+        </ul>
+        &copy;2026 Grand Horizon. All rights reserved
+    </footer>
+</body>
+</html>

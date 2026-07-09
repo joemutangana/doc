@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+
+        body{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 80vh;
+        }
+        
+        .closset{
+            width: 300px;
+            height: 350px;
+            border: 1px solid;
+            display: flex;
+            flex-direction: row;
+
+            
+                     
+            
+
+        }
+
+        .left{
+            width: 50%;
+            border-right: 1px solid;
+            height: 100%;
+           
+
+
+        }
+
+        .right{
+            
+            width: 50%;
+            height: 100%;
+           
+
+        }
+        .top, .middle1, .middle2, .bottom{
+            width: 100%;
+            border-bottom: 1px solid;
+            height: 25%;
+            position: relative;
+            
+        }
+
+        .bottom{
+            border: unset;
+            height: 24.5%;
+            position: relative;
+        }
+        
+
+         .left .middle2{
+            
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+         }
+         .closset img{
+            width: 100%;
+            height: 100%;
+            
+        }
+
+        h1{
+            font-size: smaller;
+            background-color: green;
+            color: white;
+            position: absolute;
+            padding: 5px;
+            top: 0;
+        }
+
+        
+
+    </style>
+</head>
+<body>
+
+   
+    
+    
+    <div class="closset">
+
+        <div class="left">
+            <div class="top">
+                <h1>Hat</h1>
+                <img src="h1.jpg" alt="hat.jpg" srcset="">
+
+            </div>
+            <div class="middle1"><img src="c1.jpg" alt="t-shirt.jpg">
+
+            </div>
+            <div class="middle2"><img src="s1.jpg" alt="shoe.jpg" srcset="">
+
+            </div>
+            <div class="bottom">
+                <img src="s2.jpg" alt="shoe.jpg">
+
+            </div>
+            
+
+        </div>
+        <div class="right">
+            <div class="top">
+            <img src="p1.png" alt="pen.png" srcset="">
+            </div>
+            <div class="middle1">
+                <img src="book.png" alt="book.png" srcset="">
+            </div>
+            <div class="middle2"> <h1>laptop
+
+            </h1><img src="pc1.png" alt="computer.png">
+            
+            </div>
+            <div class="bottom">
+                <h1>Bag</h1><img src="b1.png" alt="bag.png">
+            
+            </div>
+
+        </div>
+        
+
+    </div>
+
+    
+    
+        
+
+</body>
+</html>
