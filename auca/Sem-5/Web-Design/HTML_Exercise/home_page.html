@@ -1,0 +1,272 @@
+<!--Byiringiro Eric 192034-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+       <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+    
+    <title>Home page</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        header {
+            background: #52b2f7;
+            color: aliceblue;
+            text-align: center;
+            padding: 16px;
+            font-weight: bold;
+        }
+        /* ===== Navigation ===== */
+        nav {
+            background: #1f2937;
+            padding: 0;
+        }
+        nav ul {
+            list-style-type: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            padding: 0;
+            gap: 4px;
+        }
+        nav ul li {
+            position: relative;
+        }
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 16px 20px;
+            font-weight: bold;
+            letter-spacing: 0.3px;
+            transition: background-color 0.2s ease, color 0.2s ease;
+            
+        }
+
+        nav ul li a i {
+            font-size: 13px;
+        }
+        nav ul li a:hover {
+        color: #1f2937;
+        background-color: #26f985;
+                }
+        
+                 nav ul li a:visited{
+            color: white;
+        }
+
+        nav ul li a:focus-visible{
+            outline: 2px solid #26f985;
+            outline-offset: -2px;
+        }
+
+        nav ul li a:active{
+            color: #130b5f;
+            
+        }
+        
+
+        /* Dropdown */
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown > a i{
+            display: inline-block;
+            transition: transform .3s ease;
+        }
+
+        .dropdown:hover > a i, .dropdown:focus-within > a i{
+            transform: rotate(180deg);
+        }
+        .submenu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            min-width: 180px;
+            background-color: #1f2937;
+            list-style-type: none;
+            margin: 0;
+            padding: 8px 0;
+            border-radius: 0 0 6px 6px;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+            z-index: 100;
+            opacity: 0;
+            transform: translateY(-8px);
+            transition: opacity 0.2s ease, transform 0.2s ease;
+        }
+
+        .dropdown:hover .submenu,
+        .dropdown:focus-within .submenu {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .submenu li a {
+            display: block;
+            padding: 10px 20px;
+            color: white;
+            text-decoration: none;
+            font-weight: normal;
+            white-space: nowrap;
+        }
+
+        .submenu li a:hover {
+            background-color: #26f985;
+            color: #1f2937;
+        }
+
+        /* ===== Main content ===== */
+        main {
+            display: flex;
+            gap: 15px;
+            padding: 15px;
+            border: 2px dashed #333;
+        }
+
+        section {
+            flex: 3;
+            background: #dacece;
+            padding: 5px;
+        }
+
+        section h3 {
+            text-align: center;
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+
+        article {
+            border: 1px solid #52b2f7;
+            background: #faf9f9;
+            padding: 5px;
+            border-radius: 8px;
+        }
+
+        article h3 {
+            margin-bottom: 10px;
+            font-size: 12px;
+            color: #aa1212;
+        }
+
+        aside {
+            flex: 2;
+            background: #90f5ee;
+            padding: 5px;
+        }
+
+        aside h4 {
+            margin-bottom: 10px;
+            font-size: 12px;
+            text-align: center;
+            color: #aa1212;
+        }
+
+        footer {
+            background: #efa7a7;
+            color: #faf9f9;
+            text-align: center;
+            padding: 20px;
+            font-weight: bold;
+        }
+
+        p img{
+            width: 100px;
+            background-color: goldenrod;
+        }
+
+        
+        
+    </style>
+</head>
+<body>
+    <header>
+        <p>Put your logo and other content here</p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#"><i class="fas fa-home" aria-hidden="true"></i>Home</a></li>
+            <li class="dropdown">
+                <a href="#">Rooms <i class="fas fa-chevron-down" aria-hidden="true"></i></a>
+                <ul class="submenu">
+                    <li><a href="#">Standard</a></li>
+                    <li><a href="#">General</a></li>
+                </ul>
+            </li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Bookings</a></li>
+            <li><a href="#"><i class="fas fa-phone" aria-hidden="true"></i>Contact us</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section>
+            <h3>Java scriot</h3>
+            <article>
+                <h3>What Java script can do?</h3>
+                <p id="demo">JavaScript can change HTML content.</p>
+                <button onclick="document.getElementById('demo').innerHTML='<img src=\'js.jpg\'>'">
+                    Click Me!
+                    <script>
+                        console.log("Page loads successfully");
+                        //window.alert("Welcome to website!")
+                    </script>
+                </button>
+
+            </article>
+        </section>
+        <section>
+            <h3>Instructions for voting</h3>
+            <article>
+                <h3>Voting Eligibility</h3>
+                <label for="age">Age:</label>
+                <input type="number" id="age" placeholder="Enter your age...">
+                <p id="result"></p>
+                <button onclick="checkAge()">Check</button>
+            </article>
+        </section>
+        <aside>
+            <h4>Quick links</h4>
+        </aside>
+    </main>
+
+    <footer>
+        <p>&copy; right reserved for us</p>
+    </footer>
+
+    <script>
+       
+
+        function checkAge(){
+
+            const age = document.getElementById('age').value;
+            //const check = document.getElementById('check');
+            const result = document.getElementById('result');
+            
+            if (age >=18 && age <65){
+                result.innerText='You are ligible to vote';
+                
+            }
+            else{
+                result.innerText = 'You are not eligible to vote';
+
+            }
+
+        }
+    </script>
+
+    
+</body>
+</html>

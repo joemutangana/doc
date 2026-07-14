@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+    <title>Document</title>
+    <style>
+
+        nav ul{
+            display: flex;
+            list-style-type: none;
+            gap: 20px;
+            padding: 0;
+        }
+
+        nav ul li a:link{
+            text-decoration: none;
+            color: blue;
+        }
+
+        nav ul button{
+            background-color: unset;
+            border: none;
+            border: 0.5px solid blue;
+            cursor: not-allowed;
+        }
+
+        nav ul li a:visited{
+            color: purple;
+
+        }
+        nav ul li a:hover{
+            color: red;
+            font-weight: bold;
+
+        }
+
+        nav ul li a:active{
+            color: orange;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>Font-Awesome</h1>
+    <nav>
+    <ul>
+        <li><a href="#"><i class="fas fa-home"></i> Home</a></li>
+        <li><a href="#"><i class="fas fa-envelope"></i> Email</a></li>
+        <li><a href="#"><i class="fas fa-phone"></i> Phone</a></li>
+
+        <li><button type="button">Join Us</button></li>
+        <li><button type="button">Learn More</button></li>
+    </ul>
+
+</nav>
+
+<h2>What Can JavaScript Do?</h2>
+<p id="demo">JavaScript can change HTML content.</p>
+<button onclick="document.getElementById('demo').innerHTML =
+'Hello JavaScript!'">
+    Click Me!
+</button>
+
+</body>
+</html>

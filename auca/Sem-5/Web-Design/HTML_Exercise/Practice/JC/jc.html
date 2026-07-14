@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        
+
+        body{
+            background-color: rgb(14, 47, 65);
+            color: aliceblue;
+            text-align: center;
+            
+
+        }
+
+        header{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            
+        }
+
+        header ul{
+            display: flex;
+            list-style-type: none;
+            gap: 10px;
+            
+        }
+
+        button{
+            background-color: unset;
+            border: none;
+            color: white;
+            padding: 5px;
+            
+        }
+
+        header .buttons #join{
+            background-color: blue;
+        }
+
+        main {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+
+        }
+
+        
+
+        main .intro{
+            width: 40%;
+            margin: auto;
+            
+        }
+
+        main .intro h4{
+            color: blue;
+        }
+
+        main .intro .bold{
+            font-weight: bolder;
+            font-size: 30px;
+        }
+
+        
+
+        main .intro #quote{
+            background-color: blue;
+
+        }
+
+        main .intro #lm{
+            border: 1px solid blue;
+            color: blue;
+        }
+
+        main .cards{
+            display: flex;
+            margin: auto;
+            gap: 20px;
+        }
+
+        main .cards .card{
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+            background-color: white;
+            color: black;
+            padding: 15px;
+        }
+
+        main .cards .card .icon{
+            background-color: aqua;
+            width: 15%;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+
+        
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="brand-name">
+            BrandName
+        </div>
+
+        <ul class="menu">
+            <li>Home</li>
+            <li>Product</li>
+            <li>Pricing</li>
+            <li>Contact</li>
+        </ul>
+
+        <div class="buttons">
+            <button type="button" id="login">Login</button>
+            <button type="button" id="join">JOIN US</button>
+        </div>
+    </header>
+
+    <main>
+        <div class="intro">
+            <h4>Welcome</h4>
+            <p class="bold">Selling on the internet like a pro</p>
+            <p>We know how Large objects will act, but things on a small scale just do not act that way</p>
+            <div class="buttons">
+                <button type="button" id="quote">Get Quote Now</button>
+                <button type="button" id="lm">Learn More</button>
+                </div>
+        </div>
+
+        <div class="cards">
+            <div class="card">
+                <div class="icon">
+                    Icon
+                </div>
+                <h2>
+                    Training Courses
+                </h2>
+                <p>
+                    We know how Large objects will act, but things on a small scale just do not act that 
+                </p>
+            </div>
+            <div class="card">
+                <div class="icon">
+                    Icon
+                </div>
+                <h2>2,769 online courses</h2>
+                <p>
+                    We know how Large objects will act, but things on a small scale just do not act that 
+                </p>
+            </div>
+            <div class="card">
+                <div class="icon">
+            Icon
+                </div>
+                <h2>Top users</h2>
+                <p>
+                    We know how Large objects will act, but things on a small scale just do not act that 
+                </p>
+            </div>
+            
+        </div>
+    </main>
+    
+    
+</body>
+</html>
