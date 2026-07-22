@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reserevation</title>
+    <style>
+        body {
+            margin: 0;
+        }
+
+        header {
+            background-color: rgb(0, 102, 255);
+            padding: 10px;
+            color: white;
+            font-size: xxx-large;
+            text-align: center;
+        }
+
+        main {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            border-bottom: 2px solid #def;
+            border-radius: 9px;
+
+
+        }
+
+        form {
+
+            background-color: #fff;
+            padding: 10px;
+            border: 2px solid #def;
+            border-radius: 9px;
+            gap: 10px;
+            width: 50%;
+            justify-content: center;
+            display: flex;
+            flex-direction: column;
+
+        }
+
+        form .card {
+            display: flex;
+            gap: 20px;
+            width: 100%;
+        }
+
+        form p{
+            font-size: smaller;
+            color: red;
+            margin: -5px 0;
+
+        }
+
+        form .group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding: 8px;
+            border-radius: 3px;
+            border: 1.5px solid #def;
+            width: 100%;
+
+        }
+
+        .group:hover {
+            background-color: rgba(221, 238, 255, 0.644);
+        }
+
+        input,
+        select,
+        textarea {
+            outline: none;
+            border-radius: 3px;
+            outline: none;
+            padding: 5px;
+            width:98%;
+            border: 1px solid;
+        }
+
+        select{
+            width: 49%;
+        }
+
+        button {
+
+            width: 20%;
+            background-color: blue;
+            border: 1px solid blue;
+            border-radius: 3px;
+            padding: 5px;
+            text-align: center;
+            color: white;
+
+        }
+
+        button:hover {
+            background-color: darkblue;
+            cursor: pointer;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        Hotel Reservation
+    </header>
+
+    <main>
+        <form action="#" method="post">
+            <div class="card">
+                <div class="group">
+                    <label for="name">Full Name </label>
+                    <input type="text" id="name" placeholder="Enter your name">
+                    <p id="nameError"></p>
+                    <label for="email">Email </label>
+                    <input type="email" name="email" id="email" placeholder="Enter your email">
+                    <p id="emailError"></p>
+                    <label for="tel">Phone Number </label>
+                    <input type="tel" name="tel" id="tel" placeholder="Enter your phone number">
+                    <p id="telError"></p>
+                </div>
+
+                <div class="group">
+                    <label for="check-in-date">Check-in Date</label>
+                    <input type="date" name="check-in-date" id="check-in-date">
+                    <p id="dateInError"></p>
+                    <label for="check-out-date">Check-out Date</label>
+                    <input type="date" name="check-out-date" id="check-out-date">
+                    <p id="dateOutError"></p>
+                    <label for="nguests">Number of Guests </label>
+                    <input type="number" name="nguests" id="nguests" placeholder="Enter number of guests">
+                    <p id="guestError"></p>
+                </div>
+            </div>
+
+            <label for="rtype">Room Type</label>
+            <select name="rtype" id="rtype">
+                <option value="">Select room</option>
+                <option value="std">Standard Room</option>
+                <option value="dlx">Delux Room</option>
+                <option value="fml">Family Room</option>
+                <option value="st">Suite Room</option>
+            </select>
+            <p id="roomError"></p>
+
+
+            <label for="rqst">Special Request </label>
+            <textarea name="rqst" id="rqst" rows="5"
+                placeholder="Any special request? Enter your request here"></textarea>
+                
+            <button type="submit">Book Now</button>
+        </form>
+       
+    </main>
+
+    <script>
+
+
+        let validTel = /^\d+$/;
+        let today = new Date().toISOString().split("T")[0];
+
+        //Form fields
+        let fullName =document.getElementById('name');
+        let email = document.getElementById('email');
+        let phoneInput = document.getElementById('tel');
+        let checkInDate = document.getElementById('check-in-date');
+        let checkOutDate = document.getElementById('check-out-date');
+        let numberOfGuest = document.getElementById('nguests');
+        let roomType = document.getElementById('rtype');
+        let form = document.querySelector('form');
+
+        //Display error variables
+        let nameError = document.getElementById('nameError');
+        let emailError = document.getElementById('emailError');
+        let phoneError = document.getElementById('telError');
+        let checkInError = document.getElementById('dateInError');
+        let checkOutError = document.getElementById('dateOutError');
+        let numberOfGuestError = document.getElementById('guestError');
+        let roomTypeError = document.getElementById('roomError');
+
+
+        function showError(input, elementError, message){
+            elementError.innerText = message;
+            input.style.border ='1px solid red';
+        }
+
+
+        function showSuccess(input, elementError){
+            input.style.border='1px solid green';
+            elementError.innerText ='';
+        }
+
+        //validate name 
+        function validateName() {
+
+
+                if (fullName.value.trim() === "") {
+                    showError(fullName, nameError, "Please enter your name");
+                    return false;
+
+                }
+                else {
+                    showSuccess(fullName, nameError);
+                    return true;
+
+                }
+
+            }
+
+        //validate phone number
+        function validatePhone() {
+            if (!validTel.test(phoneInput.value) || phoneInput.value.length < 10) {
+                showError(phoneInput, phoneError, "Enter valid phone number and remove space");
+                return false;
+
+            }
+            else {
+                showSuccess(phoneInput, phoneError);
+                return true;
+
+            }
+
+        }
+
+        //validate room type
+        function validateRoomType(){
+            if(roomType.value.trim()===""){
+                showError(roomType, roomTypeError,"Please select room type");
+            }
+            else{
+                showSuccess(roomType, roomTypeError);
+            }
+        }
+
+        //validate chec-in-date
+        function validateCheckInDate(){
+            if(checkInDate.value ===""){
+                showError(checkInDate, checkInError, "Please enter Check-in-date ")
+
+            }
+            if (checkInDate.value < today) {
+                showError(checkInDate, checkInError, "Check-in-date should not be less than today");
+                checkInDate.value='';
+                return false;
+
+            }
+
+
+            else{
+                showSuccess(checkInDate, checkInError);
+                return true;
+            }
+        }
+
+        //Validate check-out-date
+        function validateCheckOutDate(){
+
+            if(checkOutDate.value <= checkInDate.value){
+                showError(checkOutDate, checkOutError, "Check Out date must be greater checkin date");
+                checkOutDate.value ='';
+                return false;
+            }
+
+            else{
+                showSuccess(checkOutDate,checkOutError);
+                return true;
+
+
+            }
+        }
+
+        //Adding input event listner on form fields
+        
+        roomType.addEventListener('input', validateRoomType);
+        fullName.addEventListener('input', validateName);
+        checkInDate.addEventListener('input', validateCheckInDate);
+        checkOutDate.addEventListener('input', validateCheckOutDate);
+        phoneInput.addEventListener('input', validatePhone);
+        
+        
+       
+
+        form.addEventListener('submit', function(event){
+            if(!validateName() || !validatePhone() || !validateRoomType()  || !validateCheckInDate() || !validateCheckOutDate()){
+                event.preventDefault();
+            }
+        });
+
+
+
+    </script>
+</body>
+
+</html>

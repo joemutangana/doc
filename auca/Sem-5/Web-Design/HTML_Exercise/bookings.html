@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Booking Rate Calculator</title>
+
+    <style>
+        body{
+            margin: 0;
+            
+        }
+        header{
+            background-color: rgb(0, 110, 255);
+            color: white;
+            text-align: center;
+            font-size: xxx-large;
+            padding: 10px;
+            justify-content: center;
+
+        }
+
+        main{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        article{
+            margin:7% auto;
+            border: 2px solid #def;
+            padding: 20px;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            width: 25%;
+        }
+        label{
+            font-weight: bolder;
+        }
+
+        input{
+            outline: none;
+            padding: 5px;
+            border: 2px solid #def;
+
+        }
+        button{
+            background-color:blue;
+            color: white;
+            border:1px solid blue;
+            padding: 5px;
+            cursor: pointer;
+            border-radius: 4px;
+            
+        }
+
+        button:hover{
+            background-color: darkblue;
+            color: white;
+        }
+
+        #result{
+            
+            
+            padding: 10px;
+            border-radius: 3px;
+            border: 2px solid #def;
+            display: none;
+            gap: 5px; 
+            justify-content: space-between;
+            flex-direction: column;
+            
+            
+
+
+
+        }
+
+        #result a{
+            text-decoration: none;
+            color: white;
+            padding: 5px;
+            border: 1px blue solid;
+            border-radius: 4px;
+            background-color: blue;
+            text-align: center;
+            
+            width: 40%;
+            
+        }
+
+        #result a:hover{
+            background-color: darkblue;
+            color: white;
+        }
+
+        #result .error{
+            color: red;
+        }
+        
+    </style>
+</head>
+<body>
+    <header>
+        Hotel Booking Rate Calculator
+    </header>
+    <main>
+        <article>
+            
+
+            <label for="nights">How many nights do you want to stay?</label>
+            <input type="text" id="nights" placeholder="Enter number of nights">
+            <div id="result"></div>
+            <button id="check" onclick="isNumber()" type="submit">Check Rate</button>
+            
+            
+            
+            
+        </article>
+    </main>
+    
+    <script>
+        const result = document.getElementById("result");
+        
+        function isNumber(){
+        result.style.display='flex';
+            const nights = document.getElementById("nights").value;
+            if(isNaN(Number(nights)) || Number(nights) < 1){
+                result.innerHTML=`<div class="error">Please enter a valid number of nights</error>`;
+            }
+
+            if(Number(nights <=2) && nights > 0){
+                result.innerHTML=`Standard rate: $120/night <a href="reservation.html">Continue booking</a>`;
+
+            }
+
+            else if (Number(nights <= 6) && nights >=3 ) {
+                result.innerHTML = `Weekly Discount rate: $100/night <a href="reservation.html">Continue booking</a>`;
+
+            }
+
+            else if (Number(nights >= 6)) {
+                result.innerHTML = `Extendade stay rate: $80/night <a href="reservation.html">Continue booking</a>`;
+
+            }
+
+            
+
+            
+            
+        }
+    </script>
+</body>
+
+</html>

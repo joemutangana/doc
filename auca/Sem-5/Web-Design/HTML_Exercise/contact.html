@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact</title>
+    <style>
+        body {
+            margin: 0;
+        }
+
+        header {
+            background-color: blue;
+            font-size: xxx-large;
+            color: white;
+            text-align: center;
+            padding: 10px;
+        }
+
+        main {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            margin-top: 30px;
+            
+
+        }
+
+
+
+
+
+        form {
+            margin-top: 10px;
+            display: flex;
+            gap: 10px;
+            flex-direction: column;
+            width: 50%;
+            border: 3px solid #def;
+            padding: 20px;
+            border-radius: 5px;
+
+        }
+
+        form .card {
+            display: flex;
+            gap: 10px;
+            justify-content: space-between;
+        }
+
+        form .group {
+            width: 50%;
+            gap: 10px;
+            
+            display: flex;
+            flex-direction: column;
+
+        }
+
+        form p{
+            font-size: smaller;
+            color: red;
+            margin: -5px 0;
+
+        }
+
+
+        button {
+            background-color: blue;
+            color: white;
+            border: 1px solid blue;
+            padding: 5px;
+            border-radius: 3px;
+            width: 20%;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: darkblue;
+            color: white;
+
+        }
+
+        textarea {
+            width: 99%;
+            height: 70px;
+            outline: none;
+        }
+
+        input {
+            padding: 5px;
+            outline: none;
+        }
+
+        #error {
+
+            color: red;
+
+        }
+
+        #error h1 {
+            color: green;
+            font-size: small;
+
+        }
+
+        /* @media (max-width:440px) {
+            main{
+                margin: 10px;
+            }
+            form{
+                width: 90%;
+                margin: 7px;
+            }
+
+            form .group{
+                width: auto;
+            }
+            form .card{
+                flex-direction: column;
+            }
+
+            textarea{
+                width: 80%;
+            }
+            
+        } */
+
+        article{
+            color: blue;
+        }
+    </style>
+</head>
+
+<body>
+    <header>Contact Us</header>
+
+    <main>
+        <article>
+
+            We would love to hear from you.
+            Please complete the form below.
+        </article>
+        <form action="#" method="post" >
+            <div class="card">
+                <div class="group">
+                    <label for="name">Full Name</label>
+                    <input type="text" name="name" id="name" placeholder="Enter your name">
+                    <p id="nameError"></p>
+                    <label for="email">Email</label>
+                    <input type="email" name="email" id="email" placeholder="Enter your email" oninput="">
+                    <p id="emailError"></p>
+                    <label for="pnbr">Phone Number</label>
+                    <input type="tel" name="pnbr" id="pnbr" placeholder="Enter your phone number" oninput="checkTel()">
+                    <p id="telError"></p>
+                </div>
+
+
+                <div class="group">
+                    <label for="city">City</label>
+                    <input type="text" name="city" id="city" placeholder="Enter your city">
+                    <p id="cityError"></p>
+                    <label for="ctry">Country</label>
+                    <input type="text" name="ctry" id="ctry" placeholder="Enter your country">
+                    <p id="ctryError"></p>
+                    <label for="age">Age</label>
+                    <input type="number" name="age" id="age" placeholder="Enter your age">
+                    <p id="ageError"></p>
+                </div>
+            </div>
+
+                <div class="group">
+
+                </div>
+                <label for="msg">Message</label>
+                <textarea name="msg" id="msg" placeholder="Enter your message"></textarea>
+                <p id="msgError"></p>
+                <div class="error" id="error"></div>
+                <button type="submit" id="send">Send</button>
+        </form>
+    </main>
+
+    <script>
+        const validEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const validTel = /^\d+$/;
+        const displayError = document.getElementById('error');
+        const allInput = document.querySelectorAll('input');
+        const emailInput = document.getElementById('email');
+        const message = document.getElementById('msg');
+        const age = document.getElementById('age');
+        const phoneInput = document.getElementById('pnbr');
+        const fullName = document.getElementById('name');
+        const city = document.getElementById('city');
+        const country = document.getElementById('ctry');
+        const form = document.querySelector('form');
+
+        //Error display variables
+
+        const nameError = document.getElementById('nameError');
+        const emailError = document.getElementById('emailError');
+        const telError = document.getElementById('telError');     
+        const cityError = document.getElementById('cityError');   
+        const ctryError = document.getElementById('ctryError');
+        const ageError = document.getElementById('ageError');
+        const msgError = document.getElementById('msgError');
+
+        function showError(input, elementError, message){
+            elementError.innerText = message;
+            input.style.border = "1px solid red";
+
+        }
+
+        function showSuccess(input, elementError){
+            elementError.innerText='';
+            input.style.border = "1px solid green";
+        }
+        function validateName() {
+
+            
+                if (fullName.value.trim() === "") {
+                    showError(fullName,nameError, "Please enter your name");
+                    return false;
+
+                }
+                else {
+                    showSuccess(fullName, nameError);
+                    return true;
+
+                }
+
+            }
+
+            function validateCity() {
+                if (city.value.trim() === "") {
+                    showError(city, cityError, "Please enter city");
+                    return false;
+
+                }
+                else {
+                    showSuccess(city, cityError);
+                    return true;
+
+                }
+
+            }
+
+            function validateCountry() {
+                if (country.value.trim() === "") {
+                    showError(country, ctryError, "Please enter country");                   
+                    return false;
+
+                }
+                else {
+                    showSuccess(country, ctryError);
+                    return true;
+
+                }
+
+            }
+
+            function validatePhone() {
+                if (!validTel.test(phoneInput.value) || phoneInput.value.length < 10) {
+                    showError(phoneInput, telError, "Enter valid phone number and remove space");
+                    return false;
+
+                }
+                else {
+                    showSuccess(phoneInput,telError);
+                    return true;
+
+                }
+
+            }
+
+            function validateAge() {
+                if (age.value < 18) {
+                    showError(age, ageError, "Age must be greater than or equal 18");
+                    return false;
+                }
+                else {
+                    showSuccess(age, ageError);
+                    return true;
+
+                }
+
+            }
+
+            function validateEmail() {
+                if (!validEmail.test(emailInput.value)) {
+                    showError(emailInput, emailError, "Enter valid email address");
+                    return false;
+
+                }
+                else {
+                    showSuccess(emailInput, emailError)
+                    return true;
+
+                }
+
+            }
+
+            function validateMessage() {
+                if (message.value.trim() === "") {
+                    showError(message, msgError, "Message field can not be empty");
+                    return false;
+                }
+                else {
+                    showSuccess(message, msgError)
+                    return true;
+                }
+
+            }
+
+        fullName.addEventListener('input', validateName);
+        city.addEventListener('input', validateCity);
+        country.addEventListener('input', validateCountry);
+        phoneInput.addEventListener("input", validatePhone);
+        age.addEventListener("input", validateAge);
+        emailInput.addEventListener("input", validateEmail);
+        message.addEventListener("input", validateMessage);
+
+
+      
+        form.addEventListener('submit', function(event){
+            
+            if(
+            !validateName()||
+            !validateEmail()||
+            !validatePhone()||
+            !validateCity()||
+            !validateCountry()||
+            !validateAge()||
+            !validateMessage())
+            {
+                 event.preventDefault(); 
+
+            }
+            
+
+
+        });
+        
+
+        
+
+       
+    </script>
+</body>
+
+</html>
