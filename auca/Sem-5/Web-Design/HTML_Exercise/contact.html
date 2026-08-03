@@ -183,6 +183,10 @@
     </main>
 
     <script>
+
+        
+
+        //Fields variables
         const validEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         const validTel = /^\d+$/;
         const displayError = document.getElementById('error');
@@ -196,8 +200,8 @@
         const country = document.getElementById('ctry');
         const form = document.querySelector('form');
 
-        //Error display variables
 
+        //Error display variables
         const nameError = document.getElementById('nameError');
         const emailError = document.getElementById('emailError');
         const telError = document.getElementById('telError');     
@@ -216,20 +220,18 @@
             elementError.innerText='';
             input.style.border = "1px solid green";
         }
-        function validateName() {
 
-            
+
+        function validateName() {            
                 if (fullName.value.trim() === "") {
                     showError(fullName,nameError, "Please enter your name");
                     return false;
-
                 }
                 else {
                     showSuccess(fullName, nameError);
                     return true;
 
                 }
-
             }
 
             function validateCity() {
@@ -245,7 +247,6 @@
                 }
 
             }
-
             function validateCountry() {
                 if (country.value.trim() === "") {
                     showError(country, ctryError, "Please enter country");                   
@@ -278,27 +279,24 @@
                 if (age.value < 18) {
                     showError(age, ageError, "Age must be greater than or equal 18");
                     return false;
-                }
+                }                
                 else {
                     showSuccess(age, ageError);
                     return true;
 
                 }
-
             }
 
             function validateEmail() {
                 if (!validEmail.test(emailInput.value)) {
                     showError(emailInput, emailError, "Enter valid email address");
                     return false;
-
                 }
                 else {
                     showSuccess(emailInput, emailError)
                     return true;
 
                 }
-
             }
 
             function validateMessage() {
@@ -323,8 +321,7 @@
 
 
       
-        form.addEventListener('submit', function(event){
-            
+        form.addEventListener('submit', function(event){            
             if(
             !validateName()||
             !validateEmail()||
@@ -332,20 +329,12 @@
             !validateCity()||
             !validateCountry()||
             !validateAge()||
-            !validateMessage())
+            !validateMessage())                        
             {
-                 event.preventDefault(); 
-
+                event.preventDefault();           
             }
-            
-
-
         });
-        
 
-        
-
-       
     </script>
 </body>
 
