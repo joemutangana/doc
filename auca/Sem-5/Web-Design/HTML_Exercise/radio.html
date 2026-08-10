@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button type="button" id="select_all">Select All</button>
+    <form action="" method="post">
+        <input type="radio" name="" id="" class="present">
+        <input type="radio" name="" id="" class="present">
+        <input type="radio" name="" id="" class="present">
+        <input type="radio" name="" id="" class="present">
+    </form>
+
+    <script>
+        const selectAll = document.getElementById("select_all");
+        const present = document.querySelectorAll('.present');
+
+        let selected = false;
+
+        selectAll.addEventListener('click', function(){
+            selected = !selected;
+            present.forEach(function(item){
+                
+                item.checked = selected;
+            });
+
+            selectAll.innerHTML = selected ? `Deselect All` : `Select All`;
+        });
+
+        
+
+
+    </script>
+</body>
+
+
+</html>
