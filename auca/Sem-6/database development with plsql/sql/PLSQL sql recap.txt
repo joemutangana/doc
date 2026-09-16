@@ -1,0 +1,78 @@
+PL/SQL: sql recap
+---------------------
+
+
+Concantinate in sql
+------------------
+
+select first_name||' '||last_name as Names from employees;
+
+NVL checks non value and replace them with new value which affect only output
+---------------------------
+
+select first_name, nvl(commission_pct, (salary*0.1)) from employees where salary is not null;
+====================================
+
+
+Between and in
+----------------
+
+select first_name, salary from employees where salary in(5000,80000); return only those values where they are true
+select first_name, salary from employees where salary between 5000 and 80000; returns the values fall in that range of numbers
+
+====================================
+
+
+
+select first_name, last_name, gpa, status from students where gpa >= 2 and gpa <=4 and first_name like'K%' and last_name like'_h%';
+--------------------------------
+
+
+DATE COMPARISON
+===============
+
+
+
+select first_name, last_name, gpa, status, ENROLLMENT_DATE from students WHERE enrollment_date = DATE'2023-09-01';
+
+EXTRACT YEAR
+--------
+
+
+
+select first_name, last_name, gpa, status, ENROLLMENT_DATE from students 
+WHERE EXTRACT(YEAR FROM ENROLLMENT_DATE) = 2023;
+
+OR USE BETWEEN
+
+
+
+select first_name, last_name, gpa, status, ENROLLMENT_DATE from students WHERE enrollment_date BETWEEN DATE'2023-01-01' AND DATE'2023-12-31';
+
+
+ORDER BY
+--------------
+
+select * from employees order by salary desc nulls last;
+
+this means nulss values should come as last rows
+
+
+
+single rows function
+-----------------------
+
+upper()
+lower()
+length()
+round()
+trunc()
+min()
+max()
+avg()
+to_char()
+
+
+select first_name, round(salary*0.0061, 3) as promo_salary from employees;
+select first_name, to_char(enrollment_date, 'DD-MM-YYYY') from students;
+

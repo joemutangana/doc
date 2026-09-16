@@ -1,0 +1,67 @@
+Day 1 oop configuration
+======================
+
+OOP Configuration
+
+jdk and ide === jdk java development kit
+
+open browser === search oracle.com
+
+oracle.com=== search java
+
+go to java download 
+
+select jdk file you want
+
+select your operating system
+
+select preferred file(zip,exe,msi)
+
+after download open file you downloaded if is .exe
+
+and click next next until done
+
+then check in cmd java -version
+
+
+jdk roles====
+
+1. compilation === process to check if we have an error or not in our program
+2. execution/running === process of getting an output
+
+
+=======================================================
+
+
+Day 2
+=============
+
+
+method = function
+
+method definition it has a body
+
+method(){} because it has a body {} it method definition
+
+method(); because it have no body it is being called / method is predefined
+
+javac == java compilation, checking if we have an error in our program
+
+Data types in java
+******************
+
+[int, float, char, Boolean, date, string, and many others]
+
+Primitive data types: are all datatypes supported by c and also supported by oop language (java).
+---------------------
+
+Concantinate : is a process of combining String with variable
+---------------
+
+
+anything start with Upper case letter is a class
+Class starts with uppercase: Scanner / StudentRegistration
+method start with lowercase: studentRegistration();
+
+
+
