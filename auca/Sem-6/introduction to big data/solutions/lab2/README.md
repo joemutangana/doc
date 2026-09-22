@@ -215,6 +215,7 @@ After calculating all district averages, I compared them to find the district wi
 ### Output
 
 ![Exercise 5.3 Output](screenshots/ex5_3.png)
+![Exercise 5.3 Output](screenshots/ex5_4.png)
 
 ---
 
