@@ -4,14 +4,14 @@
 ## Step 1: Open Oracle SQL developer
 
 ```
-Open `Oracle Sql developer` and connect to your existing `user`, or create new connection.
+Open Oracle Sql Developer and connect to your existing user, or create new connection.
 ```
 
 ## Step 2: Open the SQL worksheet
 
 
 ```
-Find the icon of sql on `icon menu bar` to open new work sheet.
+Find the icon of sql on icon menu bar to open new query worksheet.
 ```
 
 ## Step 3: Make sure you have the following tables or create them.
@@ -24,7 +24,7 @@ employees
 departments
 ```
 
-## Step 4: Paste the queries based on a query you want execute, or retype it as it is.
+## Step 4: Paste the queries based on a query you want to execute, or retype it as it is.
 
 ## Step 5: Click on run script above the worksheet
 
