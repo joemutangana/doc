@@ -17,11 +17,11 @@ Find the icon of sql on `icon menu bar` to open new work sheet.
 ## Step 3: Make sure you have the following tables or create them.
 
 ```
-students<br>
-courses<br>
-enrollments<br>
-employees<br>
-departments<br>
+students
+courses
+enrollments
+employees
+departments
 ```
 
 ## Step 4: Paste the queries based on a query you want execute, or retype it as it is.
