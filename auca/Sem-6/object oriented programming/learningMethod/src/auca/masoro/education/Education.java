@@ -32,7 +32,7 @@ Access modifier are 4:
 *public: means other classes in different a package can access it
 *default: means class in the same package can access it
 *private: means only the class itself can access it
-*protected: means class in the same package and subclasses in different packages can access it
+*protected: means class in the same package and subclasses in different packages can access it only if inherted
 
 
 Method re-use is when one method calls another method to perform a task. 

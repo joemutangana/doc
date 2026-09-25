@@ -14,7 +14,7 @@ Open Oracle Sql Developer and connect to your existing user, or create new conne
 Find the icon of sql on icon menu bar to open new query worksheet.
 ```
 
-## Step 3: Make sure you have the following tables or create them.
+## Step 3: Make sure you have the following tables or create them using their schema below.
 
 
 * `students`
