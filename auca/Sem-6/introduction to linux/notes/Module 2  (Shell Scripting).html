@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Module 2 — Shell Scripting</title>
+<style>
+:root{
+  --bg:#f7f5f0;--bg-alt:#efece3;--text:#1c2027;--dim:#5b6270;--accent:#b5720a;--accent2:#3f7d70;--border:#ddd8cc;--code-bg:#fff;
+  box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){--bg:#12161c;--bg-alt:#1a2029;--text:#e8e6df;--dim:#9aa3ad;--accent:#e8a33d;--accent2:#5fb3a3;--border:#2a323d;--code-bg:#0d1117;}
+}
+:root[data-theme="dark"]{--bg:#12161c;--bg-alt:#1a2029;--text:#e8e6df;--dim:#9aa3ad;--accent:#e8a33d;--accent2:#5fb3a3;--border:#2a323d;--code-bg:#0d1117;}
+html{scroll-padding-top:env(safe-area-inset-top,0px);height:100%;}
+*{box-sizing:border-box;}
+body{margin:0;height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;display:flex;flex-direction:column;}
+.deck{flex:1;position:relative;overflow:hidden;}
+.slide{display:none;position:absolute;inset:0;padding:6vh 8vw 12vh;overflow-y:auto;}
+.slide.active{display:block;}
+.tag{display:inline-block;font-size:.78rem;letter-spacing:.02em;color:var(--accent);border:1px solid var(--accent);border-radius:3px;padding:2px 9px;margin-bottom:18px;font-weight:600;}
+h1{font-size:clamp(1.8rem,4vw,3rem);line-height:1.1;margin:0 0 10px;font-weight:700;letter-spacing:-.01em;}
+h2{font-size:clamp(1.4rem,3vw,2.1rem);margin:0 0 22px;font-weight:700;letter-spacing:-.01em;border-left:4px solid var(--accent);padding-left:14px;}
+h3{font-size:1.05rem;color:var(--accent2);margin:20px 0 8px;font-weight:700;}
+p{max-width:70ch;line-height:1.6;color:var(--text);}
+p.dim,li.dim{color:var(--dim);}
+ul{max-width:72ch;line-height:1.7;padding-left:1.3em;}
+li{margin-bottom:4px;}
+.lead{font-size:1.15rem;color:var(--dim);max-width:60ch;}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;}
+@media(max-width:800px){.grid{grid-template-columns:1fr;}}
+pre.code{background:var(--code-bg);border:1px solid var(--border);border-radius:6px;padding:14px 16px;overflow-x:auto;max-width:78ch;font-size:.88rem;line-height:1.55;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;background:var(--bg-alt);padding:1px 5px;border-radius:3px;font-size:.9em;}
+.cmt{color:var(--dim);}
+.out{color:var(--accent2);}
+table.tbl{border-collapse:collapse;max-width:80ch;width:100%;font-size:.92rem;}
+table.tbl th,table.tbl td{border:1px solid var(--border);padding:7px 12px;text-align:left;vertical-align:top;}
+table.tbl th{background:var(--bg-alt);color:var(--accent);font-weight:700;}
+table.tbl code{background:none;padding:0;}
+.title-wrap{height:100%;display:flex;flex-direction:column;justify-content:center;}
+.foot{position:sticky;bottom:0;background:var(--bg);border-top:1px solid var(--border);padding:10px 8vw calc(10px + env(safe-area-inset-bottom,0px));display:flex;align-items:center;gap:14px;}
+.foot button{background:var(--bg-alt);color:var(--text);border:1px solid var(--border);border-radius:5px;padding:8px 16px;font-size:.95rem;cursor:pointer;}
+.foot button:disabled{opacity:.35;cursor:default;}
+.foot button:focus-visible,a:focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
+.counter{color:var(--dim);font-size:.85rem;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;}
+.spacer{flex:1;}
+.progress{height:3px;background:var(--border);}
+.progress div{height:100%;background:var(--accent);width:0;transition:width .2s;}
+strong{color:var(--accent);}
+.callout{border-left:3px solid var(--accent2);background:var(--bg-alt);padding:10px 16px;border-radius:0 6px 6px 0;margin:14px 0;max-width:70ch;line-height:1.55;}
+.callout .lbl{display:block;color:var(--accent2);font-weight:700;font-size:.78rem;margin-bottom:4px;}
+</style>
+</head>
+<body>
+<div class="progress"><div id="pbar"></div></div>
+<div class="deck" id="deck">
+
+<section class="slide"><div class="title-wrap">
+<span class="tag">Linux Fundamentals</span>
+<h1>Module 2: Shell Scripting</h1>
+<p class="lead">Ever typed a command and wondered what actually happens the moment you hit Enter? That curiosity is where every good sysadmin starts.</p>
+<p class="dim">By the end of this module, you won't just run commands. You'll write scripts that run themselves.</p>
+</div></section>
+
+<section class="slide"><span class="tag">Agenda</span><h2>What you'll walk away with</h2>
+<p class="lead">This isn't theory you'll forget by Friday. Every topic below comes with a script you can actually run today.</p>
+<div class="grid">
+<ul>
+<li>What a shell really is, and why it matters</li>
+<li>The shell types you'll meet in the wild</li>
+<li>Checking and switching your shell like a pro</li>
+<li>Writing and running your first Bash script</li>
+<li>The free variables Bash hands you automatically</li>
+</ul>
+<ul>
+<li>Storing and reading your own variables</li>
+<li>Making scripts interactive with user input</li>
+<li>Making decisions with if and case</li>
+<li>Repeating work with for, while and until</li>
+<li>Scheduling scripts to run themselves with cron</li>
+</ul>
+</div></section>
+
+<section class="slide"><span class="tag">1. Shells</span><h2>What is a shell, really?</h2>
+<p><strong>Think of it like this:</strong> the shell is a translator standing between you and the Linux kernel. You speak in commands like <code>ls</code> or <code>mkdir</code>, and the shell translates that into instructions the machine actually understands.</p>
+<ul>
+<li>A terminal is just a window. The <strong>shell</strong> is the program running inside it doing the real work</li>
+<li>You can type commands one at a time (interactive mode), or write a whole list of them in a file and run them together (a script)</li>
+<li>A shell script is not scary. It's a plain text file with a list of commands, run from top to bottom</li>
+</ul>
+<div class="callout"><span class="lbl">In the real world</span>The moment you SSH into a server on AWS, DigitalOcean or any cloud host, a shell is the first thing that greets you. Get comfortable here and servers stop feeling intimidating.</div>
+</section>
+
+<section class="slide"><span class="tag">1. Shells</span><h2>Types of shells</h2>
+<p>Not every shell speaks the exact same dialect. Here are the ones you'll actually run into:</p>
+<table class="tbl">
+<tr><th>Shell</th><th>Binary</th><th>Notes</th></tr>
+<tr><td>Bourne Shell</td><td><code>sh</code></td><td>The original, from 1977. Minimal, the POSIX baseline.</td></tr>
+<tr><td>Bourne Again Shell</td><td><code>bash</code></td><td>Default on most Linux distros. What we'll use here.</td></tr>
+<tr><td>Z Shell</td><td><code>zsh</code></td><td>Bash-compatible plus extras. Default on macOS.</td></tr>
+<tr><td>Korn Shell</td><td><code>ksh</code></td><td>Scripting-focused, common in enterprise Unix.</td></tr>
+<tr><td>C Shell</td><td><code>csh</code>/<code>tcsh</code></td><td>C-like syntax, less common today.</td></tr>
+<tr><td>Friendly Interactive</td><td><code>fish</code></td><td>Beginner-friendly, but not POSIX-compatible.</td></tr>
+</table>
+<p class="dim">Good news: almost everything in this module works the same in bash and zsh. Learn bash once, and you're already fluent nearly everywhere else too.</p>
+</section>
+
+<section class="slide"><span class="tag">1. Shells</span><h2>Check your current and available shells</h2>
+<p>Picture this: first day at a new job, you SSH into a server you've never touched before. Before typing anything else, check what shell you're standing in.</p>
+<pre class="code">$ echo $SHELL              <span class="cmt"># shell set for your user account</span>
+<span class="out">/bin/bash</span>
+
+$ ps -p $$                 <span class="cmt"># shell actually running THIS session</span>
+<span class="out">  PID TTY    TIME CMD
+ 3312 pts/0  00:00:00 bash</span>
+
+$ cat /etc/shells          <span class="cmt"># every shell installed on the system</span>
+<span class="out">/bin/sh
+/bin/bash
+/usr/bin/zsh</span></pre>
+<p class="dim"><code>$SHELL</code> can be stale after switching. <code>ps -p $$</code> is the live, trustworthy check.</p>
+</section>
+
+<section class="slide"><span class="tag">1. Shells</span><h2>Change your shell</h2>
+<h3>Temporary, just for this session</h3>
+<pre class="code">$ zsh          <span class="cmt"># just launch it; type 'exit' to return</span></pre>
+<h3>Permanent, your default login shell</h3>
+<pre class="code">$ chsh -s /usr/bin/zsh     <span class="cmt"># set a new default (may ask for your password)</span>
+$ chsh -s /bin/bash         <span class="cmt"># switch back to bash any time</span></pre>
+<p class="dim">Some teams prefer zsh for its autocomplete and themes. Knowing how to switch means you're never stuck with a default you didn't choose. All examples from here use <strong>Bash</strong>, the shell you'll meet by default on almost every Linux server on earth.</p>
+</section>
+
+<section class="slide"><span class="tag">2. Bash Basics</span><h2>Your first script</h2>
+<p><strong>This is the moment</strong> you stop being someone who just uses Linux and become someone who builds with it. Every script starts with a shebang, telling Linux exactly which interpreter should run it:</p>
+<pre class="code"><span class="cmt">#!/bin/bash</span>
+echo "Hello, Linux World!"</pre>
+<ol>
+<li>Save it as <code>hello.sh</code></li>
+<li>Make it executable: <code>chmod +x hello.sh</code></li>
+<li>Run it: <code>./hello.sh</code> (or <code>bash hello.sh</code> without chmod)</li>
+</ol>
+<div class="callout"><span class="lbl">Try it now</span>Open a terminal and type those three lines yourself. Right now, before the next slide. It takes thirty seconds and it's the best way to make this actually stick.</div>
+</section>
+
+<section class="slide"><span class="tag">3. Static Scripts</span><h2>Static programs: no variables needed</h2>
+<p>Say every morning you SSH into a server just to check the date, the disk space and who else is logged in. Three commands, every single day. A <strong>static</strong> script runs all three for you in one shot, no thinking required.</p>
+<pre class="code"><span class="cmt">#!/bin/bash
+# systeminfo.sh — always runs the same fixed commands</span>
+echo "Today's date:"
+date
+echo "Disk usage:"
+df -h
+echo "Who else is logged in:"
+who</pre>
+<div class="callout"><span class="lbl">In the real world</span>Sysadmins call this a health check script. It never changes its behavior. It just saves you from typing the same commands forever.</div>
+</section>
+
+<section class="slide"><span class="tag">3. Static Scripts</span><h2>Predefined variables</h2>
+<p>Bash quietly keeps track of useful information for you. You never declare these, they're just there when you need them.</p>
+<div class="grid">
+<div><h3>Environment variables</h3>
+<table class="tbl">
+<tr><td><code>$HOME</code></td><td>your home folder</td></tr>
+<tr><td><code>$USER</code></td><td>current username</td></tr>
+<tr><td><code>$PWD</code></td><td>current directory</td></tr>
+<tr><td><code>$PATH</code></td><td>executable search path</td></tr>
+</table></div>
+<div><h3>Special script variables</h3>
+<table class="tbl">
+<tr><td><code>$0</code></td><td>script name</td></tr>
+<tr><td><code>$1..$9</code></td><td>positional arguments</td></tr>
+<tr><td><code>$#</code></td><td>number of arguments</td></tr>
+<tr><td><code>$?</code></td><td>exit status of last command</td></tr>
+</table></div>
+</div>
+<pre class="code"><span class="cmt">#!/bin/bash
+# run as: ./backup.sh /var/www</span>
+echo "Script $0 was run by $USER"
+echo "Backing up folder: $1"
+echo "You passed $# argument(s)"</pre>
+</section>
+
+<section class="slide"><span class="tag">4. Variables</span><h2>User-defined variables</h2>
+<pre class="code"><span class="cmt">#!/bin/bash</span>
+name="Alice"          <span class="cmt"># no spaces around the =</span>
+age=25                <span class="cmt"># no $ when you assign it</span>
+echo "Hello, $name, you are $age years old"</pre>
+<ul>
+<li>Use <code>$name</code> to <strong>read</strong> a variable. No <code>$</code> when you <strong>assign</strong> it</li>
+<li>Quote variables when you use them: <code>"$name"</code> avoids weird, hard to spot bugs</li>
+<li><code>readonly price=10</code> locks a value so nothing can change it later</li>
+<li><code>unset name</code> removes a variable completely</li>
+</ul>
+<p class="dim">This is the same idea a website uses to show "Welcome back, Sarah." Same concept, way simpler under the hood.</p>
+</section>
+
+<section class="slide"><span class="tag">5. Dynamic Scripts</span><h2>Dynamic programs: talking to your user</h2>
+<p>A <strong>dynamic</strong> script reacts to whoever is running it, using <code>read</code> to capture whatever they type.</p>
+<pre class="code"><span class="cmt">#!/bin/bash</span>
+read -p "What's your name? " name
+echo "Nice to meet you, $name!"
+
+read -p "Which website should I check? " site
+echo "Checking $site now..."</pre>
+<p class="dim">Arguments typed at launch, like <code>./script.sh Alice</code>, make a script dynamic too. Read them with <code>$1</code>, <code>$2</code> and so on.</p>
+</section>
+
+<section class="slide"><span class="tag">5. Dynamic Scripts</span><h2>Arithmetic operations</h2>
+<pre class="code">read -p "Hours worked: " hours
+read -p "Hourly rate: " rate
+
+echo "You earned $((hours * rate)) this week"
+echo "Remainder if split 3 ways: $((hours % 3))"</pre>
+<p>The double parentheses <code>$(( ))</code> are the modern, preferred way to do math in Bash. You'll also spot <code>let</code> and <code>expr</code> in older scripts doing the same job.</p>
+<p class="dim">Bash only handles whole numbers natively. For decimals, pipe into <code>bc</code>: <code>echo "3.5+2" | bc</code></p>
+</section>
+
+<section class="slide"><span class="tag">6. Conditionals</span><h2>If statements</h2>
+<p>Picture a server slowly filling up its disk. Nobody notices until it's too late and the site goes down. An <code>if</code> statement is how a script notices for you, before that happens.</p>
+<pre class="code">if [ $usage -ge 90 ]; then
+    echo "Critical: disk almost full"
+elif [ $usage -ge 70 ]; then
+    echo "Warning: keep an eye on this"
+else
+    echo "All good"
+fi</pre>
+<table class="tbl">
+<tr><th>Numbers</th><th>Strings</th><th>Files</th></tr>
+<tr><td><code>-eq -ne</code></td><td><code>= !=</code></td><td><code>-f</code> is file</td></tr>
+<tr><td><code>-gt -lt</code></td><td><code>-z</code> empty</td><td><code>-d</code> is directory</td></tr>
+<tr><td><code>-ge -le</code></td><td><code>-n</code> not empty</td><td><code>-e</code> exists</td></tr>
+</table>
+</section>
+
+<section class="slide"><span class="tag">6. Conditionals</span><h2>If, in action</h2>
+<pre class="code"><span class="cmt">#!/bin/bash
+# even_odd.sh</span>
+read -p "Enter a number: " num
+if [ $((num % 2)) -eq 0 ]; then
+    echo "$num is even"
+else
+    echo "$num is odd"
+fi</pre>
+<pre class="code"><span class="cmt">#!/bin/bash
+# disk_check.sh</span>
+read -p "Enter current disk usage %: " usage
+if [ $usage -ge 90 ]; then
+    echo "Send an alert now"
+elif [ $usage -ge 70 ]; then
+    echo "Log a warning"
+else
+    echo "Nothing to do"
+fi</pre>
+<p class="dim">This exact pattern, check a number then react, is most of what real monitoring scripts do in production.</p>
+</section>
+
+<section class="slide"><span class="tag">6. Conditionals</span><h2>Case statements</h2>
+<p>When you're matching one value against several options, <code>case</code> reads far cleaner than a long chain of <code>if/elif</code>.</p>
+<pre class="code"><span class="cmt">#!/bin/bash
+# app_control.sh</span>
+read -p "start, stop or status? " action
+case $action in
+    start)  echo "Starting application..." ;;
+    stop)   echo "Stopping application..." ;;
+    status) echo "Checking status..." ;;
+    *)      echo "I don't recognize: $action" ;;
+esac</pre>
+<p class="dim">This is basically a tiny version of what tools like <code>systemctl</code> do under the hood. <code>*)</code> catches anything unexpected, just like <code>else</code>.</p>
+</section>
+
+<section class="slide"><span class="tag">7. Loops</span><h2>For loops</h2>
+<div class="grid">
+<pre class="code"><span class="cmt"># list form</span>
+for fruit in apple mango kiwi
+do
+    echo "I like $fruit"
+done</pre>
+<pre class="code"><span class="cmt"># range form</span>
+for i in {1..5}
+do
+    echo "Server check #$i"
+done</pre>
+</div>
+<pre class="code"><span class="cmt"># C-style form</span>
+for (( i=0; i<5; i++ ))
+do
+    echo "i = $i"
+done</pre>
+<p class="dim">Swap "apple mango kiwi" for a real list of servers or usernames, and this stops being a toy example and becomes actual admin work.</p>
+</section>
+
+<section class="slide"><span class="tag">7. Loops</span><h2>While, until and loop control</h2>
+<div class="grid">
+<pre class="code"><span class="cmt"># while: run WHILE true</span>
+count=1
+while [ $count -le 5 ]
+do
+    echo "Attempt $count"
+    ((count++))
+done</pre>
+<pre class="code"><span class="cmt"># until: run UNTIL true</span>
+count=1
+until [ $count -gt 5 ]
+do
+    echo "Attempt $count"
+    ((count++))
+done</pre>
+</div>
+<p><code>break</code> exits a loop early. <code>continue</code> skips straight to the next round.</p>
+<div class="callout"><span class="lbl">Real-world remix</span>This exact shape is how deployment scripts wait for a server to come online: <code>until ping -c1 google.com &> /dev/null; do echo "Waiting for network..."; sleep 2; done</code></div>
+</section>
+
+<section class="slide"><span class="tag">7. Loops</span><h2>Functions, your shortcut</h2>
+<pre class="code"><span class="cmt">#!/bin/bash</span>
+log() {
+    local message=$1
+    echo "$(date): $message"
+}
+
+log "Backup started"
+log "Backup finished"</pre>
+<p>Copy-pasting the same three lines into ten different scripts is a maintenance headache waiting to happen. Define it once, call it by name, and every script you write from now on stays short and readable.</p>
+</section>
+
+<section class="slide"><span class="tag">8. Cron</span><h2>Automating scripts: cron jobs</h2>
+<p>This is how Netflix, your bank and pretty much every server on the internet runs jobs at 3 AM without a single human clicking a button. Meet <strong>cron</strong>, the scheduler quietly running Linux systems since 1975.</p>
+<pre class="code">*  *  *  *  *  command_to_run
+│  │  │  │  │
+│  │  │  │  └── day of week (0-6, Sun=0)
+│  │  │  └───── month (1-12)
+│  │  └──────── day of month (1-31)
+│  └─────────── hour (0-23)
+└────────────── minute (0-59)</pre>
+<p>Example: <code>0 2 * * *  /home/user/backup.sh</code> runs at exactly 2:00 AM, every single day, forever.</p>
+<p class="dim">Shortcuts exist too: <code>@reboot</code>, <code>@daily</code>, <code>@weekly</code>, <code>@monthly</code>.</p>
+</section>
+
+<section class="slide"><span class="tag">8. Cron</span><h2>Managing your crontab</h2>
+<pre class="code">$ crontab -e   <span class="cmt"># edit your personal crontab</span>
+$ crontab -l   <span class="cmt"># list your scheduled jobs</span>
+$ crontab -r   <span class="cmt"># remove all jobs, careful with this one</span></pre>
+<h3>Put it together</h3>
+<pre class="code">0 2 * * *     /home/user/backup.sh >> /var/log/backup.log 2>&1
+*/15 * * * *  /home/user/check_disk.sh
+0 9 * * 1-5   /home/user/daily_report.sh</pre>
+<p class="dim">Write a script once, then let cron run it every night while you sleep. That backup line above genuinely runs on real servers right now, at companies you've heard of.</p>
+</section>
+
+<section class="slide"><span class="tag">Wrap-up</span><h2>Habits that separate hobbyists from pros</h2>
+<ul>
+<li>Always start with <code>#!/bin/bash</code> and comment your intent</li>
+<li>Quote your variables: <code>"$var"</code> avoids weird, hard to spot bugs</li>
+<li><code>set -x</code> prints every command as it runs, priceless for debugging</li>
+<li><code>set -e</code> stops your script the moment something fails</li>
+<li>Run your script through <a href="https://www.shellcheck.net" target="_blank" rel="noopener">ShellCheck</a> before you trust it</li>
+<li>Use exit codes on purpose: <code>exit 0</code> means success, anything else means something broke</li>
+</ul>
+<p class="dim">These aren't nitpicky rules. They're the difference between "it works on my machine" and a script your whole team actually trusts in production.</p>
+</section>
+
+<section class="slide"><div class="title-wrap">
+<span class="tag">Summary</span>
+<h1>You can write real Bash scripts now</h1>
+<p class="lead">You started by picking a shell. Now you can store data, take input, make decisions, repeat tasks automatically, and schedule the whole thing to run without you. That's the entire journey from typing one command to running a self sufficient system.</p>
+<h3>Coming next</h3>
+<p>Assignment 3 hands you a real scenario: a small company whose server desperately needs automating, and it's your job to build it. Time to prove you can actually do this.</p>
+</div></section>
+
+</div>
+<div class="foot">
+<button id="prev">← Prev</button>
+<span class="counter" id="counter">1 / 1</span>
+<button id="next">Next →</button>
+<div class="spacer"></div>
+</div>
+<script>
+const slides=document.querySelectorAll('.slide');
+const counter=document.getElementById('counter');
+const prevBtn=document.getElementById('prev');
+const nextBtn=document.getElementById('next');
+const pbar=document.getElementById('pbar');
+let idx=0;
+function show(i){
+  idx=Math.max(0,Math.min(i,slides.length-1));
+  slides.forEach((s,j)=>s.classList.toggle('active',j===idx));
+  counter.textContent=(idx+1)+' / '+slides.length;
+  prevBtn.disabled=idx===0;
+  nextBtn.disabled=idx===slides.length-1;
+  pbar.style.width=((idx+1)/slides.length*100)+'%';
+  try{localStorage.setItem('m2-shell-slide',idx);}catch(e){}
+}
+prevBtn.addEventListener('click',()=>show(idx-1));
+nextBtn.addEventListener('click',()=>show(idx+1));
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight') show(idx+1);
+  if(e.key==='ArrowLeft') show(idx-1);
+});
+let saved=0;
+try{const v=localStorage.getItem('m2-shell-slide');if(v!==null)saved=parseInt(v,10)||0;}catch(e){}
+show(saved);
+</script>
+</body>
+</html>
