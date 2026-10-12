@@ -1,0 +1,32 @@
+Intro to Linux assignment1
+======================================
+
+task 2
+------------
+---------------------------
+Create user on wsl
+---------------------------
+sudo useradd --badname -m 12
+echo '29061:' | sudo chpasswd
+sudo usermod -aG sudo 12
+
+------------------------------------------------------------------------------------------
+----- If you didn't use -m to create home directory for the user add these commands -----
+------------------------------------------------------------------------------------------
+
+sudo mkdir /home/12/
+sudo chown -R 12:12 /home/12/
+sudo cp -a /etc/skel/. /home/12/
+
+--------------------------------------------
+Create bad user name on actual Linux os
+--------------------------------------------
+
+sudo useradd --badname -m -g mutangana -s /bin/bash 29061
+sudo passwd 29061
+sudo usermod -aG sudo 29061
+--------------------------------------------
+
+task 3
+==============================================
+export PS1='\[\e[1;32m\](\u-㉿\h [\D{%Y-%m-%d} \t])-[\w]\[\e[0m\] > '

@@ -1,0 +1,7 @@
+Linux terminal shortcuts on long command
+----------------------------------------
+
+ctrl + A: goes to the beginning of the command
+ctrl + E: goes back to the end of command
+ctrl + K: cut preceding text command
+ctrl + Y: paste what cut from ctrl + K

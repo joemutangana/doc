@@ -1,0 +1,36 @@
+
+### 1. Requirement Analysis / Planning
+- Identify the core problem: farmers stop cultivating in summer due to heat/low rain, causing food shortages and price increases for staples (beans, cassava, Irish potatoes, groundnuts).
+- Gather requirements from farmers (e.g. interviews, like asking my father what frustrates him during dry season) and from agriculture bodies like RAB about existing drought-tolerant varieties.
+- Define system requirements: farmer inputs crop + district, system returns recommended variety + nearest seed source.
+- Identify constraints: limited internet access in rural areas, need for simple/SMS-friendly interface.
+
+### 2. Design
+- Design system architecture: mobile/USSD interface, database of crops/varieties/suppliers, matching logic.
+- Draw use-case diagram: actors = Farmer, RAB/Seed Supplier, District Agriculture Officer.
+- Draw class/data model: entities = Crop, Variety, District, Supplier, Farmer.
+- Design user interface flow: select crop → select district → view recommended variety and supplier.
+
+### 3. Implementation (Coding)
+- Build the database of crops, drought-tolerant varieties, and their attributes (yield, water needs).
+- Develop backend logic to match farmer's crop + district to the correct variety.
+- Build simple front-end (app or USSD menu) for farmers to interact with the system.
+- Integrate location data to show nearest seed suppliers.
+
+### 4. Testing
+- Test the matching logic with sample data (e.g. cassava + dry district → correct variety returned).
+- Test usability with a small group of farmers, including those with low literacy or no smartphone.
+- Fix bugs in data matching or interface confusion.
+- Verify system works with poor/no internet connectivity (USSD fallback).
+
+### 5. Deployment
+- Launch a pilot version in one district or valley with a farmer cooperative.
+- Partner with RAB or local agriculture officers to distribute access (e.g. via community meetings, SMS).
+- Provide simple training/demo for farmers on how to use the system.
+
+### 6. Maintenance
+- Update variety database as RAB approves new drought-tolerant varieties.
+- Collect farmer feedback to improve recommendations over time.
+- Monitor system usage and fix issues as more districts adopt it.
+- Expand to more crops/districts based on pilot results.
+
