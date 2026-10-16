@@ -1,0 +1,36 @@
+Software architecture and software pattern
+
+Differentiate the software architecture and software pattern
+
+Architecture design; Is concerned with structure of the system
+It is the critical link between design and requirements engineering, as 
+it identifies the main structure components in a system and the relationships between them.
+
+
+Software architecture: I a whole structure of the system, which shows where the components of the system will be placed and how they connect and communicate to each other.
+
+Think of it like a house, its architecture shows where rooms are placed, where the mall is and where will kitchen be placed, how electricity cables are crossing the house, plumber and if there is car parking, it shows that, so in implementation, you will know where each component will go.
+
+
+Meanwhile the software pattern: Its a reusable approach that you found resolve same design in many software project.
+It is more like the repeatedly work you perform in every design, but later you wonder why one design keeps coming, so that repeatedly one become your design pattern.
+
+
+
+
+Broker architecture patter
+-----------------------------
+It is the architecture designed to manager the communication between components.
+
+
+----------------------
+Mis term structure
+----------------------
+
+Its two sections
+---
+
+Section A: Multiple choices
+Section B: Open questions
+
+

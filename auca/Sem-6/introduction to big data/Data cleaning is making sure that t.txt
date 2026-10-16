@@ -1,0 +1,24 @@
+Data cleaning is making sure that the data have no errors such as missing values or incomplete values.
+
+example, imagine having that a student can not have marks above 30 in their mid term exams, but suddenly, you found one student have 40 out of 30.
+
+Today we are going to learn the library called pandas.
+----------------------------
+
+Data frames id an entire table with its columns and rows.
+
+
+  ----------------------------------------------------------------------------------------
+- import pandas as df                                                                     --
+-                                                                                         --
+- df : data frames                                                                        --
+-                                                                                         --
+- df.head(5) displays the first 5 rows                                                    --
+- df.tail(3) will display last 3 rows                                                     --
+- df.describe() will calculate statistics such as count(), min(), max(), std() at once    --
+- df.unique                                                                               --
+-                                                                                         --
+- df["scores"] access the specific column from the table                                  --
+- df.shape() shows the structure of the data frame                                        --
+  ----------------------------------------------------------------------------------------
+

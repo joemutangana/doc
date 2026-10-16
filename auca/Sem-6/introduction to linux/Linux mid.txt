@@ -1,0 +1,221 @@
+Linux
+-------------------
+
+Commands to install required software on vm1
+------------------------------------------------
+sudo apt update
+sudo apt install openssl
+sudo apt install apache2
+
+Or do it in one command say
+-------------------------------
+
+
+sudo apt update && sudo apt install apache2 openssl -y
+
+------------
+Check if apache2 is running
+----------------------------
+sudo systemctl status apache2
+---------------------
+
+or start it by 
+
+--------
+sudo systemctl start apache2
+--------
+
+where does domain config be stored in apache2?
+--------------------
+sudo nano /etc/apache2/sites-available/29061.f26.conf
+
+websites files stored at 
+----------
+
+/var/www/29061
+
+
+------------------------------
+generate the self signed certificate
+----------------------
+sudo openssl req -x509 -nodes -days 365 \
+  -newkey rsa:2048 \
+  -keyout /etc/ssl/private/29061.f26.key \
+  -out /etc/ssl/certs/29061.f26.crt \
+  -subj "/O=AUCA/OU=Linux-F26/CN=29061" \
+  -addext "subjectAltName=DNS:29061.f26"
+
+
+------------------------------
+Verify the certficate
+-----------------------------
+sudo openssl x509 -in /etc/ssl/certs/29061.f26.crt -noout -subject -issuer -dates
+
+Check the cert domain
+------------------------
+sudo openssl x509 -in /etc/ssl/certs/29061.f26.crt -noout -ext subjectAltName
+--------
+
+
+Configure HTTPS in Apache
+-------------------------------
+sudo a2enmod ssl
+sudo systemctl restart apache2
+
+
+------------------------
+SSL/TLS certficates re stored at
+-------------
+/etc/ssl/29061/29061.crt
+/etc/ssl/29061/29061.key
+
+
+virtual host configuration
+-----------------------
+
+# HTTP website
+<VirtualHost *:80>
+    ServerName 29061.f26
+
+    DocumentRoot /var/www/29061
+
+    <Directory /var/www/29061>
+        Options -Indexes
+        AllowOverride None
+        Require all granted
+    </Directory>
+
+    ErrorLog ${APACHE_LOG_DIR}/29061-http-error.log
+    CustomLog ${APACHE_LOG_DIR}/29061-http-access.log combined
+</VirtualHost>
+
+
+# HTTPS website
+<VirtualHost *:443>
+    ServerName 29061.f26
+
+    DocumentRoot /var/www/29061
+
+    SSLEngine on
+    SSLCertificateFile /etc/ssl/29061/29061.crt
+    SSLCertificateKeyFile /etc/ssl/29061/29061.key
+
+    <Directory /var/www/29061>
+        Options -Indexes
+        AllowOverride None
+        Require all granted
+    </Directory>
+
+    ErrorLog ${APACHE_LOG_DIR}/29061-https-error.log
+    CustomLog ${APACHE_LOG_DIR}/29061-https-access.log combined
+</VirtualHost>
+
+
+
+
+Linux 
+--------
+
+ssh
+
+check for keys
+------------------
+ls -l ~/.ssh
+
+if no key found generate 
+
+generate the key
+-------------------
+
+ssh-keygen -t ed25519 -C "vm1-to-vm2" //normal way
+ssh-keygen -t ed25519 -C "vm1-to-vm2" -f ~/.ssh/vm2_key//if you want to specify the file where the key will be saved
+
+press enter
+press enter
+press enter
+
+check again if the key generated
+-------------------------------------
+ls -l ~/.ssh
+
+
+connect/install the ssh to another pc
+--------------------------------------
+
+ssh-copy-id mutangana@192.168.56.101
+
+
+SSH into another pc's
+--------------------------
+ssh mutangana@192.168.56.101
+
+if it configured well, then i should enter this pcs shell without password
+
+
+configure notification email
+-------------------------------
+
+sudo apt update
+sudo apt install inotify-tools msmtp-mta bsd-mailx -y
+
+inotifywait --version
+msmtp --version
+dpkg -s bsd-mailx 
+
+
+----
+inotifywait Wacthers/monitors
+----------
+
+inotifywait --monitor --event close_wait --event moved_to --format %f /home/29061/incoming
+
+You may put it in the bash script
+
+
+---Configure mail
+--------------------
+
+nano ~/.msmtprc
+--------------------
+
+defaults
+auth on
+tls on
+tls_starttls on
+tls_trust_file /etc/ssl/certs/ca-certificates.crt
+logfile ~/.msmtp.log
+
+account gmail
+host smtp.gmail.com
+port 587
+from linux.auca.ac@gmail.com
+user linux.auca.ac@gmail.com
+password ocrx jijn qzja coxf
+
+account default : gmail
+
+-------------------------------------
+
+Simple test
+---------------------
+printf 'Hello! This is a test email sent from VM2.\n' | mail -s "VM2 Email Test" linux.auca.ac@gmail.com
+
+------
+Bash to send email on each new file
+-------------------------------
+
+#!/bin/bash
+
+INCOMING="$HOME/incoming"
+OWNER="joegithub12@gmail.com"
+received_at="$(date +'%Y-%m-%d %H:%M:%S')"
+source="VM1"
+
+inotifywait --monitor --event close_write --event moved_to --format %f "$INCOMING" |
+ while read -r filename; do
+   echo "New file detected:\n $filename"
+   printf 'New backup received. Filename: %s\n Source: %s\n Received at: %s\n' "$filename" "$source" "$received_at |
+mail -s "New backup received $filename" "OWNER"
+ done 
+
+

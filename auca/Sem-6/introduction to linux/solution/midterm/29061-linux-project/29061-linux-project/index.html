@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Linux-F26 system administration learning portfolio by AUCA student 29061.">
+  <title>Linux-F26 | System Administration </title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="topbar">
+    <a class="brand" href="#home" aria-label="Linux Field Guide home"><span class="brand-mark">L<span>_</span></span><span>LINUX<span class="brand-sub">AUCA / F26</span></span></a>
+    <div class="top-meta"><span class="live-dot"></span> 29061 <span class="meta-divider">/</span> Linux-F26</div>
+    <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="sidebar">☰ <span class="sr-only">Toggle navigation</span></button>
+  </header>
+  <div class="layout">
+    <aside class="sidebar" id="sidebar">
+      <div class="side-label">COURSE NAVIGATION</div>
+      <nav aria-label="Main navigation">
+        <a class="nav-link active" href="#home"><span>⌂</span> Overview</a>
+        <a class="nav-link" href="#commands"><span>⌘</span> Command library <b>60</b></a>
+        <a class="nav-link" href="#linux-basics"><span>▤</span> Linux basics</a>
+        <a class="nav-link" href="#scripting"><span>⟨/⟩</span> Shell scripting</a>
+        <a class="nav-link" href="#permissions"><span>◈</span> Users & permissions</a>
+        <a class="nav-link" href="#practice"><span>◎</span> Practice lab</a>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="profile-chip"><div class="avatar">M29</div><div><strong>Student 29061</strong><span>AUCA · Linux-F26</span></div></div>
+        <p class="side-note">A practical record of learning Linux system administration.</p>
+      </div>
+    </aside>
+    <main id="main">
+      <section class="hero" id="home">
+        <div class="hero-copy">
+          <div class="eyebrow"><span class="eyebrow-line"></span> 29061 AUCA LINUX-F26 </div>
+          <h1>Understand the system.<br><span>Own the terminal.</span></h1>
+          <p class="hero-intro">A hands-on field guide to Linux commands, shell automation, and secure file permissions — built from my Linux-F26 learning journey.</p>
+          <div class="hero-actions"><a class="button button-primary" href="#commands">Explore command library <span>↗</span></a><a class="text-link" href="#learning-summary">My learning summary <span>↓</span></a></div>
+        </div>
+        <div class="terminal-card" aria-label="Example terminal session">
+          <div class="terminal-head"><div class="traffic"><i></i><i></i><i></i></div><span>29061@linux: ~</span><span class="terminal-menu">•••</span></div>
+          <div class="terminal-body"><div><span class="prompt">29061@linux</span><span class="path">:~$</span> pwd</div><div class="output">/home/29061</div><div><span class="prompt">29061@linux</span><span class="path">:~$</span> ls -la</div><div class="output">.  ..  .bashrc  Documents  Projects</div><div><span class="prompt">29061@linux</span><span class="path">:~$</span> <span class="cursor">▋</span></div><div class="terminal-caption">A shell is an interface for giving the operating system instructions.</div></div>
+          <div class="terminal-foot"><span><span class="status-dot"></span> SESSION EXAMPLE</span><span>bash · local</span></div>
+        </div>
+        <div class="hero-orb orb-one"></div><div class="hero-orb orb-two"></div>
+      </section>
+
+      <section class="stats-grid" aria-label="Project overview">
+        <article class="stat-card"><div class="stat-icon purple">⌘</div><div><strong>60</strong><span>Commands explored</span></div><span class="stat-foot">01 / REFERENCE</span></article>
+        <article class="stat-card"><div class="stat-icon cyan">⟨/⟩</div><div><strong>03</strong><span>Core learning areas</span></div><span class="stat-foot">02 / KNOWLEDGE</span></article>
+        <article class="stat-card"><div class="stat-icon amber">◈</div><div><strong>rwx</strong><span>Permission model</span></div><span class="stat-foot">03 / SECURITY</span></article>
+        <article class="stat-card"><div class="stat-icon green">↻</div><div><strong>100%</strong><span>Offline-friendly</span></div><span class="stat-foot">04 / SELF-CONTAINED</span></article>
+      </section>
+
+      <section class="content-section" id="learning-summary">
+        <div class="section-heading"><div><div class="eyebrow">START HERE / 01</div><h2>What I have learned so far</h2></div><span class="section-index">OVERVIEW</span></div>
+        <div class="summary-panel"><div class="summary-symbol">✳</div><div><h3>From commands to administration</h3><p>During Linux-F26, I have been learning how to work confidently in a Linux terminal and how everyday commands fit into system administration. I learned that commands are not just things to memorize: they are tools for inspecting a system, organizing files, finding information, and diagnosing problems. I have also practiced the importance of ownership and permissions, because a system must be usable without allowing every account to change everything.</p><p>My lab work has connected Linux concepts with hosting a website on an Apache virtual machine. Preparing a web directory, configuring a site, and checking access permissions helped me see how file management, services, networking, and security work together. I am continuing to build confidence by testing commands carefully, reading their output, and checking the effect of changes.</p><div class="tag-row"><span>Terminal practice</span><span>Apache hosting</span><span>Permissions</span><span>System thinking</span></div></div></div>
+      </section>
+
+      <section class="content-section" id="linux-basics">
+        <div class="section-heading"><div><div class="eyebrow">FOUNDATIONS / 02</div><h2>Linux basic commands</h2></div><span class="section-index">THE EVERYDAY TOOLKIT</span></div>
+        <p class="section-lead">Linux administration often follows a simple cycle: locate what you need, inspect it, make a controlled change, then verify the result.</p>
+        <div class="topic-grid">
+          <article class="topic-card"><div class="topic-number">01</div><div class="topic-icon">⌖</div><h3>Navigate the file system</h3><p>The file system is organized as a tree that begins at <code>/</code>. Use <code>pwd</code> to confirm your current location, <code>ls</code> to inspect a directory, and <code>cd</code> to move between locations.</p><div class="mini-terminal">$ pwd<br><span>/home/student</span><br>$ cd Documents</div><p class="why"><b>Why it matters</b> — knowing your current directory helps prevent changes to the wrong files.</p></article>
+          <article class="topic-card"><div class="topic-number">02</div><div class="topic-icon">▧</div><h3>Create and manage files</h3><p><code>mkdir</code> creates directories, <code>touch</code> creates an empty file or updates timestamps, while <code>cp</code> and <code>mv</code> copy and move or rename items.</p><div class="mini-terminal">$ mkdir project<br>$ touch project/notes.txt<br>$ cp notes.txt notes.bak</div><p class="why"><b>Why it matters</b> — clear structure and backups make administration safer and easier to maintain.</p></article>
+          <article class="topic-card"><div class="topic-number">03</div><div class="topic-icon">▤</div><h3>View and manipulate files</h3><p><code>cat</code> prints file contents, <code>less</code> lets you read long files page by page, and <code>tail</code> is useful for checking the latest lines of a log.</p><div class="mini-terminal">$ less notes.txt<br>$ tail -n 20 app.log</div><p class="why"><b>Why it matters</b> — reading logs and configuration files is a common part of troubleshooting.</p></article>
+          <article class="topic-card"><div class="topic-number">04</div><div class="topic-icon">⌕</div><h3>Search for information</h3><p><code>find</code> searches for files by criteria, while <code>grep</code> searches text for a pattern. Combine them thoughtfully when tracking down a file or a setting.</p><div class="mini-terminal">$ find . -name "*.conf"<br>$ grep -n "Listen" site.conf</div><p class="why"><b>Why it matters</b> — targeted searches are faster than opening files one by one.</p></article>
+          <article class="topic-card"><div class="topic-number">05</div><div class="topic-icon">◴</div><h3>Monitor the system</h3><p><code>ps</code> lists process information, <code>top</code> provides a live view of resource use, and <code>df</code> reports file-system space. Check before terminating a process or changing a system.</p><div class="mini-terminal">$ ps aux<br>$ top<br>$ df -h</div><p class="why"><b>Why it matters</b> — process and disk checks help identify common causes of a slow or unhealthy system.</p></article>
+          <article class="topic-card"><div class="topic-number">06</div><div class="topic-icon">⌁</div><h3>Services and network information</h3><p>Services are background programs that provide capabilities such as web hosting. On systemd-based Linux systems, <code>systemctl</code> is commonly used to inspect and manage services. Network tools such as <code>ip</code> show interface and address details; <code>ping</code> tests basic reachability.</p><div class="mini-terminal">$ systemctl status apache2<br>$ ip address<br>$ ping -c 4 example.local</div><p class="why"><b>Why it matters</b> — a hosted site depends on a running service, correct network configuration, and working permissions.</p></article>
+        </div>
+        <div class="callout"><span class="callout-icon">!</span><p><strong>Admin habit:</strong> inspect before changing. Read command help or the manual, verify the target path, and check the result after an operation. Some commands require elevated privileges; use them only when necessary.</p></div>
+      </section>
+
+      <section class="content-section" id="commands">
+        <div class="section-heading"><div><div class="eyebrow">REFERENCE / 03</div><h2>Command library</h2></div><span class="section-index">60 COMMANDS</span></div>
+        <p class="section-lead">Search the assigned command set and filter by category. Options can vary between Linux distributions and shell implementations, so check <code>man</code> or built-in help on your own system.</p>
+        <div class="command-controls"><label class="search-box"><span>⌕</span><input id="commandSearch" type="search" placeholder="Search commands, uses, or examples…" aria-label="Search commands"></label><label class="select-wrap"><span class="sr-only">Filter by category</span><select id="categoryFilter"><option value="all">All categories</option><option value="navigation">Navigation & files</option><option value="text">Text & archives</option><option value="system">System & processes</option><option value="shell">Shell & utilities</option><option value="users">Users & permissions</option><option value="network">Network & environment</option></select></label><span class="result-count" id="resultCount" aria-live="polite">60 commands</span></div>
+        <div class="command-grid" id="commandGrid" aria-live="polite"></div>
+        <div class="empty-state" id="emptyState" hidden><span>⌕</span><h3>No commands found</h3><p>Try a different search term or category.</p></div>
+        <p class="small-note">Command notes are learning aids, not a replacement for the manual installed on your machine. Options marked as shell-dependent may behave differently between Bash, other shells, Linux distributions, or desktop environments.</p>
+      </section>
+
+      <section class="content-section" id="scripting">
+        <div class="section-heading"><div><div class="eyebrow">AUTOMATION / 04</div><h2>Shell scripting</h2></div><span class="section-index">REPEATABLE TASKS</span></div>
+        <p class="section-lead">A shell script is a text file containing commands that a shell runs in sequence. Scripts make repeatable work consistent, reduce manual steps, and can report failures instead of silently continuing.</p>
+        <div class="script-layout"><div class="script-explainer"><div class="concept-row"><span class="concept-num">01</span><div><h3>Variables and input/output</h3><p>Variables store values for reuse. <code>echo</code> displays text, while quoted variables such as <code>"$target"</code> help preserve spaces in file names.</p></div></div><div class="concept-row"><span class="concept-num">02</span><div><h3>Conditions and loops</h3><p><code>if</code> branches based on a test. A <code>for</code> or <code>while</code> loop repeats work across items or while a condition remains true.</p></div></div><div class="concept-row"><span class="concept-num">03</span><div><h3>Exit status and functions</h3><p>Commands return an exit status: usually <code>0</code> means success and a non-zero value signals a problem. Functions group reusable steps into named blocks.</p></div></div><div class="concept-row"><span class="concept-num">04</span><div><h3>Permissions and automation</h3><p>A script can be run with <code>bash script.sh</code>, or made executable and launched by path. Scheduled automation can use <code>crontab</code>, with careful logging and testing.</p></div></div></div>
+          <div class="code-panel"><div class="code-panel-head"><span><span class="file-dot"></span> check-space.sh</span><button class="copy-button" data-copy="scriptExample">Copy code</button></div><pre><code id="scriptExample">#!/usr/bin/env bash
+# Report disk space for the root filesystem.
+set -u
+
+mount_point="/"
+
+if df -h "$mount_point"; then
+  echo "Disk-space check completed."
+else
+  status=$?
+  echo "Disk-space check failed (status $status)." >&amp;2
+  exit "$status"
+fi</code></pre><div class="code-panel-foot">EXAMPLE SCRIPT <span>•</span> SAFE READ-ONLY CHECK</div></div></div>
+        <div class="steps-strip"><div><span>STEP 01</span><strong>Write</strong><p>Save the text in a file.</p></div><div><span>STEP 02</span><strong>Review</strong><p>Check paths and commands.</p></div><div><span>STEP 03</span><strong>Execute</strong><p>Run with Bash or executable permissions.</p></div><div><span>STEP 04</span><strong>Verify</strong><p>Read output and exit status.</p></div></div>
+        <div class="callout"><span class="callout-icon">↗</span><p><strong>Practical application:</strong> an administrator could adapt a script to check disk usage each day and record the result. Before automating a task that modifies files, test it on sample data and consider what should happen if one command fails.</p></div>
+      </section>
+
+      <section class="content-section" id="permissions">
+        <div class="section-heading"><div><div class="eyebrow">SECURITY / 05</div><h2>Users & file permissions</h2></div><span class="section-index">CONTROL ACCESS</span></div>
+        <p class="section-lead">Linux uses users and groups to identify who is accessing a resource. Each file or directory has an owner, an associated group, and permission bits that control access for the owner, group, and others.</p>
+        <div class="permission-overview"><div class="permission-card"><div class="permission-glyph">U</div><h3>User / owner</h3><p>The account that owns the file. Ownership affects which permission class applies to that account.</p></div><div class="permission-card"><div class="permission-glyph">G</div><h3>Group</h3><p>A collection of accounts that can share access to files and directories.</p></div><div class="permission-card"><div class="permission-glyph">O</div><h3>Others</h3><p>Accounts that are neither the owner nor members of the file's group.</p></div></div>
+        <div class="permission-detail-grid"><article class="detail-panel"><h3>What does rwx mean?</h3><div class="perm-line"><code>r</code><div><strong>Read</strong><p>For a file, read its contents. For a directory, list names (subject to directory search permission).</p></div></div><div class="perm-line"><code>w</code><div><strong>Write</strong><p>For a file, change contents. For a directory, create, remove, or rename entries when other requirements are met.</p></div></div><div class="perm-line"><code>x</code><div><strong>Execute / search</strong><p>For a file, run it as a program if its format and other requirements allow. For a directory, traverse it.</p></div></div></article><article class="detail-panel"><h3>Read a permission string</h3><div class="permission-string"><span class="muted">-</span><span class="p-owner">rw-</span><span class="p-group">r--</span><span class="p-other">r--</span></div><p class="mono-caption">- rw- r-- r--</p><p>The first character indicates the file type. The next three bits belong to the owner, then the group, then others. This example is a regular file with mode <code>644</code>.</p><div class="mode-legend"><span><i class="legend-owner"></i> Owner</span><span><i class="legend-group"></i> Group</span><span><i class="legend-other"></i> Others</span></div></article></div>
+        <div class="permission-calculator"><div class="calculator-head"><div><div class="eyebrow">INTERACTIVE TOOL</div><h3>Permission mode explorer</h3><p>Toggle access bits to see the symbolic and numeric modes update.</p></div><span class="calc-icon">rwx</span></div><div class="permission-groups"><div class="perm-group"><h4>Owner <small>USER</small></h4><label><input type="checkbox" data-perm="u" data-bit="r" checked> Read <span>4</span></label><label><input type="checkbox" data-perm="u" data-bit="w" checked> Write <span>2</span></label><label><input type="checkbox" data-perm="u" data-bit="x"> Execute <span>1</span></label></div><div class="perm-group"><h4>Group <small>GROUP</small></h4><label><input type="checkbox" data-perm="g" data-bit="r" checked> Read <span>4</span></label><label><input type="checkbox" data-perm="g" data-bit="w"> Write <span>2</span></label><label><input type="checkbox" data-perm="g" data-bit="x"> Execute <span>1</span></label></div><div class="perm-group"><h4>Others <small>OTHER</small></h4><label><input type="checkbox" data-perm="o" data-bit="r" checked> Read <span>4</span></label><label><input type="checkbox" data-perm="o" data-bit="w"> Write <span>2</span></label><label><input type="checkbox" data-perm="o" data-bit="x"> Execute <span>1</span></label></div></div><div class="calc-result"><div><span>NUMERIC MODE</span><strong id="numericMode">644</strong></div><div><span>SYMBOLIC MODE</span><strong id="symbolicMode">rw-r--r--</strong></div><button class="copy-button" id="copyMode">Copy chmod command</button></div><p class="small-note">The explorer shows the basic nine permission bits. Special bits such as setuid, setgid, and sticky bit are not included.</p></div>
+        <div class="permission-examples"><div><span class="example-mode">755</span><div><strong>Owner can modify; everyone can read and traverse/execute.</strong><p>Common for directories and executable programs when public read/traverse access is appropriate.</p></div><code>chmod 755 folder</code></div><div><span class="example-mode">644</span><div><strong>Owner can edit; group and others can read.</strong><p>A common choice for ordinary website files that visitors and the web server need to read.</p></div><code>chmod 644 index.html</code></div><div><span class="example-mode">600</span><div><strong>Only the owner has read and write access.</strong><p>Useful for private files that should not be readable by other local accounts.</p></div><code>chmod 600 private.txt</code></div></div>
+        <div class="callout"><span class="callout-icon">!</span><p><strong>Security principle:</strong> give each account only the access it needs. For a static Apache site, the web server needs to read files and traverse their parent directories; it usually does not need permission to modify the site's content. Use <code>chown</code> to change ownership and <code>chmod</code> to change permission bits, and verify with <code>ls -l</code>.</p></div>
+      </section>
+
+      <section class="content-section" id="practice">
+        <div class="section-heading"><div><div class="eyebrow">CHECK YOUR UNDERSTANDING / 06</div><h2>Practice lab</h2></div><span class="section-index">QUICK CHECK</span></div>
+        <div class="quiz-card"><div class="quiz-progress"><span>KNOWLEDGE CHECK</span><span id="quizCount">QUESTION 1 OF 3</span></div><div class="quiz-track"><span id="quizTrack"></span></div><h3 id="quizQuestion">Which command shows your current working directory?</h3><div class="quiz-options" id="quizOptions"><button data-answer="0">ls</button><button data-answer="1">pwd</button><button data-answer="2">cd</button></div><div class="quiz-feedback" id="quizFeedback" aria-live="polite"></div><div class="quiz-footer"><span>Think it through before choosing.</span><button class="button button-primary" id="nextQuestion" disabled>Next question →</button></div></div>
+      </section>
+      <footer class="footer"><div class="footer-brand"><span class="brand-mark">L<span>_</span></span><div><strong>Linux-F26 Field Guide</strong><span>AUCA · Student ID 29061</span></div></div><p>Built for learning, practice, and responsible system administration.</p><a href="#home">Back to top ↑</a></footer>
+    </main>
+  </div>
+</body>
+</html>

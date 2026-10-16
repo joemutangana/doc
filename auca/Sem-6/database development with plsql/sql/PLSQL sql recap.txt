@@ -40,7 +40,7 @@ EXTRACT YEAR
 
 
 
-select first_name, last_name, gpa, status, ENROLLMENT_DATE from students 
+select first_name, last_name, gpa, status, ENROLLMENT_DATE from students
 WHERE EXTRACT(YEAR FROM ENROLLMENT_DATE) = 2023;
 
 OR USE BETWEEN
@@ -76,3 +76,81 @@ to_char()
 select first_name, round(salary*0.0061, 3) as promo_salary from employees;
 select first_name, to_char(enrollment_date, 'DD-MM-YYYY') from students;
 
+
+
+
+CONDITION LOGIC WITH CASE
+--------------
+
+
+
+select first_name, salary,
+
+case
+when salary >= 80000 then 'HIGH PAID'
+WHEN SALARY >=60000 AND SALARY <80000 THEN 'MEDIUM'
+WHEN SALARY >=0 AND SALARY <=60000 THEN 'LOW'
+ELSE 'INVALID'
+END AS SALARY_CATEGORY
+FROM EMPLOYEES;
+
+Group by and having
+--------------------------------
+
+select department, count(*) as total_employees
+from employees
+group by department having count(*) > 7;
+
+
+Joins
+-----------------------------
+
+select c.course_name, count(*) as total_students
+from courses c
+join enrollments e on c.course_id = e.course_id
+group by c.course_name
+;
+
+
+
+SubQueries
+-----------------
+
+select course_id, count(*)
+from enrollments
+group by course_id
+having count(*) > (select avg(count(*)) from enrollments group by course_id);
+
+
+
+
+PL/SQL
+--------------------
+
+nested loop and cursor for loop(group discussion)
+
+
+Cursors
+-----------------------
+
+We use implicit when we want to process many rows but process one by one.
+While Explicit is good to use when we are manipulating data like deleting or updating.
+
+
+
+Procedures and functions
+----------------------------
+
+If you are just doing the action better to use the procedures
+while if you want to calculate and return some value, better to use functions.
+
+functions always return.
+
+
+-------------------------------
+type of parameters in procedures
+---------------------
+
+IN     =means send data inside procedures
+OUT    =means getting data out from procedures
+IN OUT =means that we are sending and getting data from procedures
