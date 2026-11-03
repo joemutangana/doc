@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Student ID 29061 | Linux System Administration Tutorial</title>
+<style>
+:root{--navy:#14213d;--blue:#2855b5;--light:#eef3ff;--paper:#f4f6fa;--ink:#1b2433;--muted:#5c687a;--line:#dbe2ec;--code:#101827;--codeText:#edf2fb;--green:#e9f8f0;--amber:#fff5d9}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.7 system-ui,-apple-system,"Segoe UI",sans-serif}
+header{background:linear-gradient(130deg,#111a30,#2855b5);color:#fff;padding:50px max(22px,calc((100% - 1160px)/2) ) 42px}.kicker{font-size:.78rem;font-weight:800;text-transform:uppercase;letter-spacing:.14em;color:#d5e0ff}h1{font-size:clamp(2.1rem,5vw,3.7rem);line-height:1.1;margin:.5rem 0 1rem}header p{max-width:800px;color:#e4ebff;font-size:1.08rem}.student{display:inline-block;background:#fff;color:#193c84;font-weight:850;padding:8px 15px;border-radius:99px;margin-top:9px}
+.shell{max-width:1160px;margin:28px auto;padding:0 18px;display:grid;grid-template-columns:250px minmax(0,1fr);gap:24px}.nav{position:sticky;top:16px;align-self:start;background:#fff;border:1px solid var(--line);border-radius:15px;padding:18px}.nav b{display:block;margin-bottom:8px}.nav a{display:block;padding:5px 8px;border-radius:7px;color:#33435d;text-decoration:none;font-size:.92rem}.nav a:hover{background:var(--light);color:var(--blue)}main{min-width:0}.panel{background:#fff;border:1px solid var(--line);border-radius:15px;padding:24px;margin-bottom:18px}.intro{border-top:4px solid var(--blue)}h2{font-size:1.65rem;line-height:1.25;margin:0 0 12px}h3{font-size:1.17rem;margin:20px 0 8px}p{margin:8px 0 12px}.step{font-size:.78rem;color:var(--blue);font-weight:850;text-transform:uppercase;letter-spacing:.1em}.goal,.expected,.warning{padding:11px 14px;border-radius:9px;margin:13px 0}.goal{background:#f0f4ff;border-left:3px solid var(--blue)}.expected{background:var(--green);border-left:3px solid #19845b}.warning{background:var(--amber);border:1px solid #f0dc9a}pre{background:var(--code);color:var(--codeText);padding:16px;border-radius:10px;overflow:auto;font: .86rem/1.65 ui-monospace,SFMono-Regular,Consolas,monospace;white-space:pre}code{font-family:ui-monospace,SFMono-Regular,Consolas,monospace}p code,li code,td code{background:#edf0f5;border-radius:4px;padding:2px 5px}table{width:100%;border-collapse:collapse;margin:14px 0}th,td{border:1px solid var(--line);padding:9px;text-align:left;vertical-align:top}th{background:#f0f4fb}.muted{color:var(--muted)}.small{font-size:.9rem}li{margin:5px 0}footer{max-width:1160px;margin:auto;padding:12px 20px 38px;color:var(--muted)}
+@media(max-width:850px){.shell{grid-template-columns:1fr}.nav{position:static}.nav nav{columns:2}}@media(max-width:520px){.nav nav{columns:1}.panel{padding:17px}pre{font-size:.78rem}}
+</style>
+</head>
+<body>
+<header>
+<div class="kicker">Linux System Administration · Mid-Term Mini Project</div>
+<h1>Apache2, HTTPS &amp; Automated Backups</h1>
+<p>A step-by-step record of the Apache2 web server setup, self-signed HTTPS certificate, SSH connection between two VMs, scheduled backup transfer, and email notification workflow.</p>
+<div class="student">Student ID: 29061</div>
+</header>
+<div class="shell">
+<aside class="nav"><b>On this page</b><nav>
+<a href="#overview">Overview</a><a href="#install">1. Install Apache2</a><a href="#http">2. HTTP virtual host</a><a href="#certificate">3. Certificate</a><a href="#https">4. HTTPS virtual host</a><a href="#testing">5. Firewall and tests</a><a href="#ssh">Task 2: SSH</a><a href="#report">Report script</a><a href="#transfer">Backup transfer</a><a href="#cron">Cron schedule</a><a href="#mailtools">Email packages</a><a href="#msmtp">msmtp configuration</a><a href="#watcher">Email notification script</a><a href="#verify">End-to-end verification</a>
+</nav></aside>
+<main>
+<section class="panel intro" id="overview">
+<h2>Project overview</h2>
+<p>This tutorial explains the configuration and commands recorded for the project. Task 1 configures Apache2 on VM1 to serve the domain <code>29061.f26</code> over HTTP and HTTPS. Task 2 configures SSH access, creates zipped system reports, transfers backups, schedules the transfer with cron, and sends email when a new file arrives on VM2.</p>
+<table><tr><th>Setting</th><th>Value from the project notes</th></tr>
+<tr><td>Student ID</td><td><strong>29061</strong></td></tr>
+<tr><td>Apache domain</td><td><code>29061.f26</code></td></tr>
+<tr><td>Website directory</td><td><code>/var/www/29061.f26</code></td></tr>
+<tr><td>HTTP virtual host</td><td><code>/etc/apache2/sites-available/29061.f26.conf</code></td></tr>
+<tr><td>HTTPS virtual host</td><td><code>/etc/apache2/sites-available/29061.f26-ssl.conf</code></td></tr>
+<tr><td>Certificate / private key</td><td><code>/etc/ssl/certs/29061.f26.crt</code> / <code>/etc/ssl/private/29061.f26.key</code></td></tr>
+<tr><td>SSH destination from initial notes</td><td><code>mutangana@192.168.56.101</code></td></tr>
+<tr><td>Backup destination in send-backups.sh</td><td><code>29061@10.117.138.200:/home/29061/incoming/</code></td></tr>
+<tr><td>Email account / alert recipient</td><td><code>linux.auca.ac@gmail.com</code> / <code>joegithub12@gmail.com</code></td></tr></table>
+<div class="warning"><strong>Security:</strong> Never publish a real password, Gmail app password, private SSH key, or TLS private key. The msmtp password below is shown as a placeholder. Email addresses and host addresses are reproduced from the notes you provided.</div>
+<p class="muted small">Run commands on the machine where indicated. The command blocks retain the configuration and values in your notes; notes after a block explain the purpose and point out details worth checking.</p>
+</section>
+
+<section class="panel" id="install"><div class="step">Task 1 · Step 1</div><h2>Install Apache2 and OpenSSL on VM1</h2>
+<div class="goal"><strong>Goal:</strong> Install the web server and OpenSSL tools used to create and inspect the certificate.</div>
+<pre><code>sudo apt update
+sudo apt install openssl
+sudo apt install apache2</code></pre>
+<p>Alternatively, run the installation in one command:</p>
+<pre><code>sudo apt update && sudo apt install apache2 openssl -y</code></pre>
+<p><code>apt update</code> refreshes the package index. Apache2 serves web pages, while OpenSSL creates and checks the self-signed TLS certificate.</p>
+<h3>Check the Apache2 service</h3><pre><code>sudo systemctl status apache2</code></pre>
+<p>If it is not running, start it:</p><pre><code>sudo systemctl start apache2</code></pre>
+<div class="expected"><strong>Expected result:</strong> The service status reports that Apache2 is active and running.</div>
+</section>
+
+<section class="panel" id="http"><div class="step">Task 1 · Step 2</div><h2>Create the website directory and HTTP virtual host</h2>
+<div class="goal"><strong>Goal:</strong> Tell Apache which directory to serve for the local project domain.</div>
+<p>The website files are stored in:</p><pre><code>/var/www/29061.f26</code></pre>
+<p>Create it if it does not already exist:</p><pre><code>sudo mkdir -p /var/www/29061.f26</code></pre>
+<p>Open the HTTP virtual-host file:</p><pre><code>sudo nano /etc/apache2/sites-available/29061.f26.conf</code></pre>
+<p>Configuration used:</p>
+<pre><code>&lt;VirtualHost *:80&gt;
+    ServerName 29061.f26
+    DocumentRoot /var/www/29061.f26
+
+    ErrorLog ${APACHE_LOG_DIR}/29061.f26-error.log
+    CustomLog ${APACHE_LOG_DIR}/29061.f26-access.log combined
+&lt;/VirtualHost&gt;</code></pre>
+<p><strong>Explanation:</strong> <code>*:80</code> listens for HTTP traffic on port 80. <code>ServerName</code> selects the local domain, and <code>DocumentRoot</code> points to the website folder. The final directives configure separate error and access logs.</p>
+<h3>Enable and validate the configuration</h3><pre><code>sudo a2ensite 29061.f26.conf
+sudo apache2ctl configtest
+sudo systemctl reload apache2</code></pre>
+<div class="expected"><strong>Expected result:</strong> <code>apache2ctl configtest</code> prints <code>Syntax OK</code>.</div>
+<h3>Configure the local domain</h3>
+<p>Because <code>29061.f26</code> is a project domain, add a hosts-file entry on each device that needs to resolve it. The entry maps VM1's actual IP address to the domain:</p>
+<pre><code>sudo nano /etc/hosts
+
+# Add a line using VM1's actual IP:
+VM1_IP  29061.f26</code></pre>
+<p>On Windows, edit <code>C:\Windows\System32\drivers\etc\hosts</code> as Administrator. The placeholder <code>VM1_IP</code> must be replaced with the IP of VM1; it is not a literal address.</p>
+</section>
+
+<section class="panel" id="certificate"><div class="step">Task 1 · Step 3</div><h2>Generate and verify the self-signed certificate</h2>
+<div class="goal"><strong>Goal:</strong> Generate a certificate for <code>29061.f26</code> and verify its identity and validity.</div>
+<pre><code>sudo openssl req -x509 -nodes -days 365 \
+  -newkey rsa:2048 \
+  -keyout /etc/ssl/private/29061.f26.key \
+  -out /etc/ssl/certs/29061.f26.crt \
+  -subj "/O=AUCA/OU=Linux-F26/CN=29061" \
+  -addext "subjectAltName=DNS:29061.f26"</code></pre>
+<p><strong>What the options mean:</strong></p>
+<ul><li><code>-x509</code> creates a self-signed X.509 certificate.</li><li><code>-nodes</code> creates an unencrypted private key so the server can start without an interactive key passphrase.</li><li><code>-days 365</code> sets the certificate validity period.</li><li><code>-newkey rsa:2048</code> creates a 2048-bit RSA key.</li><li><code>-keyout</code> and <code>-out</code> set the private-key and certificate paths.</li><li><code>-subj</code> provides the certificate subject fields.</li><li><code>-addext</code> adds the Subject Alternative Name (SAN), which contains the DNS name.</li></ul>
+<p>Restrict access to the private key:</p><pre><code>sudo chmod 600 /etc/ssl/private/29061.f26.key</code></pre>
+<h3>Inspect the certificate</h3><pre><code>openssl x509 -in /etc/ssl/certs/29061.f26.crt -noout -subject -issuer -dates
+openssl x509 -in /etc/ssl/certs/29061.f26.crt -noout -ext subjectAltName
+openssl x509 -in /etc/ssl/certs/29061.f26.crt -noout -text</code></pre>
+<p>These commands show the certificate subject, issuer, validity dates, SAN, and full certificate details. Check that the SAN contains <code>DNS:29061.f26</code>. Because the certificate is self-signed, browsers do not automatically trust it.</p>
+<h3>Check the certificate served by Apache and compare public keys</h3><pre><code>echo | openssl s_client -connect 29061.f26:443 -servername 29061.f26 2>/dev/null | openssl x509 -noout -subject -dates
+openssl x509 -in /etc/ssl/certs/29061.f26.crt -noout -pubkey | openssl sha256
+sudo openssl pkey -in /etc/ssl/private/29061.f26.key -pubout | openssl sha256</code></pre>
+<p>The first command inspects the certificate returned by the HTTPS server. The next two calculate SHA-256 hashes of the certificate's public key and the public key derived from the private key. Matching hashes confirm that the certificate and private key belong together.</p>
+</section>
+
+<section class="panel" id="https"><div class="step">Task 1 · Step 4</div><h2>Enable SSL and configure the HTTPS virtual host</h2>
+<div class="goal"><strong>Goal:</strong> Enable Apache's SSL module and configure the site to use port 443.</div>
+<p>Enable SSL and restart Apache2:</p><pre><code>sudo a2enmod ssl
+sudo systemctl restart apache2
+sudo systemctl reload apache2</code></pre>
+<p>Create the HTTPS virtual-host file:</p><pre><code>sudo nano /etc/apache2/sites-available/29061.f26-ssl.conf</code></pre>
+<p>Configuration used:</p><pre><code>&lt;VirtualHost *:443&gt;
+    ServerName 29061.f26
+    DocumentRoot /var/www/29061.f26
+
+    SSLEngine on
+    SSLCertificateFile /etc/ssl/certs/29061.f26.crt
+    SSLCertificateKeyFile /etc/ssl/private/29061.f26.key
+
+    ErrorLog ${APACHE_LOG_DIR}/29061.f26-ssl-error.log
+    CustomLog ${APACHE_LOG_DIR}/29061.f26-ssl-access.log combined
+&lt;/VirtualHost&gt;</code></pre>
+<p><strong>Explanation:</strong> This virtual host listens on HTTPS port 443. <code>SSLEngine on</code> enables TLS, and the certificate directives point to the certificate and private key generated in the previous step.</p>
+<h3>Enable and validate HTTPS</h3><pre><code>sudo a2ensite 29061.f26-ssl.conf
+sudo apache2ctl configtest</code></pre>
+<div class="expected"><strong>Expected result:</strong> <code>Syntax OK</code>.</div>
+<p>Reload the service to apply the virtual-host configuration:</p><pre><code>sudo systemctl reload apache2</code></pre>
+</section>
+
+<section class="panel" id="testing"><div class="step">Task 1 · Step 5</div><h2>Configure the firewall and test HTTP/HTTPS</h2>
+<div class="goal"><strong>Goal:</strong> Allow web traffic and test the website locally and from another device.</div>
+<p>Allow HTTP and HTTPS through UFW:</p><pre><code>sudo ufw allow 80/tcp
+sudo ufw allow 443/tcp</code></pre>
+<p>From VM1, run:</p><pre><code>curl -I http://29061.f26
+curl -kI https://29061.f26</code></pre>
+<p><code>curl -I</code> requests response headers. <code>curl -kI</code> performs the HTTPS request without rejecting the self-signed certificate for lack of trust.</p>
+<p>From the second device, visit <code>http://29061.f26</code> after adding the hosts entry. You can also test HTTPS with:</p><pre><code>curl -kI https://29061.f26</code></pre>
+<div class="warning">If the second-device test fails, check that the device can reach VM1's IP, the hosts entry points to the correct VM1 address, the firewall permits ports 80 and 443, and Apache2 is running.</div>
+</section>
+
+<section class="panel" id="ssh"><div class="step">Task 2 · Step 1</div><h2>Check SSH keys and connect VM1 to VM2</h2>
+<div class="goal"><strong>Goal:</strong> Configure public-key authentication so VM1 can log into VM2 without repeatedly entering the VM2 account password.</div>
+<p>Check for existing keys:</p><pre><code>ls -l ~/.ssh</code></pre>
+<p>If no suitable key exists, generate one using the default filename:</p><pre><code>ssh-keygen -t ed25519 -C "vm1-to-vm2"</code></pre>
+<p>Or specify a custom filename:</p><pre><code>ssh-keygen -t ed25519 -C "vm1-to-vm2" -f ~/.ssh/vm2_key</code></pre>
+<p>Follow the prompts, then check the key files:</p><pre><code>ls -l ~/.ssh</code></pre>
+<p>Copy the public key to VM2 using the connection in your notes:</p><pre><code>ssh-copy-id mutangana@192.168.56.101</code></pre>
+<p>Connect to VM2:</p><pre><code>ssh mutangana@192.168.56.101</code></pre>
+<div class="expected"><strong>Expected result:</strong> if the correct public key is installed and selected, SSH opens the remote shell without asking for the VM2 account password. A key passphrase may still be requested if you set one.</div>
+<p>If using the custom key file, install its public key explicitly:</p><pre><code>ssh-copy-id -i ~/.ssh/vm2_key.pub mutangana@192.168.56.101</code></pre>
+<div class="warning">The later backup script in these notes uses a different destination, <code>29061@10.117.138.200</code>. Keep the IP, username, and key consistent with the VM and SSH setup actually used for the working transfer. The two addresses may represent different network interfaces or setups; verify them on your machines rather than assuming they are interchangeable.</div>
+</section>
+
+<section class="panel" id="report"><div class="step">Task 2 · Step 2</div><h2>Create the system report with report.sh</h2>
+<div class="goal"><strong>Goal:</strong> Record the student ID, timestamp, hostname, logged-in users, disk status, and system uptime in a text report, then zip it into an outgoing folder.</div>
+<p>The report script you supplied is shown below. Save it as <code>report.sh</code> in the location you use on VM1.</p>
+<pre><code>#!/bin/bash
+
+id=29061
+timestamp="$(date +%Y%m%d_%H%M%S)"
+hostname="$(hostname)"
+file="${id}_${timestamp}.txt"
+zip_file="${id}_${timestamp}.zip"
+OUTGOING="$HOME/outgoing"
+
+echo >> "$file"
+echo "Student ID: $id" >> "$file"
+echo "Report create: $(date '+%Y-%m-%d %H:%M:%S')" >> "$file"
+echo "Host: $hostname" >> "$file"
+
+
+
+echo  >> "$file"
+echo ==== Logged-in Users==== >> "$file"
+echo >> "$file"
+who >> "$file"
+echo >> "$file"
+
+echo >> "$file"
+echo ==== Disk status ==== >> "$file"
+echo >> "$file"
+df -h >> "$file"
+echo >> "$file"
+
+echo >> "$file"
+echo ==== System uptime ==== >> "$file"
+echo "$file"
+uptime >> "$file"
+echo >> "$file"
+
+zip "$zip_file" "$file"
+rm "$file"
+
+mv "$zip_file"  "$OUTGOING"</code></pre>
+<p><strong>How it works:</strong> The timestamp makes the report and ZIP filenames unique. <code>hostname</code> records the machine name, <code>who</code> lists logged-in users, <code>df -h</code> shows disk usage, and <code>uptime</code> shows how long the system has been running. <code>zip</code> compresses the report, <code>rm</code> removes the text file, and <code>mv</code> moves the ZIP to the outgoing folder.</p>
+<div class="warning"><strong>Check before running:</strong> Make sure <code>$HOME/outgoing</code> exists. The line <code>echo "$file"</code> prints the filename to the terminal instead of adding it to the report; it is preserved here as it appeared in your notes. Also make sure the script's final move succeeds and the outgoing directory is writable.</div>
+<pre><code>mkdir -p "$HOME/outgoing"
+chmod +x report.sh
+./report.sh</code></pre>
+</section>
+
+<section class="panel" id="transfer"><div class="step">Task 2 · Step 3</div><h2>Transfer ZIP backups with send-backups.sh</h2>
+<div class="goal"><strong>Goal:</strong> Find ZIP files in the outgoing directory, transfer each file to the VM incoming directory over SCP, and move the local file to the sent directory.</div>
+<p>The transfer script you supplied is shown below:</p>
+<pre><code>#!/bin/bash
+
+
+OUTGOING="$HOME/outgoing"
+
+
+for file in "$OUTGOING"/*.zip; do
+
+if [[ -f "$file" ]] then
+
+echo "Transferring: $file"
+scp "$file"  29061@10.117.138.200:/home/29061/incoming/
+
+echo "Transfer successful: $file"
+
+mv "$file" "$HOME/sent"
+else
+echo "Transfer failed: $file"
+fi
+
+done</code></pre>
+<p><strong>How it works:</strong> The <code>for</code> loop checks ZIP files in <code>$HOME/outgoing</code>. <code>scp</code> copies each selected file to <code>/home/29061/incoming/</code> on the destination machine. <code>mv</code> then moves the local file to <code>$HOME/sent</code>, preventing it from being selected again in later runs.</p>
+<div class="warning"><strong>Syntax and reliability check:</strong> In Bash, the condition line should use <code>if [[ -f "$file" ]]; then</code> (or put <code>then</code> on the following line). The version pasted above is preserved from your notes, but if it is exactly what is saved on disk, run <code>bash -n /home/29061/scripts/send_backups.sh</code> to check it. Also, the script currently prints “Transfer successful” without checking SCP's exit status; verify the actual file arrived before relying on that message.</div>
+<p>The script also expects <code>$HOME/sent</code> to exist. Create it if necessary:</p><pre><code>mkdir -p "$HOME/sent"</code></pre>
+</section>
+
+<section class="panel" id="cron"><div class="step">Task 2 · Step 4</div><h2>Schedule the transfer with cron</h2>
+<div class="goal"><strong>Goal:</strong> Run the backup transfer script automatically every minute.</div>
+<p>Open the crontab for the user who owns the script:</p><pre><code>crontab -e</code></pre>
+<p>The cron line from your notes is:</p>
+<pre><code>* * * * * /home/29061/scripts/send_backups.sh >> /home/29061/logs/logfile 2>&1</code></pre>
+<p><strong>Explanation:</strong> The five asterisks mean every minute, every hour, every day of the month, every month, and every day of the week. The command runs the transfer script. <code>&gt;&gt;</code> appends normal output to the log file, while <code>2&gt;&amp;1</code> sends error output to the same log.</p>
+<p>Make sure the paths exist and the script is executable:</p><pre><code>chmod +x /home/29061/scripts/send_backups.sh
+mkdir -p /home/29061/logs
+crontab -l</code></pre>
+<div class="warning">Your cron line runs <code>send_backups.sh</code>, not <code>report.sh</code>. This means report creation must be triggered separately or by another configured job for new ZIP files to appear. Keep the schedule as shown if that is the configuration you used, and verify how report creation is scheduled in your actual setup.</div>
+</section>
+
+<section class="panel" id="mailtools"><div class="step">Task 2 · Step 5</div><h2>Install the notification packages on VM2</h2>
+<div class="goal"><strong>Goal:</strong> Install the file watcher, SMTP client, mail command, and ZIP utility.</div>
+<pre><code>sudo apt update
+sudo apt install inotify-tools msmtp-mta bsd-mailx zip -y</code></pre>
+<p>Verify the tools:</p><pre><code>inotifywait --version
+msmtp --version
+dpkg -s bsd-mailx</code></pre>
+<ul><li><strong>inotifywait:</strong> watches filesystem events in a directory.</li><li><strong>msmtp:</strong> sends email using an SMTP server.</li><li><strong>MTA:</strong> stands for Mail Transfer Agent, software used to send or relay mail.</li><li><strong>bsd-mailx:</strong> provides the command-line <code>mail</code> utility. BSD stands for Berkeley Software Distribution; <code>mailx</code> is a family/name of command-line mail utilities.</li><li><strong>zip:</strong> creates ZIP archives for the system reports.</li></ul>
+<h3>Try the file watcher</h3><pre><code>inotifywait --monitor --event close_wait --event moved_to --format %f /home/29061/incoming</code></pre>
+<p>This is the manual watcher command from your notes. <code>--monitor</code> keeps watching, <code>--format %f</code> prints the filename, and <code>moved_to</code> detects files moved into the directory.</p>
+<div class="warning"><strong>Event name check:</strong> Standard <code>inotifywait</code> commonly uses <code>close_write</code> (a file has finished being written), rather than <code>close_wait</code>. Your notification script below uses <code>close_write</code>. If the manual command reports an invalid event, use <code>close_write</code> for the test.</div>
+</section>
+
+<section class="panel" id="msmtp"><div class="step">Task 2 · Step 6</div><h2>Configure email using msmtp</h2>
+<div class="goal"><strong>Goal:</strong> Configure the sender account that the <code>mail</code> command will use to send notifications.</div>
+<p>Open the per-user configuration file on VM2:</p><pre><code>nano ~/.msmtprc</code></pre>
+<p>Your configuration, with the password represented safely as a placeholder:</p>
+<pre><code>defaults
+auth on
+tls on
+tls_starttls on
+tls_trust_file /etc/ssl/certs/ca-certificates.crt
+logfile ~/.msmtp.log
+
+account gmail
+host smtp.gmail.com
+port 587
+from linux.auca.ac@gmail.com
+user linux.auca.ac@gmail.com
+password [PUT Password here]
+
+account default : gmail</code></pre>
+<p><strong>Explanation:</strong> The configuration uses Gmail's SMTP server at <code>smtp.gmail.com</code> on port <code>587</code>, with authentication and STARTTLS enabled. The <code>from</code> and <code>user</code> values identify the sender account. The log file helps troubleshoot delivery problems.</p>
+<p>Protect the file because it contains credentials:</p><pre><code>chmod 600 ~/.msmtprc</code></pre>
+<h3>Send a test email</h3><pre><code>printf 'Hello! This is a test email sent from VM2.\\n' | mail -s "VM2 Email Test" linux.auca.ac@gmail.com</code></pre>
+<p>Check the inbox and spam folder. If no email arrives, inspect <code>~/.msmtp.log</code> and verify the SMTP credentials and network access. Use a valid app password where required by the email provider.</p>
+</section>
+
+<section class="panel" id="watcher"><div class="step">Task 2 · Step 7</div><h2>Send an email whenever a new backup arrives</h2>
+<div class="goal"><strong>Goal:</strong> Watch VM2's incoming directory and email <code>joegithub12@gmail.com</code> when a new file arrives.</div>
+<p>The script from your notes:</p>
+<pre><code>#!/bin/bash
+
+INCOMING="$HOME/incoming"
+RECEIVER="joegithub12@gmail.com"
+TIMESTAMP="$(date +'%Y-%m-%d %H:%M:%S')"
+SOURCE="VM1"
+
+inotifywait --monitor --event close_write --event moved_to --format %f "$INCOMING" |
+ while read -r FILENAME; do
+   echo "New file detected:\n $FILENAME"
+   echo -e "New backup received.\nFilename: $FILENAME\nSource: $SOURCE\nReceived at: $TIMESTAMP\n" |
+    mail -s "New Backup Received: $FILENAME" "$RECEIVER" 
+ done</code></pre>
+<p><strong>How it works:</strong> <code>INCOMING</code> points to the watched folder. <code>RECEIVER</code> is the notification recipient. <code>inotifywait</code> waits for completed writes or files moved into the directory and prints each filename. The loop reads that filename and sends a message using <code>mail</code>.</p>
+<div class="warning"><strong>Timestamp note:</strong> In the script as written, <code>TIMESTAMP</code> is set once when the script starts, so every email will show the start time rather than the time of the new file. If you want the exact arrival time, move that assignment inside the <code>while</code> loop. The message's <code>echo -e</code> formats the newlines in the email body.</div>
+<p>Save the script in the location you use on VM2, make it executable, and run it:</p><pre><code>chmod +x ~/watch_incoming.sh
+~/watch_incoming.sh</code></pre>
+<p>Keep the watcher running while testing. A file already present before the watcher starts does not create a new event for the running watcher.</p>
+</section>
+
+<section class="panel" id="verify"><div class="step">Task 2 · Final step</div><h2>Test the complete workflow</h2>
+<div class="goal"><strong>Goal:</strong> Confirm that a report is created, transferred to VM2, and triggers an email alert.</div>
+<ol>
+<li>Confirm SSH connectivity from VM1 to the actual VM2 destination used by the transfer script.</li>
+<li>Run <code>report.sh</code> and confirm a ZIP appears in <code>$HOME/outgoing</code>.</li>
+<li>Run <code>send_backups.sh</code> manually, or wait for cron to run it.</li>
+<li>On VM2, check the incoming directory: <code>ls -lh /home/29061/incoming</code>.</li>
+<li>Leave the watcher running and confirm that the new-file event appears.</li>
+<li>Check the recipient inbox and spam folder for the notification.</li>
+<li>Inspect the cron log and <code>~/.msmtp.log</code> if anything fails.</li>
+</ol>
+<pre><code># Check the scheduled job and its log on the machine running cron
+crontab -l
+tail -n 50 /home/29061/logs/logfile
+
+# On VM2, check incoming backups and mail log
+ls -lh /home/29061/incoming
+tail -n 30 ~/.msmtp.log</code></pre>
+<p>If a step fails, test each part separately: SSH login, report creation, SCP transfer, file-monitor event, and SMTP email delivery. This makes it easier to identify where the workflow stopped.</p>
+</section>
+</main>
+</div>
+<footer>Linux System Administration · Mid-Term Mini Project · Student ID 29061</footer>
+</body>
+</html>

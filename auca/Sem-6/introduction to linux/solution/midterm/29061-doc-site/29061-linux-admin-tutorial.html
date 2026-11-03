@@ -1,0 +1,426 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>29061 | Linux System Administration Documentation</title>
+<style>
+:root{--ink:#172033;--muted:#586579;--paper:#f5f7fb;--card:#fff;--line:#dce3ee;--blue:#2457c5;--blue2:#eaf0ff;--green:#147d57;--code:#101827;--codeink:#e8eef8;--amber:#fff5d9}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.68 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+.hero{background:linear-gradient(135deg,#101b34,#2457c5);color:white;padding:52px max(22px,calc((100% - 1120px)/2)) 42px}.eyebrow{text-transform:uppercase;letter-spacing:.14em;font-size:.78rem;font-weight:800;color:#cbd8ff}.hero h1{font-size:clamp(2rem,5vw,3.6rem);line-height:1.1;margin:.45rem 0 1rem}.hero p{max-width:760px;color:#e4eaff;font-size:1.08rem}.student{display:inline-block;margin-top:10px;background:#fff;color:#17366f;padding:8px 14px;border-radius:999px;font-weight:800}
+.layout{max-width:1120px;margin:28px auto;padding:0 20px;display:grid;grid-template-columns:255px minmax(0,1fr);gap:26px}.sidebar{align-self:start;position:sticky;top:18px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px}.sidebar strong{display:block;margin-bottom:8px}.sidebar a{display:block;color:#34445f;text-decoration:none;padding:5px 8px;border-radius:7px;font-size:.92rem}.sidebar a:hover{background:var(--blue2);color:var(--blue)}main{min-width:0}.intro,.step,.note{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px;margin-bottom:18px}.intro{border-top:4px solid var(--blue)}h2{font-size:1.75rem;line-height:1.25;margin:0 0 12px}h3{font-size:1.2rem;margin:0 0 8px}h4{margin:18px 0 6px}p{margin:8px 0 12px}.muted{color:var(--muted)}.tag{display:inline-block;background:var(--blue2);color:#214da8;font-weight:800;font-size:.76rem;padding:3px 9px;border-radius:999px;margin-bottom:9px}.goal{border-left:3px solid var(--blue);padding:7px 12px;background:#f6f8ff;margin:12px 0}.result{border-left:3px solid var(--green);padding:7px 12px;background:#effaf5;margin:12px 0}.warning{background:var(--amber);border:1px solid #f0d98d;border-radius:10px;padding:12px 14px;margin:14px 0}.stepnum{color:var(--blue);font-weight:850;letter-spacing:.04em;font-size:.8rem;text-transform:uppercase}pre{background:var(--code);color:var(--codeink);padding:16px;border-radius:11px;overflow:auto;font: .88rem/1.6 ui-monospace,SFMono-Regular,Consolas,monospace;white-space:pre}.inline{background:#edf0f6;padding:2px 5px;border-radius:5px;font: .9em ui-monospace,monospace}table{width:100%;border-collapse:collapse;margin:12px 0}th,td{text-align:left;vertical-align:top;border:1px solid var(--line);padding:9px}th{background:#f0f4fb}.small{font-size:.9rem}footer{max-width:1120px;margin:0 auto;padding:10px 20px 42px;color:var(--muted)}a{color:var(--blue)}.pill{font-weight:700;color:#214da8}.two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:850px){.layout{grid-template-columns:1fr}.sidebar{position:static}.sidebar nav{columns:2}.two{grid-template-columns:1fr}.hero{padding-top:36px}}
+@media(max-width:520px){.sidebar nav{columns:1}.intro,.step,.note{padding:17px}pre{font-size:.8rem}}
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="eyebrow">Linux System Administration · Mid-Term Mini Project</div>
+  <h1>From Web Hosting to Automated Backups</h1>
+  <p>A reproducible, step-by-step guide to serving a website with Apache2 over HTTP/HTTPS, automating system reports between two Linux VMs, and publishing this documentation with NGINX.</p>
+  <div class="student">Student ID: 29061</div>
+</header>
+<div class="layout">
+<aside class="sidebar">
+<strong>On this page</strong>
+<nav>
+<a href="#overview">Before you begin</a>
+<a href="#task1">Task 1 — Apache2</a>
+<a href="#http">HTTP virtual host</a>
+<a href="#tls">Self-signed TLS</a>
+<a href="#https">HTTPS virtual host</a>
+<a href="#test1">Task 1 testing</a>
+<a href="#task2">Task 2 — Backups</a>
+<a href="#network">VM networking & SSH</a>
+<a href="#report">Report script</a>
+<a href="#cron">Cron & transfer</a>
+<a href="#email">VM2 email alert</a>
+<a href="#chain">End-to-end test</a>
+<a href="#task3">Task 3 — NGINX</a>
+
+</nav>
+</aside>
+<main>
+<section class="intro" id="overview">
+<h2>Before you begin</h2>
+<p>This tutorial documents one working example. It uses <strong>VM1</strong> for Apache2 and the backup/report script, and <strong>VM2</strong> for receiving backups, monitoring incoming files, sending email alerts, and hosting this documentation with NGINX.</p>
+<table><tr><th>Placeholder</th><th>Example used here</th><th>Replace it if yours differs</th></tr>
+<tr><td>Student ID / website domain</td><td><code>29061</code> / <code>29061.f26</code></td><td>Use your assigned ID and domain consistently.</td></tr>
+<tr><td>VM1</td><td>Apache2 server and report producer</td><td>Use your actual VM1 IP.</td></tr>
+<tr><td>VM2</td><td><code>192.168.56.101</code> in SSH examples</td><td>Replace with the IP reachable from VM1 and the second device.</td></tr>
+<tr><td>Linux account</td><td><code>mutangana</code></td><td>Replace with the account that exists on the target VM.</td></tr>
+<tr><td>Email addresses</td><td><code>sender@example.com</code>, <code>receiver@example.com</code></td><td>Replace with your own sender and recipient.</td></tr></table>
+<div class="warning"><strong>Security:</strong> Never publish a private SSH key, TLS private key, password, Gmail app password, or the contents of a secret configuration file. Use placeholders in documentation and keep secret files readable only by their owner.</div>
+<p class="muted small">Commands are examples for Ubuntu/Debian. Run each command on the machine named in the step. Commands beginning with <code>sudo</code> need administrator privileges.</p>
+</section>
+
+<section class="step" id="task1">
+<div class="stepnum">Task 1 · Step 1</div><h2>Install Apache2 and prepare the website directory</h2>
+<div class="goal"><strong>Goal:</strong> Install the web server and create a directory for the site files. Run these commands on VM1.</div>
+<pre><code>sudo apt update
+sudo apt install apache2 openssl -y
+sudo systemctl enable --now apache2
+systemctl is-active apache2
+sudo mkdir -p /var/www/29061.f26
+sudo chown -R "$USER":www-data /var/www/29061.f26
+sudo chmod -R 755 /var/www/29061.f26</code></pre>
+<p><strong>What this does:</strong> <code>apt update</code> refreshes package information. Apache2 serves HTTP requests; OpenSSL creates and inspects the certificate. <code>enable --now</code> starts Apache now and enables it at boot. The directory stores website content. The owner can edit files while Apache's group can read them.</p>
+<div class="result"><strong>Expected result:</strong> <code>systemctl is-active apache2</code> prints <code>active</code>.</div>
+<h4>Create a starter page</h4>
+<pre><code>nano /var/www/29061.f26/index.html</code></pre>
+<p>Put a small HTML page in the file, save it, and exit the editor:</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang="en"&gt;
+&lt;meta charset="utf-8"&gt;
+&lt;title&gt;29061 Web Server&lt;/title&gt;
+&lt;h1&gt;Student ID: 29061&lt;/h1&gt;
+&lt;p&gt;Apache2 HTTP and HTTPS test page.&lt;/p&gt;
+&lt;/html&gt;</code></pre>
+</section>
+
+<section class="step" id="http">
+<div class="stepnum">Task 1 · Step 2</div><h2>Configure the HTTP virtual host and local domain</h2>
+<div class="goal"><strong>Goal:</strong> Tell Apache which domain maps to the website directory.</div>
+<pre><code>sudo nano /etc/apache2/sites-available/29061.f26.conf</code></pre>
+<p>Add these key lines:</p>
+<pre><code>&lt;VirtualHost *:80&gt;
+    ServerName 29061.f26
+    DocumentRoot /var/www/29061.f26
+
+    ErrorLog ${APACHE_LOG_DIR}/29061.f26-error.log
+    CustomLog ${APACHE_LOG_DIR}/29061.f26-access.log combined
+&lt;/VirtualHost&gt;</code></pre>
+<p><strong>Explanation:</strong> <code>*:80</code> listens for HTTP on port 80. <code>ServerName</code> selects the domain; <code>DocumentRoot</code> identifies the folder Apache serves. The log directives keep this site's errors and access records separate.</p>
+<pre><code>sudo a2ensite 29061.f26.conf
+sudo apache2ctl configtest
+sudo systemctl reload apache2</code></pre>
+<div class="result"><strong>Expected result:</strong> the configuration test prints <code>Syntax OK</code>.</div>
+<h4>Make the domain resolve on each test device</h4>
+<p>The domain <code>29061.f26</code> is a project/local name, not automatically a public DNS name. Add the VM1 IP and domain to the hosts file on VM1 and on any device where you want to type the domain.</p>
+<pre><code>sudo nano /etc/hosts
+# Add one line, replacing VM1_IP with VM1's actual LAN IP:
+VM1_IP  29061.f26</code></pre>
+<p>On Windows, edit <code>C:\\Windows\\System32\\drivers\\etc\\hosts</code> as Administrator and add the same mapping. If the second device cannot edit hosts, test by IP instead. A hosts entry changes name resolution only on that device.</p>
+</section>
+
+<section class="step" id="tls">
+<div class="stepnum">Task 1 · Step 3</div><h2>Generate and verify a self-signed TLS certificate</h2>
+<div class="goal"><strong>Goal:</strong> Create a certificate whose Subject Alternative Name matches <code>29061.f26</code>.</div>
+<pre><code>sudo openssl req -x509 -nodes -days 365 \\
+  -newkey rsa:2048 \\
+  -keyout /etc/ssl/private/29061.f26.key \\
+  -out /etc/ssl/certs/29061.f26.crt \\
+  -subj "/O=AUCA/OU=Linux-F26/CN=29061" \\
+  -addext "subjectAltName=DNS:29061.f26"
+sudo chmod 600 /etc/ssl/private/29061.f26.key</code></pre>
+<p><strong>Explanation:</strong> <code>req -x509</code> creates a self-signed certificate; <code>-newkey rsa:2048</code> creates a new 2048-bit RSA key; <code>-nodes</code> leaves the key unencrypted so Apache can start without an interactive passphrase; <code>-days 365</code> sets validity; <code>-subj</code> fills certificate identity fields; <code>-addext</code> adds the DNS name used for hostname verification. The private key is restricted to its owner.</p>
+<h4>Inspect the certificate</h4>
+<pre><code>sudo openssl x509 -in /etc/ssl/certs/29061.f26.crt -noout -subject -issuer -dates
+sudo openssl x509 -in /etc/ssl/certs/29061.f26.crt -noout -ext subjectAltName
+sudo openssl x509 -in /etc/ssl/certs/29061.f26.crt -noout -text</code></pre>
+<p>For a self-signed certificate, the issuer and subject are normally the same. Check that the SAN output contains <code>DNS:29061.f26</code> and that the dates cover the current time. Self-signed means browsers do not trust it automatically; for this class project, <code>curl -k</code> can test the HTTPS connection while skipping trust verification.</p>
+</section>
+
+<section class="step" id="https">
+<div class="stepnum">Task 1 · Step 4</div><h2>Enable Apache SSL and create the HTTPS virtual host</h2>
+<div class="goal"><strong>Goal:</strong> Configure Apache to serve the same site over HTTPS on port 443.</div>
+<pre><code>sudo a2enmod ssl
+sudo nano /etc/apache2/sites-available/29061.f26-ssl.conf</code></pre>
+<p>Use this virtual-host configuration:</p>
+<pre><code>&lt;VirtualHost *:443&gt;
+    ServerName 29061.f26
+    DocumentRoot /var/www/29061.f26
+
+    SSLEngine on
+    SSLCertificateFile /etc/ssl/certs/29061.f26.crt
+    SSLCertificateKeyFile /etc/ssl/private/29061.f26.key
+
+    ErrorLog ${APACHE_LOG_DIR}/29061.f26-ssl-error.log
+    CustomLog ${APACHE_LOG_DIR}/29061.f26-ssl-access.log combined
+&lt;/VirtualHost&gt;</code></pre>
+<p><strong>Explanation:</strong> <code>SSLEngine on</code> enables TLS for this virtual host. The certificate and private-key directives point to the files generated in the previous step.</p>
+<pre><code>sudo a2ensite 29061.f26-ssl.conf
+sudo apache2ctl configtest
+sudo systemctl restart apache2
+sudo systemctl reload apache2
+sudo apache2ctl -S</code></pre>
+<p>Use <code>apache2ctl -S</code> to inspect which virtual hosts Apache has loaded. If the default site catches HTTP requests, inspect <code>/etc/apache2/sites-enabled/</code> and disable only the conflicting default configuration if appropriate.</p>
+</section>
+
+<section class="step" id="test1">
+<div class="stepnum">Task 1 · Step 5</div><h2>Firewall and test HTTP/HTTPS from another device</h2>
+<div class="goal"><strong>Goal:</strong> Confirm the server accepts requests locally and across the LAN.</div>
+<pre><code>sudo ufw status
+sudo ufw allow 80/tcp
+sudo ufw allow 443/tcp
+curl -I http://29061.f26
+curl -kI https://29061.f26
+echo | openssl s_client -connect 29061.f26:443 -servername 29061.f26 2&gt;/dev/null | openssl x509 -noout -subject -dates</code></pre>
+<p>If UFW is inactive, the allow rules may be unnecessary, but record the firewall state. On a second device on the same LAN, open <code>http://29061.f26</code> and <code>https://29061.f26</code> if its hosts file is configured. Alternatively, use <code>http://VM1_IP</code> to test by IP. A browser warning for the self-signed certificate is expected.</p>
+<div class="warning"><strong>Important:</strong> The second-device test must use VM1's actual reachable LAN IP, not <code>127.0.0.1</code> or a VM-only address the device cannot route to. If it fails, check the IP/subnet, virtual network mode, firewall, and listening ports.</div>
+</section>
+
+<section class="step" id="task2">
+<div class="stepnum">Task 2 · Overview</div><h2>Automate system reports and backup delivery</h2>
+<p>The example flow is: VM1 creates a report, compresses it into a ZIP file, and transfers the ZIP to VM2. VM2 watches its incoming directory and emails a notification when a new ZIP arrives.</p>
+<div class="two"><div class="note"><h3>VM1</h3><p>Collect system information → create ZIP → transfer to VM2.</p></div><div class="note"><h3>VM2</h3><p>Receive ZIP → detect new file → send email alert → host documentation with NGINX.</p></div></div>
+</section>
+
+<section class="step" id="network">
+<div class="stepnum">Task 2 · Step 1</div><h2>Check networking and set up SSH key authentication</h2>
+<div class="goal"><strong>Goal:</strong> Make sure VM1 can reach VM2 and authenticate without entering the account password for each transfer.</div>
+<p>Run on both VMs to inspect addresses:</p>
+<pre><code>ip -br address
+ip route
+ping -c 4 192.168.56.101</code></pre>
+<p>Replace the example address with VM2's reachable IP. A failed ping alone does not prove SSH is broken because ICMP may be blocked. Test SSH itself as well.</p>
+<p>On VM2, install and start the SSH server if needed:</p>
+<pre><code>sudo apt update
+sudo apt install openssh-server -y
+sudo systemctl enable --now ssh
+systemctl is-active ssh
+sudo ufw allow OpenSSH</code></pre>
+<p>On VM1, create an Ed25519 key if you do not already have a suitable key:</p>
+<pre><code>ls -la ~/.ssh
+ssh-keygen -t ed25519 -C "vm1-to-vm2"
+ssh-copy-id mutangana@192.168.56.101
+ssh mutangana@192.168.56.101</code></pre>
+<p>Accept the first-connection host-key prompt only after checking that the destination is the intended VM. Enter the VM2 account password during <code>ssh-copy-id</code> if prompted; later SSH logins should use the installed public key. Never copy the private key (usually a file without <code>.pub</code>) to VM2.</p>
+<div class="warning">If you generated a custom key filename, such as <code>~/.ssh/vm2_key</code>, use <code>ssh-copy-id -i ~/.ssh/vm2_key.pub mutangana@192.168.56.101</code> and make the transfer script use <code>ssh -i ~/.ssh/vm2_key</code> or configure an SSH alias.</div>
+</section>
+
+<section class="step" id="report">
+<div class="stepnum">Task 2 · Step 2</div><h2>Create the system report script on VM1</h2>
+<div class="goal"><strong>Goal:</strong> Collect the student ID, timestamp, hostname, logged-in users, disk status, and uptime, then package the report.</div>
+<pre><code>mkdir -p ~/bin ~/outgoing
+nano ~/bin/create_report.sh</code></pre>
+<p>Use this complete example. It keeps temporary report files in a dedicated directory and sends the ZIP to <code>~/outgoing</code>.</p>
+<pre><code>#!/bin/bash
+set -euo pipefail
+
+id="29061"
+timestamp="$(date +%Y%m%d_%H%M%S)"
+hostname="$(hostname)"
+workdir="$HOME/report-work"
+outgoing="$HOME/outgoing"
+report="${id}_${timestamp}.txt"
+zip_file="${id}_${timestamp}.zip"
+
+mkdir -p "$workdir" "$outgoing"
+cd "$workdir"
+
+{
+    echo "Student ID: $id"
+    echo "Report created: $(date '+%Y-%m-%d %H:%M:%S')"
+    echo "Host: $hostname"
+    echo
+    echo "==== Logged-in Users ===="
+    who
+    echo
+    echo "==== Disk status ===="
+    df -h
+    echo
+    echo "==== System uptime ===="
+    uptime
+} &gt; "$report"
+
+zip -q "$zip_file" "$report"
+mv "$zip_file" "$outgoing/"
+rm "$report"
+
+echo "Created: $outgoing/$zip_file"</code></pre>
+<p><strong>Explanation:</strong> <code>set -euo pipefail</code> makes the script stop on common errors. The timestamp gives each report a unique name. The braces group report commands and redirect their output to the text file. <code>zip</code> compresses it; <code>mv</code> places the ZIP in the outgoing folder; <code>rm</code> removes the uncompressed temporary report.</p>
+<pre><code>chmod +x ~/bin/create_report.sh
+~/bin/create_report.sh
+ls -lh ~/outgoing</code></pre>
+<div class="result"><strong>Expected result:</strong> a timestamped <code>29061_....zip</code> file appears in <code>~/outgoing</code>.</div>
+</section>
+
+<section class="step" id="cron">
+<div class="stepnum">Task 2 · Step 3</div><h2>Transfer the backup and schedule it with cron</h2>
+<div class="goal"><strong>Goal:</strong> Send the generated ZIP files from VM1 to VM2 and automate the process.</div>
+<p>First create VM2's receiving directory using the VM1 SSH account:</p>
+<pre><code>ssh mutangana@192.168.56.101 'mkdir -p ~/incoming'</code></pre>
+<p>Create the transfer script on VM1:</p>
+<pre><code>nano ~/bin/transfer_reports.sh</code></pre>
+<pre><code>#!/bin/bash
+set -euo pipefail
+
+REMOTE_USER="mutangana"
+REMOTE_HOST="192.168.56.101"
+REMOTE_DIR="incoming"
+OUTGOING="$HOME/outgoing"
+
+mkdir -p "$OUTGOING"
+
+# Copy ZIP reports to VM2. -p preserves timestamps; -v shows copied files.
+find "$OUTGOING" -maxdepth 1 -type f -name '*.zip' -print0 |
+while IFS= read -r -d '' file; do
+    scp -p "$file" "${REMOTE_USER}@${REMOTE_HOST}:${REMOTE_DIR}/"
+    # Move delivered files to an archive folder to avoid sending them repeatedly.
+    mkdir -p "$OUTGOING/sent"
+    mv "$file" "$OUTGOING/sent/"
+done</code></pre>
+<p><strong>Explanation:</strong> <code>find</code> selects ZIP reports only. Null-delimited filenames safely handle spaces. <code>scp</code> copies each ZIP to VM2's <code>incoming</code> directory. Successfully transferred files are moved into <code>outgoing/sent</code> so later runs do not repeatedly upload them. Keep the SSH key and destination account correctly configured.</p>
+<pre><code>chmod +x ~/bin/transfer_reports.sh
+~/bin/create_report.sh
+~/bin/transfer_reports.sh</code></pre>
+<p>After confirming manual transfer works, schedule the jobs on VM1. Open the current user's crontab:</p>
+<pre><code>crontab -e</code></pre>
+<p>Example: create a report and transfer files every 5 minutes. Use separate lines so the transfer runs after report creation in the same cron invocation:</p>
+<pre><code>*/5 * * * * /home/mutangana/bin/create_report.sh &gt;&gt; /home/mutangana/backup-cron.log 2&gt;&amp;1 &amp;&amp; /home/mutangana/bin/transfer_reports.sh &gt;&gt; /home/mutangana/backup-cron.log 2&gt;&amp;1</code></pre>
+<p>Replace <code>/home/mutangana</code> with the actual home directory for the account whose crontab you edited. Cron has a minimal environment, so use absolute paths and log output. Check the scheduled entry with <code>crontab -l</code> and inspect <code>~/backup-cron.log</code>.</p>
+<div class="warning"><strong>Scheduling note:</strong> This example runs both commands every five minutes. If your assignment requires a different schedule, change the five-minute expression to the required interval.</div>
+</section>
+
+<section class="step" id="email">
+<div class="stepnum">Task 2 · Step 4</div><h2>Configure VM2 to detect incoming backups and email a notification</h2>
+<div class="goal"><strong>Goal:</strong> Monitor VM2's incoming folder and send an email when a new file has finished arriving or has been moved into the folder.</div>
+<p>Run on VM2:</p>
+<pre><code>sudo apt update
+sudo apt install inotify-tools msmtp-mta bsd-mailx zip -y
+inotifywait --version
+msmtp --version
+dpkg -s bsd-mailx | grep '^Status:'</code></pre>
+<p><strong>Package roles:</strong> <code>inotify-tools</code> provides filesystem event monitoring; <code>msmtp-mta</code> sends mail through an SMTP server; <code>bsd-mailx</code> provides the <code>mail</code> command; <code>zip</code> creates compressed report archives on VM1.</p>
+<h4>Configure msmtp without publishing secrets</h4>
+<pre><code>nano ~/.msmtprc</code></pre>
+<p>Example structure only—replace the example addresses and add your app password locally. Do not paste the real password into this website, screenshots, or a public repository.</p>
+<pre><code>defaults
+auth on
+tls on
+tls_starttls on
+tls_trust_file /etc/ssl/certs/ca-certificates.crt
+logfile ~/.msmtp.log
+
+account gmail
+host smtp.gmail.com
+port 587
+from sender@example.com
+user sender@example.com
+password YOUR_APP_PASSWORD_GOES_HERE
+
+account default : gmail</code></pre>
+<pre><code>chmod 600 ~/.msmtprc
+printf 'This is a mail test from VM2.\n' | mail -s "VM2 Email Test" receiver@example.com</code></pre>
+<p>Use an app password where the provider requires one; normal account passwords may not work. Protect the configuration because it contains credentials. The real value must stay on VM2 and must be replaced with a placeholder in the documentation.</p>
+<h4>Create the file-monitor script on VM2</h4>
+<pre><code>mkdir -p ~/incoming ~/bin
+nano ~/bin/watch_incoming.sh</code></pre>
+<pre><code>#!/bin/bash
+set -u
+
+INCOMING="$HOME/incoming"
+RECEIVER="receiver@example.com"
+SOURCE="VM1"
+
+mkdir -p "$INCOMING"
+
+inotifywait --monitor \
+  --event close_write \
+  --event moved_to \
+  --format '%f' "$INCOMING" |
+while read -r FILENAME; do
+    TIMESTAMP="$(date '+%Y-%m-%d %H:%M:%S')"
+    printf 'New backup received.\nFilename: %s\nSource: %s\nReceived at: %s\n' \\
+      "$FILENAME" "$SOURCE" "$TIMESTAMP" |
+      mail -s "New Backup Received: $FILENAME" "$RECEIVER"
+done</code></pre>
+<p><strong>Explanation:</strong> <code>--monitor</code> keeps watching. <code>close_write</code> reports a file whose writing has finished; <code>moved_to</code> detects a file moved into the directory, such as an SCP upload finalized by rename. <code>--format '%f'</code> outputs only the filename. <code>read -r</code> reads it without treating backslashes as escapes. The timestamp is calculated inside the loop so each email gets the time of its own event.</p>
+<pre><code>chmod +x ~/bin/watch_incoming.sh
+~/bin/watch_incoming.sh</code></pre>
+<p>Leave the script running while testing. For a persistent service, configure a systemd user/service unit or another supervisor; a terminal session closing will stop this foreground script.</p>
+</section>
+
+<section class="step" id="chain">
+<div class="stepnum">Task 2 · Step 5</div><h2>Test the entire backup and notification chain</h2>
+<div class="goal"><strong>Goal:</strong> Prove each link works, not just that the scripts exist.</div>
+<ol>
+<li>On VM2, start <code>~/bin/watch_incoming.sh</code> and leave it running.</li>
+<li>On VM1, run <code>~/bin/create_report.sh</code>.</li>
+<li>On VM1, run <code>~/bin/transfer_reports.sh</code>.</li>
+<li>On VM2, confirm the ZIP arrived: <code>ls -lh ~/incoming</code>.</li>
+<li>Check the recipient inbox and spam folder for the notification.</li>
+<li>Check VM1's cron log and verify the next scheduled run.</li>
+</ol>
+<pre><code># VM1
+~/bin/create_report.sh
+ls -lh ~/outgoing
+~/bin/transfer_reports.sh
+
+# VM2
+ls -lh ~/incoming
+tail -n 30 ~/.msmtp.log</code></pre>
+<p>If no email arrives, test mail separately first. Then check <code>~/.msmtp.log</code>, the recipient address, app-password setup, SMTP connectivity, and file-monitor output. If a file was already in the directory before the watcher started, it will not generate a new event; transfer a fresh file to test it.</p>
+</section>
+
+<section class="step" id="task3">
+<div class="stepnum">Task 3 · Step 1</div><h2>Install NGINX on VM2</h2>
+<p>This tutorial uses <strong>Option A</strong> from the assignment: NGINX runs on VM2 using port 80. That avoids conflict with Apache2 on VM1, which uses ports 80 and 443.</p>
+<div class="goal"><strong>Goal:</strong> Install NGINX and confirm the service is running.</div>
+<pre><code>sudo apt update
+sudo apt install nginx -y
+sudo systemctl enable --now nginx
+systemctl is-active nginx
+sudo nginx -t</code></pre>
+<div class="result"><strong>Expected result:</strong> <code>active</code> and <code>syntax is ok</code> / <code>test is successful</code>.</div>
+</section>
+
+<section class="step">
+<div class="stepnum">Task 3 · Step 2</div><h2>Create the documentation website folder</h2>
+<div class="goal"><strong>Goal:</strong> Place this tutorial page in the directory NGINX will serve.</div>
+<pre><code>sudo mkdir -p /var/www/29061-docs
+sudo chown -R "$USER":www-data /var/www/29061-docs
+sudo chmod -R 755 /var/www/29061-docs
+sudo nano /var/www/29061-docs/index.html</code></pre>
+<p>Copy the full HTML content of this tutorial into <code>index.html</code> on VM2. If you transfer the HTML file from another machine, place it at exactly <code>/var/www/29061-docs/index.html</code>. Make sure the file is readable by NGINX.</p>
+</section>
+
+<section class="step">
+<div class="stepnum">Task 3 · Step 3</div><h2>Create and enable the NGINX server block</h2>
+<div class="goal"><strong>Goal:</strong> Tell NGINX to serve the documentation directory.</div>
+<pre><code>sudo nano /etc/nginx/sites-available/29061-docs</code></pre>
+<p>Use these key configuration lines:</p>
+<pre><code>server {
+    listen 80;
+    listen [::]:80;
+    server_name _;
+
+    root /var/www/29061-docs;
+    index index.html;
+
+    location / {
+        try_files $uri $uri/ =404;
+    }
+}</code></pre>
+<p><strong>Explanation:</strong> <code>listen 80</code> accepts HTTP connections on port 80; <code>server_name _</code> acts as a catch-all for this IP-based project site; <code>root</code> points to the documentation folder; <code>index</code> identifies the default page; <code>try_files</code> serves the requested file or returns 404 if it does not exist.</p>
+<pre><code>sudo ln -s /etc/nginx/sites-available/29061-docs /etc/nginx/sites-enabled/29061-docs
+ls -l /etc/nginx/sites-enabled/
+sudo nginx -t
+sudo systemctl reload nginx</code></pre>
+<p>If the default NGINX site conflicts, disable it only after checking the active configuration:</p>
+<pre><code>sudo rm /etc/nginx/sites-enabled/default
+sudo nginx -t
+sudo systemctl reload nginx</code></pre>
+<p>Removing that symlink disables the default site; it does not delete the original file in <code>sites-available</code>.</p>
+</section>
+
+<section class="step">
+<div class="stepnum">Task 3 · Step 4</div><h2>Allow access and test NGINX</h2>
+<div class="goal"><strong>Goal:</strong> Verify the page locally on VM2, then from a separate device on the same LAN.</div>
+<pre><code>sudo ufw status
+sudo ufw allow 80/tcp
+curl -I http://localhost
+systemctl is-active nginx</code></pre>
+<p>Find VM2's LAN IP with <code>ip -br address</code>. From a second device connected to the same LAN, open:</p>
+<pre><code>http://VM2_IP</code></pre>
+<p>Replace <code>VM2_IP</code> with the actual IP address, for example <code>http://192.168.56.101</code> only if that address is reachable from the second device. Confirm that the page loads and that <strong>Student ID: 29061</strong> is visible.</p>
+<div class="warning"><strong>VirtualBox networking:</strong> The second device must have a route to VM2's address. A host-only address may be reachable from the host but not from another physical LAN device. If the test fails, check the VM's network mode and choose an address reachable by both devices; do not assume the example IP is yours.</div>
+</section>
+
+
+</main>
+</div>
+<footer>Linux System Administration · Mid-Term Mini Project · Student ID 29061<br><span class="small">Before submission, replace example IP addresses, usernames, paths, and email addresses with the values actually used in your setup. Keep all passwords and private keys secret.</span></footer>
+</body>
+</html>

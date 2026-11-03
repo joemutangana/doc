@@ -7,9 +7,18 @@ public class Book{
     private int publicationYear;
     private int availableCopies;
     
-    public Book(int bookId){
+    
+
+
+
+    public Book(int bookId, String bookTitle, String author, int publicationYear, int availableCopies) {
         this.bookId = bookId;
+        this.bookTitle = bookTitle;
+        this.author = author;
+        this.publicationYear = publicationYear;
+        this.availableCopies = availableCopies;
     }
+
 
     public boolean setBookID(int bookId){
         if(bookId <= 0){
@@ -26,11 +35,15 @@ public class Book{
         return bookId;
     }
 
+
+
     @Override
     public String toString() {
-        return "Book [bookId=" + bookId + ", bookTitle=" + bookTitle + ", author=" + author + ", publicationYear="
-                + publicationYear + ", availableCopies=" + availableCopies + "]";
+        return "\nBookId: " + bookId + "\nBookTitle: " + bookTitle + "\nAuthor: " + author + "\nPublicationYear: "
+                + publicationYear + "\nAvailableCopies: " + availableCopies + "\n";
     }
+
+   
 
 
 
